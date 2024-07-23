@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\GymRats",
+    "\\GymRats\\gymrats.client",
+    "\\GymRats\\GymRats.Server"
   ],
-  "SelectedNode": "\\D:\\Praca inzynierska",
+  "SelectedNode": "\\GymRats\\GymRats.sln",
   "PreviewInSolutionExplorer": false
 }

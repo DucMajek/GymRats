@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "1b9z+xP0I/vAY80xZDWJZC7oLse2ZJRn5CpNIdWTDKQ=",
+  "Source": "GymRats.Server",
+  "BasePath": "_content/GymRats.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\Praca inzynierska\\GymRats\\gymrats.client\\gymrats.client.esproj",
+      "Version": 2,
+      "Source": "gymrats.client",
+      "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
