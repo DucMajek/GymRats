@@ -6,49 +6,61 @@ body {
     box-sizing: border-box;
 
 }
-
+/*Pasek glowny*/
 .nav {
-    background-color: blue;
-    color: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.8);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
-    padding: 0 1rem;
-    position: relative;
-    width: 100vw;
-    height: 170px;
+    padding: 1rem 2rem;
+    z-index: 1000; 
 }
 
+/*Kolor linkow*/
+.nav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+.nav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.siteTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+.nav-right {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
 
 .img-logo {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 300px;
-    height: 400px;
-}
-
-.img-profile {
-    text-align: justify;
-    position: absolute;
-    top: 0%;
-    text-align: center;
-    color: black;
-    font-size: large;
-}
-
-
-
-.nav ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    display: flex;
-    gap: 1rem;
+    width: auto;
+    height: auto;
 }
 
 .nav a {
     color: inherit;
+}
+
+.nav-right a:hover {
+    color: #007BFF;
 }
