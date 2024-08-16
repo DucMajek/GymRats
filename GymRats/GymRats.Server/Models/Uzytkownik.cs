@@ -16,6 +16,14 @@ public partial class Uzytkownik
     [Column("Osoba_id_osoba")]
     public int OsobaIdOsoba { get; set; }
 
+    [StringLength(12)]
+    [Unicode(false)]
+    public string Email { get; set; } = null!;
+
+    [StringLength(16)]
+    [Unicode(false)]
+    public string Haslo { get; set; } = null!;
+
     [InverseProperty("UzytkownikIdUzytkownikaNavigation")]
     public virtual ICollection<Ankietum> Ankieta { get; set; } = new List<Ankietum>();
 
