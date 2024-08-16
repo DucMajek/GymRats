@@ -1,33 +1,127 @@
-﻿.backgorund-image {
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover; /* Ensure the image covers the background */
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1; /* Ensure the image stays behind the content */
-}
-
 body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
 }
 
-.App {
-    text-align: center;
-    position: relative;
+* {
+  box-sizing: border-box;
 }
 
-.nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw; 
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white; 
+  padding: 10px 20px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #00aaff; 
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.buy-pass {
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-right: 20px;
+  cursor: pointer;
+  border-radius: 0px; 
+}
+
+.profile-icon {
+  font-size: 18px;
+}
+
+.content-wrapper {
+  display: flex;
+  width: 100%;
+  margin-top: 60px;
+}
+
+
+.sidebar {
+  background-color: #00aaff;
+  color: white;
+  padding: 20px;
+  width: 200px;
+  height: calc(100vh - 60px);
+}
+
+.user-name {
+  margin-bottom: 20px;
+  font-weight: bold;
+  background-color: #d3d3d3; 
+  padding: 10px;
+  border-radius: 0px; 
+  width: 200px;
+  margin-left: -20px; 
+  margin-top: -20px;
+}
+
+
+
+.nav-menu a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.main-content {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.diet-plans, .traning-plans {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    z-index: 1000; /* Ensure it stays on top */
+    justify-content: space-around;
+}
+
+.diet-plan, .traning-plan {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 30%;
+}
+
+.diet-plan h3, .traning-plan h3{
+  margin-bottom: 20px;
+}
+
+.diet-plan .calories p, .schedule p .traning-plan h3 {
+  margin: 10px 0;
+}
+
+.diet-plan button, .traning-plan button {
+  background-color: #00aaff;
+  border-radius: 0px; 
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
 }
