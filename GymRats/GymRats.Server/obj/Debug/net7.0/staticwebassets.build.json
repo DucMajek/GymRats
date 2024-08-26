@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "1b9z+xP0I/vAY80xZDWJZC7oLse2ZJRn5CpNIdWTDKQ=",
+  "Hash": "eemr2UZ5X02h6eZ8YmWgnnZA1JBiZrTOlEuwLQu3bQA=",
   "Source": "GymRats.Server",
   "BasePath": "_content/GymRats.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "D:\\Praca inzynierska\\GymRats\\gymrats.client\\gymrats.client.esproj",
+      "Identity": "C:\\Users\\micha\\Desktop\\Praca dyplomowa\\GymRats\\gymrats.client\\gymrats.client.esproj",
       "Version": 2,
       "Source": "gymrats.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",

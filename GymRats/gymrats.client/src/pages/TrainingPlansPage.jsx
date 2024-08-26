@@ -6,9 +6,9 @@ function TrainingPlansPage() {
     <div>
       <h2>Plany treningowe</h2>
           <div className="traning-plans">
-              <TraningPlan title="Koszykówka" />
-              <TraningPlan title="Sporty walki" />
-              <TraningPlan title="Piłka nożna" />
+              <TraningPlan title="Koszykówka" id={1} />
+              <TraningPlan title="Sporty walki" id={2} />
+              <TraningPlan title="Piłka nożna" id={3} />
           </div>
     </div>
   );

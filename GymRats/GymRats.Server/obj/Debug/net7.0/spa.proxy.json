@@ -2,7 +2,7 @@
 "SpaProxyServer": {
 "ServerUrl": "https://localhost:5173",
 "LaunchCommand": "npm run dev",
-"WorkingDirectory": "D:\\Praca inzynierska\\GymRats\\GymRats.Server\\..\\gymrats.client",
+"WorkingDirectory": "C:\\Users\\micha\\Desktop\\Praca dyplomowa\\GymRats\\GymRats.Server\\..\\gymrats.client",
 "MaxTimeoutInSeconds": "120"
 }
 }
