@@ -1,2 +1,3 @@
 D:\Praca inzynierska\GymRats\gymrats.client\obj\Debug\gymrats.client.esproj.CoreCompileInputs.cache
 C:\Users\micha\Desktop\Praca dyplomowa\GymRats\gymrats.client\obj\Debug\gymrats.client.esproj.CoreCompileInputs.cache
+D:\GymRats\GymRats\gymrats.client\obj\Debug\gymrats.client.esproj.CoreCompileInputs.cache

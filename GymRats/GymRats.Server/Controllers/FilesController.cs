@@ -12,8 +12,8 @@ public class FilesController : ControllerBase
         _configuration = configuration;
     }
 
-    [HttpGet("download/{id}")]
-    public async Task<IActionResult> DownloadFile(int id)
+    [HttpGet("downloadExcelFile/{id}")]
+    public async Task<IActionResult> DownloadExcelFile(int id)
     {
         var connectionString = _configuration.GetConnectionString("Default");
 
@@ -48,5 +48,46 @@ public class FilesController : ControllerBase
         }
 
         return File(fileData, contentType, fileName);
+    }
+
+    [HttpGet("downloadPdfFile/{id}/{calorie}")]
+    public async Task<IActionResult> DownloadPdfFile(int id, string calorie)
+    {
+        var connectionString = _configuration.GetConnectionString("Default");
+
+        byte[]? fileData = null;
+        string? dietType = null;
+        string? calories = null;
+        string contentType = "application/pdf";
+
+        using (var connection = new SqlConnection(connectionString))
+        {
+            await connection.OpenAsync();
+
+            var query = "select rodzaj_diety, zawartosc_jadlospisu, kalorycznosc from Jadlospis where id_jadlospisu = @id and kalorycznosc = @kalorycznosc";
+
+            using (var command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@Id", id);
+                command.Parameters.AddWithValue("@kalorycznosc", calorie);
+
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    if (await reader.ReadAsync())
+                    {
+                        calories = reader["kalorycznosc"].ToString();
+                        dietType = reader["rodzaj_diety"].ToString() + calories + ".pdf";
+                        fileData = (byte[])reader["zawartosc_jadlospisu"];
+                    }
+                }
+            }
+        }
+
+        if (fileData == null)
+        {
+            return NotFound();
+        }
+
+        return File(fileData, contentType, dietType);
     }
 }

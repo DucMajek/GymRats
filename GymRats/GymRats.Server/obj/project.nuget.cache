@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MuUuc6lGY98=",
+  "dgSpecHash": "jcjiG7V+HeXm2/YVl0mUJCofeK/UTe8zNbms6iiZqli7QirCcTD2vCLU691q2zxSMvgv2VYXme9eTu9aNe49vw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\micha\\Desktop\\Praca dyplomowa\\GymRats\\GymRats.Server\\GymRats.Server.csproj",
+  "projectFilePath": "D:\\GymRats\\GymRats\\GymRats.Server\\GymRats.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\micha\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\micha\\.nuget\\packages\\azure.identity\\1.11.3\\azure.identity.1.11.3.nupkg.sha512",

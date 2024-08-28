@@ -3,7 +3,7 @@ import axios from 'axios';
 const DownloadButton = ({ fileId }) => {
     const downloadFile = () => {
         axios({
-            url: `https://localhost:7155/api/Files/download/${fileId}`,
+            url: `https://localhost:7155/api/Files/downloadExcelFile/${fileId}`,
             method: 'GET',
             responseType: 'blob',
         })
@@ -13,7 +13,7 @@ const DownloadButton = ({ fileId }) => {
                 const link = document.createElement('a');
                 link.href = url;
 
-                // Sprawdzenie czy nag³ówek 'content-disposition' istnieje
+                // Sprawdzenie czy naglowek 'content-disposition' istnieje
                 const contentDisposition = response.headers['content-disposition'];
                 let fileName = 'downloaded_file.xlsx';
 
@@ -29,8 +29,9 @@ const DownloadButton = ({ fileId }) => {
                 link.click();
                 link.remove();
             })
-            .catch((error) => console.error('B³¹d podczas pobierania pliku', error));
+            .catch((error) => console.error('Blad podczas pobierania pliku', error));
     };
+
 
     return (
         <button onClick={downloadFile}>
