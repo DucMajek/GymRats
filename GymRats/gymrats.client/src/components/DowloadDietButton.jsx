@@ -14,7 +14,7 @@ const DowloadDietButton = ({ fileId, calories }) => {
                 link.href = url;
 
                 // Sprawdzenie czy naglowek 'content-disposition' istnieje
-                const contentDisposition = response.headers.get('content-disposition').split('"')[1];
+                const contentDisposition = response.headers['content-disposition'];
                 let fileName = 'downloaded_file.pdf';
 
                 if (contentDisposition) {
