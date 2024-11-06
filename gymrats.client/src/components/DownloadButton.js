@@ -1,41 +1,47 @@
 import axios from 'axios';
 
-const DownloadButton = ({ fileId }) => {
-    const downloadFile = () => {
-        axios({
-            url: `https://localhost:7155/api/Files/downloadExcelFile/${fileId}`,
-            method: 'GET',
-            responseType: 'blob',
-        })
-            .then((response) => {
-                console.log(response);
-                const url = window.URL.createObjectURL(new Blob([response.data]));
-                const link = document.createElement('a');
-                link.href = url;
+const DownloadButton = ({ useAlternativeApi, fileId, calories }) => {
+    const downloadFile = async () => {
+        const dietUrl = `https://localhost:7200/api/Files/downloadDietFile/${fileId}/${calories}`;
+        const traningPlanUrl = `https://localhost:7200/api/Files/downloadTranningPlanFile/${fileId}`;
+        const url = useAlternativeApi ? traningPlanUrl : dietUrl;
 
-                // Sprawdzenie czy naglowek 'content-disposition' istnieje
-                const contentDisposition = response.headers['content-disposition'];
-                let fileName = 'downloaded_file.xlsx';
+        try {
+            const response = await axios.get(url, { responseType: 'blob' });
+            const urlBlob = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = urlBlob;
 
-                if (contentDisposition) {
-                    const fileNameMatch = contentDisposition.split('filename=')[1];
-                    if (fileNameMatch) {
-                        fileName = fileNameMatch.replace(/"/g, '');
-                    }
+            // Próbujemy wyciągnąć nazwę pliku z nagłówka
+            const contentDisposition = response.headers['content-disposition'];
+            let fileName;
+            if(!url){
+                 fileName = 'dieta.pdf';
+            } else {
+                 fileName = 'Plan treningowy.xlsx';
+            }
+                 // Domyślna nazwa pliku
+
+            if (contentDisposition) {
+                const fileNameMatch = contentDisposition.split('filename=')[1];
+                if (fileNameMatch) {
+                    fileName = fileNameMatch.replace(/"/g, '');
                 }
+            }
 
-                link.setAttribute('download', fileName);
-                document.body.appendChild(link);
-                link.click();
-                link.remove();
-            })
-            .catch((error) => console.error('Blad podczas pobierania pliku', error));
+            link.setAttribute('download', fileName);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        } catch (error) {
+            console.error('Błąd podczas pobierania pliku', error);
+        }
     };
 
 
     return (
         <button onClick={downloadFile}>
-            Pobierz plik Excel
+            Pobierz plik
         </button>
     );
 };

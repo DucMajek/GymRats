@@ -4,7 +4,7 @@ function TraningPlan({ title, id }) {
       <div className="traning-plan">
           <h3>{title}</h3>
           <div className="schedule">
-              <p>Plan treningowy<br/> <DownloadButton fileId={id} /></p>
+              <p>Plan treningowy<br/> <DownloadButton useAlternativeApi={true} fileId={id} /></p>
           </div>
       </div>
   );

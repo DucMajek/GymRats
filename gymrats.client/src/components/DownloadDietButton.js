@@ -1,11 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 //import { saveAs } from 'file-saver';
-const DowloadDietButton = ({ fileId, calories }) => { 
+const DownloadDietButton = ({ fileId, calories }) => { 
     const downloadFile = () => {
         
         axios({
-            url: `https://localhost:7155/api/Files/downloadPdfFile/${fileId}/${calories}`,
+            url: `https://localhost:7200/api/Files/downloadDietFile/${fileId}/${calories}`,
             method: 'GET',
             responseType: 'blob',
         })
@@ -16,9 +16,9 @@ const DowloadDietButton = ({ fileId, calories }) => {
                 link.href = url;
 
                 // Sprawdzenie czy naglowek 'content-disposition' istnieje
-                const contentDisposition = response.getHeaders('content-disposition');
+                const contentDisposition = response.headers['content-disposition'];
                 
-                let fileName = 'asd.pdf';
+                let fileName = 'dieta.pdf';
                 
 
                 if (contentDisposition) {
@@ -44,4 +44,4 @@ const DowloadDietButton = ({ fileId, calories }) => {
     );
 };
 
-export default DowloadDietButton;
+export default DownloadDietButton;
