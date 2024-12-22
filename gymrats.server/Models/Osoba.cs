@@ -11,7 +11,7 @@ public partial class Osoba
 
     public string Nazwisko { get; set; } = null!;
 
-    public DateTime DataUrodzenia { get; set; }
+    public DateTime? DataUrodzenia { get; set; }
 
     public string Adres { get; set; } = null!;
 

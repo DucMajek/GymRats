@@ -45,7 +45,6 @@ public partial class GymRatsContext : DbContext
 
     public virtual DbSet<UzytkownikKursTrenera> UzytkownikKursTreneras { get; set; }
 
-    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.UseCollation("Polish_CI_AS");
@@ -54,9 +53,7 @@ public partial class GymRatsContext : DbContext
         {
             entity.HasKey(e => e.IdAnkieta).HasName("Ankieta_pk");
 
-            entity.Property(e => e.IdAnkieta)
-                .ValueGeneratedNever()
-                .HasColumnName("id_ankieta");
+            entity.Property(e => e.IdAnkieta).HasColumnName("id_ankieta");
             entity.Property(e => e.OdpowiedziPytania).HasColumnName("odpowiedzi_pytania");
             entity.Property(e => e.PlanTreningowyIdPlanTreningowy).HasColumnName("Plan_treningowy_id_plan_treningowy");
             entity.Property(e => e.UzytkownikIdUzytkownika).HasColumnName("Uzytkownik_id_uzytkownika");
@@ -78,9 +75,7 @@ public partial class GymRatsContext : DbContext
 
             entity.ToTable("Blog");
 
-            entity.Property(e => e.IdBlogu)
-                .ValueGeneratedNever()
-                .HasColumnName("id_blogu");
+            entity.Property(e => e.IdBlogu).HasColumnName("id_blogu");
             entity.Property(e => e.DataPublikacji)
                 .HasColumnType("datetime")
                 .HasColumnName("data_publikacji");
@@ -98,9 +93,7 @@ public partial class GymRatsContext : DbContext
         {
             entity.HasKey(e => e.IdJadlospisu).HasName("Jadlospis_pk");
 
-            entity.Property(e => e.IdJadlospisu)
-                .ValueGeneratedNever()
-                .HasColumnName("id_jadlospisu");
+            entity.Property(e => e.IdJadlospisu).HasColumnName("id_jadlospisu");
             entity.Property(e => e.Kalorycznosc)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -122,9 +115,7 @@ public partial class GymRatsContext : DbContext
 
             entity.ToTable("Karnet");
 
-            entity.Property(e => e.IdKarnet)
-                .ValueGeneratedNever()
-                .HasColumnName("id_karnet");
+            entity.Property(e => e.IdKarnet).HasColumnName("id_karnet");
             entity.Property(e => e.DataWydania).HasColumnName("data_wydania");
             entity.Property(e => e.DataWygasniecia).HasColumnName("data_wygasniecia");
             entity.Property(e => e.TypKarnetuIdTypKarnetu).HasColumnName("Typ_Karnetu_id_typ_karnetu");
@@ -147,9 +138,7 @@ public partial class GymRatsContext : DbContext
 
             entity.ToTable("Kurs_Trenera");
 
-            entity.Property(e => e.IdKursu)
-                .ValueGeneratedNever()
-                .HasColumnName("id_kursu");
+            entity.Property(e => e.IdKursu).HasColumnName("id_kursu");
             entity.Property(e => e.CzasTrwania)
                 .HasMaxLength(5)
                 .IsUnicode(false)
@@ -171,9 +160,7 @@ public partial class GymRatsContext : DbContext
 
             entity.ToTable("Osoba");
 
-            entity.Property(e => e.IdOsoba)
-                .ValueGeneratedNever()
-                .HasColumnName("id_osoba");
+            entity.Property(e => e.IdOsoba).HasColumnName("id_osoba");
             entity.Property(e => e.Adres)
                 .HasMaxLength(25)
                 .IsUnicode(false);
@@ -205,9 +192,7 @@ public partial class GymRatsContext : DbContext
 
             entity.ToTable("Plan_treningowy");
 
-            entity.Property(e => e.IdPlanTreningowy)
-                .ValueGeneratedNever()
-                .HasColumnName("id_plan_treningowy");
+            entity.Property(e => e.IdPlanTreningowy).HasColumnName("id_plan_treningowy");
             entity.Property(e => e.NazwaPlanu)
                 .HasMaxLength(30)
                 .IsUnicode(false)
@@ -237,9 +222,7 @@ public partial class GymRatsContext : DbContext
 
             entity.ToTable("Plan_treningowy_Uzytkownik");
 
-            entity.Property(e => e.IdPlanTreningowy)
-                .ValueGeneratedNever()
-                .HasColumnName("id_plan_treningowy");
+            entity.Property(e => e.IdPlanTreningowy).HasColumnName("id_plan_treningowy");
             entity.Property(e => e.PlanTreningowyIdPlanTreningowy).HasColumnName("Plan_treningowy_id_plan_treningowy");
             entity.Property(e => e.UzytkownikIdUzytkownika).HasColumnName("Uzytkownik_id_uzytkownika");
 
@@ -267,7 +250,9 @@ public partial class GymRatsContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("doswiadczenie");
-            entity.Property(e => e.OsobaIdOsoba).HasColumnName("Osoba_id_osoba");
+            entity.Property(e => e.OsobaIdOsoba)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("Osoba_id_osoba");
             entity.Property(e => e.Specjalizacja)
                 .HasMaxLength(15)
                 .IsUnicode(false)
@@ -285,9 +270,7 @@ public partial class GymRatsContext : DbContext
 
             entity.ToTable("Trening");
 
-            entity.Property(e => e.IdTrening)
-                .ValueGeneratedNever()
-                .HasColumnName("id_trening");
+            entity.Property(e => e.IdTrening).HasColumnName("id_trening");
             entity.Property(e => e.DzienTygodnia)
                 .HasMaxLength(12)
                 .IsUnicode(false)
@@ -308,9 +291,7 @@ public partial class GymRatsContext : DbContext
 
             entity.ToTable("Typ_Karnetu");
 
-            entity.Property(e => e.IdTypKarnetu)
-                .ValueGeneratedNever()
-                .HasColumnName("id_typ_karnetu");
+            entity.Property(e => e.IdTypKarnetu).HasColumnName("id_typ_karnetu");
             entity.Property(e => e.Cena).HasColumnName("cena");
             entity.Property(e => e.Nazwa)
                 .HasMaxLength(30)
@@ -324,15 +305,13 @@ public partial class GymRatsContext : DbContext
 
             entity.ToTable("Uzytkownik");
 
-            entity.Property(e => e.IdUzytkownika)
-                .ValueGeneratedNever()
-                .HasColumnName("id_uzytkownika");
+            entity.Property(e => e.IdUzytkownika).HasColumnName("id_uzytkownika");
             entity.Property(e => e.Email)
-                .HasMaxLength(12)
+                .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("email");
             entity.Property(e => e.Haslo)
-                .HasMaxLength(16)
+                .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("haslo");
             entity.Property(e => e.OsobaIdOsoba).HasColumnName("Osoba_id_osoba");
@@ -349,9 +328,7 @@ public partial class GymRatsContext : DbContext
 
             entity.ToTable("Uzytkownik_Blog");
 
-            entity.Property(e => e.IdUzytkownikBlog)
-                .ValueGeneratedNever()
-                .HasColumnName("id_uzytkownik_blog");
+            entity.Property(e => e.IdUzytkownikBlog).HasColumnName("id_uzytkownik_blog");
             entity.Property(e => e.BlogIdBlogu).HasColumnName("Blog_id_blogu");
             entity.Property(e => e.UzytkownikIdUzytkownika).HasColumnName("Uzytkownik_id_uzytkownika");
 
@@ -372,9 +349,7 @@ public partial class GymRatsContext : DbContext
 
             entity.ToTable("Uzytkownik_Jadlospis");
 
-            entity.Property(e => e.IdUzytkownikJadlospis)
-                .ValueGeneratedNever()
-                .HasColumnName("id_uzytkownik_jadlospis");
+            entity.Property(e => e.IdUzytkownikJadlospis).HasColumnName("id_uzytkownik_jadlospis");
             entity.Property(e => e.JadlospisIdJadlospisu).HasColumnName("Jadlospis_id_jadlospisu");
             entity.Property(e => e.UzytkownikIdUzytkownika).HasColumnName("Uzytkownik_id_uzytkownika");
 
@@ -395,9 +370,7 @@ public partial class GymRatsContext : DbContext
 
             entity.ToTable("Uzytkownik_Kurs_Trenera");
 
-            entity.Property(e => e.IdUzytkownikKursTrenera)
-                .ValueGeneratedNever()
-                .HasColumnName("id_uzytkownik_kurs_trenera");
+            entity.Property(e => e.IdUzytkownikKursTrenera).HasColumnName("id_uzytkownik_kurs_trenera");
             entity.Property(e => e.KursTreneraIdKursu).HasColumnName("Kurs_Trenera_id_kursu");
             entity.Property(e => e.UzytkownikIdUzytkownika).HasColumnName("Uzytkownik_id_uzytkownika");
 
