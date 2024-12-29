@@ -7,27 +7,15 @@ import GymPassPage from './pages/GymPassPage';
 import DietsPage from './pages/DietsPage';
 import TrainingPlansPage from './pages/TrainingPlansPage';
 import CoursesPage from './pages/CoursesPage';
-import './App.css';
+//import './App.css';
 import { DarkModeToggle } from "./components/DarkModeToggle";
 
 function App() {
   return (
     <Router>
       <div className="app">
-        <DarkModeToggle/>
-        <Header />
-        <div className="content-wrapper">
-          <Sidebar />
-          <main className="main-content">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/gym-pass" element={<GymPassPage />} />
-              <Route path="/diets" element={<DietsPage />} />
-              <Route path="/training-plans" element={<TrainingPlansPage />} />
-              <Route path="/courses" element={<CoursesPage />} />
-            </Routes>
-          </main>
-        </div>
+        <HomePage />
+        
       </div>
     </Router>
   );

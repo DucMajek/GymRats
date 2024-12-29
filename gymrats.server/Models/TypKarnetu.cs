@@ -11,5 +11,7 @@ public partial class TypKarnetu
 
     public float Cena { get; set; }
 
+    public string? Opis { get; set; }
+
     public virtual ICollection<Karnet> Karnets { get; set; } = new List<Karnet>();
 }
