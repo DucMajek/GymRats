@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../assets/HomePage.css'; 
+import '../assets/styles/HomePage.css'; 
 function GymPass() {
     const [gymPassCategory, setGymPassCategory] = useState([]);
 

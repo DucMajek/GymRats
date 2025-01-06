@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import gymRatsLogo from '../assets/gymRatsLogo.svg'
+import gymRatsLogo from '../assets/img/gymRatsLogo.svg'
 import { DarkModeToggle } from './DarkModeToggle';
 function Header() {
   return (
