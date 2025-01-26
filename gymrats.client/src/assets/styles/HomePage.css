@@ -48,6 +48,8 @@
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
+  width: auto;
+  height: auto;
 }
 
 .btn:hover {

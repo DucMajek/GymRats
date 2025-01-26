@@ -9,8 +9,8 @@ import TrainingPlansPage from './pages/TrainingPlansPage';
 import CoursesPage from './pages/CoursesPage';
 //import './App.css';
 import { DarkModeToggle } from "./components/DarkModeToggle";
-import Login from './components/Login'
 import Signup from "./components/Signup";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
       <div className="app">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route exact = "true" path="/login" element={<Login />} />
+          <Route exact = "true" path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
       </div>
