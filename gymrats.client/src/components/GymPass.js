@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../assets/styles/HomePage.css'; 
+import '../assets/styles/HomePage.css';
+
 function GymPass() {
     const [gymPassCategory, setGymPassCategory] = useState([]);
 
     useEffect(() => {
         const getGymPassData = async () => {
             try {
-                const response = await axios.get('https://localhost:7200/GymPassCategory', { responseType: 'json' });
+                const response = await axios.get('https://localhost:44380/GymPassCategory', { responseType: 'json' });
                 
                 setGymPassCategory(response.data);
                 console.log(response.data);

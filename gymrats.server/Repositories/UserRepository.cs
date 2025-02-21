@@ -29,8 +29,8 @@ namespace gymrats.server.Repositories
         {
             var person = new Osoba
             {
-                Imie = string.Empty,
-                Nazwisko = string.Empty,
+                Imie = newUser.Imie,
+                Nazwisko = newUser.Nazwisko,
                 DataUrodzenia = null,
                 Adres = string.Empty,
                 NrTel = string.Empty,
@@ -46,7 +46,7 @@ namespace gymrats.server.Repositories
             var user = new Uzytkownik
             {
                 Email = newUser.Email,
-                Haslo = _passwordHasher.HashPassword(newUser.Haslo),
+                Haslo = _passwordHasher.HashPassword(newUser.Password),
                 OsobaIdOsoba = person.IdOsoba
             };
             await _context.Uzytkowniks.AddAsync(user);
@@ -67,7 +67,7 @@ namespace gymrats.server.Repositories
                 return false;
             }
 
-            bool isValidPassword = _passwordHasher.VerifyPassword(login.Haslo, user.Haslo);
+            bool isValidPassword = _passwordHasher.VerifyPassword(login.Password, user.Haslo);
 
             return isValidPassword;
         }

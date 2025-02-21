@@ -16,7 +16,7 @@ namespace gymrats.server.Services
         public string GenerateToken(string email)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes("ForTheGymBrothersWhoLostHisLoveCuzSheCheatedOfHim"); // Ensure this key is securely stored
+            var key = Encoding.UTF8.GetBytes("ForTheGymBrothersWhoLostHisLoveCuzSheCheatedOfHim");
 
             var claims = new List<Claim>
         {

@@ -12,9 +12,8 @@ const Sidebar = () => {
   return (
     <div style={{ display: 'flex', height: 'auto', overflow: 'scroll initial' }}>
       <CDBSidebar style={{
-    backgroundColor: "var(--sidebar_color)",
-    color: "var(--sidebar_text_color)",
-    transition: "background-color 3s",
+    backgroundColor: "black",
+    color: "white",
   }}>
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>} style={{ color: 'inherit' }} >
           <a href="/" className="text-decoration-none" style={{ color: 'inherit' }} >
@@ -35,6 +34,9 @@ const Sidebar = () => {
             </NavLink>
             <NavLink exact to="/courses" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon = "graduation-cap" style={{ color: 'var(--body_color)' }}>Kursy</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/courses" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon = "fa-solid fa-door-open" style={{ color: 'var(--body_color)' }}>Wyloguj się</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>

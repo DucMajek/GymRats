@@ -1,4 +1,5 @@
 import DownloadButton from './DownloadButton';
+
 function TraningPlan({ title, id }) {
   return (
       <div className="traning-plan">

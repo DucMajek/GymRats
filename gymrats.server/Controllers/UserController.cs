@@ -17,19 +17,34 @@ namespace gymrats.server.Controllers
 
 
         [HttpPost("/login")]
-        public async Task<IActionResult> SignIn(LoginRequestDto login)
+        public async Task<IActionResult> SignIn([FromBody] LoginRequestDto login)
         {
-            var result = await _userService.GetUser(login);
-            if(result.Token != null)
-                return Ok(new {result.Token});
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            return Unauthorized(result.Message);
+            var result = await _userService.Login(login);
+
+            if (result == null)
+                return Unauthorized("Wrong username or password");
+
+            // Ustawienie tokena jako ciasteczka
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = DateTime.UtcNow.AddHours(1)
+            };
+
+            Response.Cookies.Append("jwt", result.Token, cookieOptions);
+
+            return Ok(new { result.Token });
         }
 
         [HttpPost("/register")]
         public async Task<IActionResult> Register(RegisterUserRequestDto newUser)
         {
-            var result = await _userService.RegisterUser(newUser);
+            var result = await _userService.Register(newUser);
             if (result.Status == "Error")
             {
                 return BadRequest(new { result.Message, result.Status });

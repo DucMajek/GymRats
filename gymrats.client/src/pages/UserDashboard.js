@@ -1,14 +1,31 @@
-import React from 'react';
-function HomePage() {
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from '../components/Header';
+import Sidebar from '../components/Sidebar';
+import HomePage from './HomePage';
+import GymPassPage from './GymPassPage';
+import DietsPage from './DietsPage';
+import TrainingPlansPage from './TrainingPlansPage';
+import CoursesPage from './CoursesPage';
+import '../assets/styles/Dashboard.css';
+function UserDashboard() {
   return (
-      <div className = "App">
-          <p>Hello world!</p>
-          <div className='box'>
-              <h2>This is a bdox</h2>
-          </div>
-      </div>
+    <div className="app">
+    <Header />
+    <div className="content-wrapper">
+      <Sidebar />
+      <main className="main-content">
+        <Routes>
+          <Route path="/karnety" element={<GymPassPage />} />
+          <Route path="/diets" element={<DietsPage />} />
+          <Route path="/training-plans" element={<TrainingPlansPage />} />
+          <Route path="/courses" element={<CoursesPage />} />
+        </Routes>
+      </main>
+    </div>
+  </div>
     
   );
 }
 
-export default HomePage;
+export default UserDashboard;

@@ -9,40 +9,48 @@ namespace gymrats.server.Services
 {
     public interface IUserServices
     {
-        Task<LoginResponseDto> GetUser(LoginRequestDto login);
-        Task<RegisterUserResponseDto> RegisterUser(RegisterUserRequestDto newUser);
+        Task<LoginResponseDto> Login(LoginRequestDto login);
+        Task<RegisterUserResponseDto> Register(RegisterUserRequestDto newUser);
     }
+
     public class UserServices : IUserServices
     {
         private readonly IUserRepository _userRepository;
         private readonly ITokenGenerator _tokenGenerator;
+
         public UserServices(IUserRepository userRepository, ITokenGenerator tokenGenerator)
         {
             _userRepository = userRepository;
             _tokenGenerator = tokenGenerator;
         }
-        public async Task<LoginResponseDto> GetUser(LoginRequestDto login)
+
+        public async Task<LoginResponseDto?> Login(LoginRequestDto login)
         {
-
-            var user = await _userRepository.UserExist(login);
-
-            if (user)
+            try
             {
+                var user = await _userRepository.UserExist(login);
+
+                if (!user)
+                    return null;
+
                 var token = _tokenGenerator.GenerateToken(login.Email);
-                return new LoginResponseDto { 
+
+                return new LoginResponseDto
+                {
                     Token = token,
                     Message = "Login successful"
                 };
             }
-            return new LoginResponseDto
+            catch (Exception ex)
             {
-                Token = null,
-                Message = "Wrong username or password"
-            };
-
+                return new LoginResponseDto
+                {
+                    Message = "An error occurred during registration: " + ex.Message
+                };
+            }
         }
 
-        public async Task<RegisterUserResponseDto> RegisterUser(RegisterUserRequestDto newUser)
+        public async Task<RegisterUserResponseDto> Register(RegisterUserRequestDto newUser)
         {
             try
             {
@@ -56,7 +64,7 @@ namespace gymrats.server.Services
                     };
                 }
 
-                var registerUser = await _userRepository.AddNewUser(newUser);
+                await _userRepository.AddNewUser(newUser);
 
                 return new RegisterUserResponseDto
                 {
@@ -72,7 +80,5 @@ namespace gymrats.server.Services
                 };
             }
         }
-
-
     }
 }

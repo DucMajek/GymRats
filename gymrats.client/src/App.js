@@ -9,20 +9,25 @@ import TrainingPlansPage from './pages/TrainingPlansPage';
 import CoursesPage from './pages/CoursesPage';
 //import './App.css';
 import { DarkModeToggle } from "./components/DarkModeToggle";
-import Signup from "./components/Signup";
+import Login from "./components/Login";
 import LoginPage from "./pages/LoginPage";
+import { AuthProvider } from './components/AuthContext';
+import UserDashboard from './pages/UserDashboard';
 
 function App() {
   return (
-    <Router>
-      <div className="app">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route exact = "true" path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
-      </div>
+    <AuthProvider>
+      <Router>
+        <div className="app">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route exact = "true" path="/login" element={<LoginPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/dashboard/*" element={<UserDashboard />} />
+          </Routes>
+        </div>
     </Router>
+    </AuthProvider>
   );
 }
 

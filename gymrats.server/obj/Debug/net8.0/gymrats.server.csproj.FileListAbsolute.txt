@@ -89,7 +89,6 @@ D:\Praca dyplomowa\GymRats\gymrats.server\bin\Debug\net8.0\System.Composition.Ho
 D:\Praca dyplomowa\GymRats\gymrats.server\bin\Debug\net8.0\System.Composition.Runtime.dll
 D:\Praca dyplomowa\GymRats\gymrats.server\bin\Debug\net8.0\System.Composition.TypedParts.dll
 D:\Praca dyplomowa\GymRats\gymrats.server\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
-D:\Praca dyplomowa\GymRats\gymrats.server\bin\Debug\net8.0\System.Formats.Asn1.dll
 D:\Praca dyplomowa\GymRats\gymrats.server\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 D:\Praca dyplomowa\GymRats\gymrats.server\bin\Debug\net8.0\System.Memory.Data.dll
 D:\Praca dyplomowa\GymRats\gymrats.server\bin\Debug\net8.0\System.Reflection.MetadataLoadContext.dll
@@ -268,7 +267,6 @@ D:\Praca dyplomowa\GymRats\gymrats.server\obj\Debug\net8.0\staticwebassets\msbui
 D:\Praca dyplomowa\GymRats\gymrats.server\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.gymrats.server.props
 D:\Praca dyplomowa\GymRats\gymrats.server\obj\Debug\net8.0\staticwebassets.pack.json
 D:\Praca dyplomowa\GymRats\gymrats.server\obj\Debug\net8.0\scopedcss\bundle\gymrats.server.styles.css
-D:\Praca dyplomowa\GymRats\gymrats.server\obj\Debug\net8.0\gymrats.server.csproj.CopyComplete
 D:\Praca dyplomowa\GymRats\gymrats.server\obj\Debug\net8.0\gymrats.server.dll
 D:\Praca dyplomowa\GymRats\gymrats.server\obj\Debug\net8.0\refint\gymrats.server.dll
 D:\Praca dyplomowa\GymRats\gymrats.server\obj\Debug\net8.0\gymrats.server.pdb
@@ -278,3 +276,7 @@ D:\Praca dyplomowa\GymRats\gymrats.server\bin\Debug\net8.0\gymrats.server.dll
 D:\Praca dyplomowa\GymRats\gymrats.server\bin\Debug\net8.0\gymrats.server.pdb
 D:\Praca dyplomowa\GymRats\gymrats.server\obj\Debug\net8.0\gymrats.server.genruntimeconfig.cache
 D:\Praca dyplomowa\GymRats\gymrats.server\obj\Debug\net8.0\ref\gymrats.server.dll
+D:\Praca dyplomowa\GymRats\gymrats.server\bin\Debug\net8.0\gymrats.server.staticwebassets.endpoints.json
+D:\Praca dyplomowa\GymRats\gymrats.server\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+D:\Praca dyplomowa\GymRats\gymrats.server\obj\Debug\net8.0\staticwebassets\msbuild.gymrats.server.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+D:\Praca dyplomowa\GymRats\gymrats.server\obj\Debug\net8.0\gymrats..97538FDB.Up2Date

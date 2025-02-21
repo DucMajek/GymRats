@@ -10,18 +10,18 @@ namespace gymrats.server.Models.DTOs
         public string Email { get; set; } = null!;
 
         [Required(ErrorMessage = "Required.")]
-        public string Haslo { get; set; } = null!;
+        public string Password { get; set; } = null!;
 
         //[Key]
         //public int IdOsoba { get; set; }
         //[Key]
         //public int IdUzytkownika { get; set; }
 
-        //[Required(ErrorMessage = "Required.")]
-        //public string Imie { get; set; } = null!;
+        [Required(ErrorMessage = "Required.")]
+        public string Imie { get; set; } = null!;
 
-        //[Required(ErrorMessage = "Required.")]
-        //public string Nazwisko { get; set; } = null!;
+        [Required(ErrorMessage = "Required.")]
+        public string Nazwisko { get; set; } = null!;
 
         //[Required(ErrorMessage = "Required.")]
         //public DateTime DataUrodzenia { get; set; }
