@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import '../assets/styles/HomePage.css'; 
+import '../assets/styles/HomePage.css';
 import GymRats_logo from '../assets/img/GymRats_Logo.png';
 import member from '../assets/img/member.jpg';
 import member2 from '../assets/img/member2.jpg';
@@ -17,30 +17,30 @@ function HomePageFooter() {
   }, []);
 
   return (
-    <div>
+    <div id='about__us'>
       <section className="review">
         <div className="section__container review__container">
           <span><i className="ri-group-fill"></i></span>
           <div className="review__content">
             <h4>O nas</h4>
             <p>
-            To, co naprawdę wyróżnia nas, to nasz zespół dwóch ekspertów. Nasi autorzy są doświadczeni, pomocni i szczerze zaangażowani w pomoc innym w osiąganiu ich celów. 
-            Poświęcają czas na zrozumienie indywidualnych potrzeb i tworzą spersonalizowane treści, 
-            które zapewniają maksymalne rezultaty i pełne bezpieczeństwo.
+              To, co naprawdę wyróżnia nas, to nasz zespół dwóch ekspertów. Nasi autorzy są doświadczeni, pomocni i szczerze zaangażowani w pomoc innym w osiąganiu ich celów.
+              Poświęcają czas na zrozumienie indywidualnych potrzeb i tworzą spersonalizowane treści,
+              które zapewniają maksymalne rezultaty i pełne bezpieczeństwo.
             </p>
             <div className="review__footer">
-            <div class="review__member">
-              <img src={member} alt="member" />
-              <div class="review__member__details">
-                <h4>Michał Majek</h4>
-                <p>PJATK Student</p>
+              <div class="review__member">
+                <img src={member} alt="member" />
+                <div class="review__member__details">
+                  <h4>Michał Majek</h4>
+                  <p>PJATK Student</p>
+                </div>
+                <img src={member2} alt="member" />
+                <div class="review__member__details">
+                  <h4>Duc Anh Dinh</h4>
+                  <p>PJATK Student</p>
+                </div>
               </div>
-              <img src={member2} alt="member" />
-              <div class="review__member__details">
-                <h4>Duc Anh Dinh</h4>
-                <p>PJATK Student</p>
-              </div>
-            </div>
             </div>
           </div>
         </div>
@@ -52,8 +52,8 @@ function HomePageFooter() {
         <div className="footer__col">
           <div className="footer__logo"><img src={GymRats_logo} alt="logo" /></div>
           <p>
-          Zrób pierwszy krok w stronę zdrowszej i silniejszej wersji siebie dzięki naszym atrakcyjnym planom cenowym. 
-          Ćwicz, osiągaj cele i pokonuj wyzwania razem z nami!
+            Zrób pierwszy krok w stronę zdrowszej i silniejszej wersji siebie dzięki naszym atrakcyjnym planom cenowym.
+            Ćwicz, osiągaj cele i pokonuj wyzwania razem z nami!
           </p>
           <div className="footer__socials">
             <a href="#"><i className="ri-youtube-fill"></i></a>

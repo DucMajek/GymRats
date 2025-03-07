@@ -258,7 +258,7 @@ public partial class GymRatsContext : DbContext
                 .ValueGeneratedOnAdd()
                 .HasColumnName("Osoba_id_osoba");
             entity.Property(e => e.Specjalizacja)
-                .HasMaxLength(15)
+                .HasMaxLength(30)
                 .IsUnicode(false)
                 .HasColumnName("specjalizacja");
 

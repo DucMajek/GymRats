@@ -2,8 +2,6 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
 
-[ApiController]
-[Route("api/[controller]")]
 public class FilesController : ControllerBase
 {
     private readonly IConfiguration _configuration;
@@ -13,8 +11,8 @@ public class FilesController : ControllerBase
         _configuration = configuration;
     }
 
-    [HttpGet("downloadTranningPlanFile/{id}")]
-    [HttpGet("downloadDietFile/{id}/{calorie}")]
+    [HttpGet("DownloadTranningPlanFile/{id}")]
+    [HttpGet("DownloadDietFile/{id}/{calorie}")]
     public async Task<IActionResult> DownloadPdfFile(int id, string? calorie)
     {
         var connectionString = _configuration.GetConnectionString("MyDBConnection");

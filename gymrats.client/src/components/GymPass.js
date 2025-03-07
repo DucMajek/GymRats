@@ -20,6 +20,11 @@ function GymPass() {
     }, []);
 
     return (
+        <div id="price__grid">
+            <h2 className="section__header">KARNETY</h2>
+            <p className="section__subheader">
+                Nasz plan cenowy oferuje różne poziomy członkostwa, które są dopasowane do różnych preferencji i celów fitnessowych.
+            </p>
         <div className="price__grid">
             {Array.isArray(gymPassCategory) && gymPassCategory.map((item) => (
                 <div className="price__card" key={item.name}>
@@ -39,6 +44,7 @@ function GymPass() {
                     <button className="btn price__btn">Kup Teraz</button>
                 </div>
             ))}
+        </div>
         </div>
     );
 }

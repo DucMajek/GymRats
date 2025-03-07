@@ -15,12 +15,10 @@ namespace gymrats.server.Repositories
     }
     public class UserRepository : IUserRepository
     {
-        private readonly IConfiguration _configuration;
         private readonly GymRatsContext _context;
         private readonly IPasswordHasher _passwordHasher;
-        public UserRepository(IConfiguration configuration, GymRatsContext context, IPasswordHasher passwordHasher)
+        public UserRepository(GymRatsContext context, IPasswordHasher passwordHasher)
         {
-            _configuration = configuration;
             _context = context;
             _passwordHasher = passwordHasher;
         }

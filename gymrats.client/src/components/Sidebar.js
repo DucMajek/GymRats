@@ -21,7 +21,7 @@ const Sidebar = () => {
           </a>
         </CDBSidebarHeader>
 
-        <CDBSidebarContent className="sidebar-content" >
+        <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu >
             <NavLink exact to="/gym-pass" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon = "ticket-alt" style={{ color: 'var(--body_color)' }}>Karnety</CDBSidebarMenuItem>

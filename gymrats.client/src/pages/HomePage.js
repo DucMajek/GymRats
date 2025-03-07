@@ -3,9 +3,10 @@ import '../assets/styles/HomePage.css';
 import GymRats_logo from '../assets/img/GymRats_Logo.png';
 import headerLogo from '../assets/img/header.png';
 import join from '../assets/img/join.png';
-import GymPassCategory from '../components/GymPass'
-import HomePageFooter from '../components/HomePageFooter'
-import Navbar from '../components/Navbar'
+import GymPassCategory from '../components/GymPass';
+import HomePageFooter from '../components/HomePageFooter';
+import Navbar from '../components/Navbar';
+import Courses from'../components/TraningCourse';
 function HomePage() {
   useEffect(() => {
     const link = document.createElement('link');
@@ -52,7 +53,7 @@ function HomePage() {
             <p>
               Odkryj siłę fizyczną, psychiczną i emocjonalną z naszymi karnetami, które pomogą Ci osiągnąć cel.
             </p>
-            <a href="#">Join Now <i className="ri-arrow-right-line"></i></a>
+            <a href="#">Dołącz teraz <i className="ri-arrow-right-line"></i></a>
           </div>
           <div className="explore__card">
             <span><i className="ri-clipboard-fill"></i></span>
@@ -60,7 +61,7 @@ function HomePage() {
             <p>
               Osiągnij swoje cele dzięki indywidualnie dopasowanemu planowi treningowemu.
             </p>
-            <a href="#">Join Now <i className="ri-arrow-right-line"></i></a>
+            <a href="#">Dołącz teraz <i className="ri-arrow-right-line"></i></a>
           </div>
           <div className="explore__card">
             <span><i className="ri-user-star-fill"></i></span>
@@ -68,7 +69,7 @@ function HomePage() {
             <p>
               Zdobądź wiedzę i umiejętności potrzebne, by zostać profesjonalnym trenerem.
             </p>
-            <a href="#">Join Now <i className="ri-arrow-right-line"></i></a>
+            <a href="#">Dołącz teraz <i className="ri-arrow-right-line"></i></a>
           </div>
           <div className="explore__card">
             <span><i className="ri-restaurant-fill"></i></span>
@@ -76,7 +77,7 @@ function HomePage() {
             <p>
              Darmowe jadłospisy, które pomogą Ci zdrowo zwiększyć/zredukować wage.
             </p>
-            <a href="#">Join Now <i className="ri-arrow-right-line"></i></a>
+            <a href="#">Dołącz teraz <i className="ri-arrow-right-line"></i></a>
           </div>
         </div>
       </section>
@@ -116,11 +117,10 @@ function HomePage() {
       </section>
 
       <section className="section__container price__container">
-        <h2 className="section__header">Karnety</h2>
-        <p className="section__subheader">
-          Nasz plan cenowy oferuje różne poziomy członkostwa, które są dopasowane do różnych preferencji i celów fitnessowych.
-        </p>
         <GymPassCategory/>
+      </section>
+      <section className="section__container price__container">
+        <Courses/>
       </section>
       <HomePageFooter/>
     </div>
