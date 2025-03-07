@@ -7,7 +7,7 @@ import GymPassPage from './pages/GymPassPage';
 import DietsPage from './pages/DietsPage';
 import TrainingPlansPage from './pages/TrainingPlansPage';
 import CoursesPage from './pages/CoursesPage';
-//import './App.css';
+import './App.css';
 import { DarkModeToggle } from "./components/DarkModeToggle";
 import Login from "./components/Login";
 import LoginPage from "./pages/LoginPage";
@@ -21,12 +21,16 @@ function App() {
         <div className="app">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route exact = "true" path="/login" element={<LoginPage />} />
+            <Route exact="true" path="/login" element={<LoginPage />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/dashboard/*" element={<UserDashboard />} />
+            <Route path="/dashboard" element={<UserDashboard />} />
+            <Route path="/gym-pass" element={<GymPassPage />} />
+            <Route path="/diets" element={<DietsPage />} />
+            <Route path="/training-plans" element={<TrainingPlansPage />} />
+            <Route path="/courses" element={<CoursesPage />} />
           </Routes>
         </div>
-    </Router>
+      </Router>
     </AuthProvider>
   );
 }

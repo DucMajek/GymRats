@@ -1,0 +1,74 @@
+/* kontener */
+.training-plans-container {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    max-width: fit-content;
+    margin-inline: auto;
+  }
+  
+  /* lewa strona  */
+  .left-side {
+    flex: 1;
+    
+  }
+  
+  /* prawy przycisk plus */
+  .right-side {
+    flex: 1;
+    text-align: center;
+  }
+  
+  /* karta w training plan */
+  .traning-plan {
+    background-color: #f5f5f53f;
+  
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+    padding: 1rem;
+    
+
+    width: 600px; 
+
+    max-width: 90%;
+  }
+  
+  
+  .traning-plan h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  
+  .schedule {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    gap: 1rem;              
+  }
+  
+  .schedule p {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #18a6e8;
+  }
+  
+  
+  
+  
+
+  .circle-plus {
+    width: 80px;
+    height: 80px;
+    margin: 1rem auto;
+    border-radius: 100%;
+    background-color: #18a6e8;
+    color: #fff;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  

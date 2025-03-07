@@ -1,0 +1,79 @@
+.cardContainer {
+    max-width: 400px;
+    margin: 10px auto;    
+    margin-left: 20px;        
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    overflow: hidden;
+    max-width: fit-content;
+    margin-inline: auto;
+  }
+  
+  .cardHeader {
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 16px;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .cardDates {
+    padding: 16px;
+  }
+  
+  .benefitsSection {
+    background: #e0e0e0;
+    padding: 8px 16px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+  }
+  
+  .divider {
+    margin: 4px 0 0;
+    border: none;
+    border-top: 1px solid #999;
+  }
+  
+  .benefitsPlaceholder {
+    background: #d3d3d3;
+    height: 50px; 
+  }
+  
+  .bottomSection {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-evenly;
+    padding: 16px;
+    background-color: #fafafa;
+  }
+  
+  /* Dwie kolumny na dole płatność i kody */
+  .paymentForm,
+  .promoCodes {
+    flex: 1;
+    text-align: center;
+    padding: 0 16px;
+  }
+  
+  .paymentForm {
+    border-right: 1px solid #ccc;
+  }
+  
+  .changeButton,
+  .addButton {
+    margin-top: 8px;
+    padding: 8px 16px;
+    background-color: #ddd;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  
+  .changeButton:hover,
+  .addButton:hover {
+    background-color: #bbb;
+  }
+  
