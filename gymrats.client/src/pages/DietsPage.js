@@ -10,15 +10,17 @@ function DietsPage() {
       <Header />
       <div className="content-wrapper">
         <Sidebar />
-          {/*<h2>Diety</h2>*/}
+        <div className="dietContainer">
+          <h2>Diety</h2>
           <div className="diet-plans">
             <DietPlan title="Sportowa" id={1} />
             <DietPlan title="Standard" id={2} />
             <DietPlan title="Wegetariańska" id={3} />
           </div>
         </div>
-
       </div>
+
+    </div>
   );
 }
 

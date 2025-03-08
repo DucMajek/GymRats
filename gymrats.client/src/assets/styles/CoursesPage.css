@@ -1,105 +1,145 @@
 .courses-page {
-    padding: 20px;
-  }
-  
-  .courses-page h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 1.8rem;
-  }
-  
-  /* Kontener  */
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+.courses-page h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.8rem;
+}
+
+/* Kontener */
+.courses-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.course-card {
+  width: 100%; 
+  max-width: 400px; 
+  height: auto; 
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.course-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.course-label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.course-card p {
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+/* Cena */
+.course-price {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Przycisk Wybieram */
+.course-button {
+  background-color: #00aaff;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 3px;
+  margin: 10px auto;
+  max-width: 200px;
+}
+
+.course-button:hover {
+  background-color: #008fcc;
+}
+
+/* Sekcja benefitów */
+.course-benefits {
+  text-align: left;
+  margin-top: 10px;
+}
+
+.course-benefits ul {
+  margin: 8px 0 0 20px;
+  padding: 0;
+}
+
+.course-benefits li {
+  list-style-type: disc;
+  margin: 5px 0;
+}
+
+/* Link dowiedz się więcej */
+.learn-more {
+  display: inline-block;
+  margin-top: 15px;
+  color: #00aaff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.learn-more:hover {
+  color: #008fcc;
+}
+
+/* Media Queries dla responsywności */
+@media (max-width: 768px) {
   .courses-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-    flex-wrap: wrap; 
-    gap: 20px;
-    
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
   }
-  
+
   .course-card {
-    width: 500px;
-    height: 535px;           
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    padding: 20px;
-    text-align: center;          
-    display: flex;
-    flex-direction: column;      
-    justify-content: space-between;
+      width: 90%; /* Karty zajmują 90% szerokości na mniejszych ekranach */
+      max-width: 100%; /* Usuwa maksymalną szerokość */
   }
-  
-  .course-card h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-  }
-  
-  .course-label {
-    font-weight: bold;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-  }
-  
-  .course-card p {
-    margin-bottom: 10px;
-    line-height: 1.4;
-  }
-  
-  /* Cena */
-  .course-price {
-    font-weight: bold;
-    color: #333;
-  }
-  
-  /* Przycisk Wybieram */
+
   .course-button {
-    background-color: #00aaff;
-    color: #fff;
-    border: none;
-    padding: 12px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 3px;
-    margin: 10px auto; 
-    max-width: 200px;
+      width: 100%; /* Przycisk na pełną szerokość */
+      max-width: none; /* Usuwa ograniczenie szerokości */
   }
-  
-  .course-button:hover {
-    background-color: #008fcc; 
+}
+
+@media (max-width: 480px) {
+  .course-card {
+      width: 100%; /* Karty zajmują 100% szerokości na bardzo małych ekranach */
+      padding: 15px; /* Mniejszy padding */
   }
-  
-  /* Sekcja benefitów */
-  .course-benefits {
-    text-align: left; 
-    margin-top: 10px;
+
+  .course-card h3 {
+      font-size: 1.1rem; /* Mniejszy rozmiar czcionki */
   }
-  
-  .course-benefits ul {
-    margin: 8px 0 0 20px;
-    padding: 0;
+
+  .course-button {
+      padding: 10px 15px; /* Mniejszy padding przycisku */
+      font-size: 0.9rem; /* Mniejszy rozmiar czcionki */
   }
-  
-  .course-benefits li {
-    list-style-type: disc;
-    margin: 5px 0;
+  .content-wrapper {
+    display: flex;
+    width: 100%;
+    margin-top: 60px;
+    flex-wrap: wrap;
   }
-  
-  /* Link dowiedz się więcej */
-  .learn-more {
-    display: inline-block;
-    margin-top: 15px;
-    color: #00aaff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-  }
-  
-  .learn-more:hover {
-    color: #008fcc; 
-  }
-  
+}

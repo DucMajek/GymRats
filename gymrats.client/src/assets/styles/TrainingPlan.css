@@ -53,7 +53,17 @@
     color: #18a6e8;
   }
   
-  
+  button {
+    background-color: #00aaff;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 3px;
+    margin: 10px auto; 
+    max-width: 200px;
+  }
   
   
 

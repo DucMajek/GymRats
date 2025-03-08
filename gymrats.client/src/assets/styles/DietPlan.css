@@ -1,48 +1,73 @@
 .diet-plans {
-    display: flex;
-    justify-content: space-around;
-    max-width: fit-content;
-    margin-inline: auto;
+  display: flex;
+  justify-content: space-around;
+  gap: 1vw;
+
+}
+
+@media (max-width: 768px) {
+  .diet-plans {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
 }
 
 .diet-plan {
-    background-color: rebeccapurple;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 60%;
-    height: 60%;
-    
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  box-shadow: 0 0 10px rgb(238, 108, 48);
+  color: white;
+  width: 460px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 
-.diet-plan h3{
+.diet-plan h3 {
   margin-bottom: 20px;
+  font-size: 3.5rem;
+  color: white;
 
 }
 
-.diet-plan .calories p, .schedule p {
-  margin: 10px 0;
-
+.diet-plan .calories p {
+  margin: 0;
+  font-size: 30px;
+  display: flex; 
+  align-items: center; 
+  gap: 160px;
 }
 
 .diet-plan button {
-  border-radius: 0px; 
-  color: orange;
+  border-radius: 0px;
+  color: white;
   border: none;
   padding: 5px 10px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  /* Dodane dla efektu hover */
+  background-color: orange;
+}
 
+.diet-plan button:hover {
+  background-color: rgba(238, 108, 48, 0.8);
+  color: white;
 }
 
 .content-wrapper {
   display: flex;
   width: 100%;
   margin-top: 60px;
+  flex-wrap: wrap;
 }
 
 
-.data-page h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 1.8rem;
+.dietContainer h2 {
+  text-align: justify;
+  font-size: 2.5em;
+  color: white;
 }

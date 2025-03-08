@@ -40,7 +40,7 @@ const DownloadButton = ({ useAlternativeApi, fileId, calories }) => {
 
 
     return (
-        <button onClick={downloadFile}>
+        <button onClick={downloadFile} >
             Pobierz plik
         </button>
     );

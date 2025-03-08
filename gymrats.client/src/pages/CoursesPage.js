@@ -17,7 +17,7 @@ function CoursesPage() {
 
             {/* Karta kursu 1 */}
             <div className="course-card">
-              <h3>KURS TRENERA PERSONALNEGO</h3>
+              <h3>TRENER PERSONALNY</h3>
               <p className="course-label">Opis:</p>
               <p>
                 Oferujemy 120 godzin zajęć praktycznych i teoretycznych z najlepszymi ekspertami w dziedzinie fitness,
@@ -44,12 +44,12 @@ function CoursesPage() {
 
             {/* Karta kursu 2 */}
             <div className="course-card">
-              <h3>KURS TRENERA PRZYGOTOWANIA MOTORYCZNEGO</h3>
+              <h3>TRENER PRZYGOTOWANIA MOTORYCZNEGO</h3>
               <p className="course-label">Opis:</p>
               <p>
-                Oferujemy 90 godzin akademickich ćwiczeń, wykładów i hospitacji.
-                W ostatnim dniu kursu uczestnicy zdają egzamin przed komisją CKKS.
-                Kurs kończy się egzaminem.
+              Oferujemy 90 godzin akademickich zajęć praktycznych i teoretycznych, obejmujących ćwiczenia, wykłady oraz hospitacje. 
+              Pod okiem doświadczonych specjalistów zdobędziesz wiedzę i umiejętności niezbędne do pracy w zawodzie. 
+              W ostatnim dniu kursu uczestnicy przystępują do egzaminu przed komisją CKKS, który potwierdza ich kwalifikacje.
               </p>
               <p className="course-price">Cena: 1500 złotych za cały kurs</p>
               <button className="course-button">Wybieram</button>
@@ -69,7 +69,7 @@ function CoursesPage() {
 
             {/* Karta kursu 3 */}
             <div className="course-card">
-              <h3>KURS TRENERA FITNESS</h3>
+              <h3>TRENER FITNESS</h3>
               <p className="course-label">Opis:</p>
               <p>
                 Zapewniamy intensywny kurs trenera fitness, trwający 90 godzin,

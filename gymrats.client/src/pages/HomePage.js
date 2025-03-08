@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import '../assets/styles/HomePage.css'; 
-import GymRats_logo from '../assets/img/GymRats_Logo.png';
 import headerLogo from '../assets/img/header.png';
 import join from '../assets/img/join.png';
 import GymPassCategory from '../components/GymPass';
