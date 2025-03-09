@@ -1,12 +1,17 @@
 .courses-page {
   padding: 20px;
   flex-wrap: wrap;
+  gap: 2rem;
+  margin-inline: 20px;
+  padding: 1rem;
+  max-width: fit-content;
 }
 
 .courses-page h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 1.8rem;
+  margin-bottom: 8px;
+  color:white;
+  font-size: 2.5em;
+  
 }
 
 /* Kontener */
@@ -15,21 +20,23 @@
   justify-content: space-around;
   align-items: flex-start;
   gap: 20px;
+  
 }
 
 .course-card {
   width: 100%; 
   max-width: 400px; 
   height: auto; 
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgb(238, 108, 48);
+  color: white;
+  border-radius: 8px;
   padding: 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  
 }
 
 .course-card h3 {
@@ -53,12 +60,12 @@
 /* Cena */
 .course-price {
   font-weight: bold;
-  color: #333;
+  color: white;
 }
 
 /* Przycisk Wybieram */
 .course-button {
-  background-color: #00aaff;
+  background-color: orange;
   color: #fff;
   border: none;
   padding: 12px 20px;
@@ -70,7 +77,8 @@
 }
 
 .course-button:hover {
-  background-color: #008fcc;
+  background-color: rgba(238, 108, 48, 0.8);
+  color: white;
 }
 
 /* Sekcja benefitów */
@@ -93,14 +101,14 @@
 .learn-more {
   display: inline-block;
   margin-top: 15px;
-  color: #00aaff;
+  color: orange;
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
 }
 
 .learn-more:hover {
-  color: #008fcc;
+  color: rgba(238, 108, 48, 0.8);
 }
 
 /* Media Queries dla responsywności */

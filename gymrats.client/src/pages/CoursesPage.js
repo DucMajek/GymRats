@@ -8,13 +8,12 @@ function CoursesPage() {
   return (
     <div className="main">
       <Header />
-      <div className="content-wrapper">
+      <div className="content-wrapper" style={{gap:"0"}}>
         <Sidebar />
         <div className="courses-page">
           <h2>Kursy na trenera</h2>
 
           <div className="courses-container">
-
             {/* Karta kursu 1 */}
             <div className="course-card">
               <h3>TRENER PERSONALNY</h3>
@@ -38,7 +37,7 @@ function CoursesPage() {
 
 
               <Link to="/course-details/1" className="learn-more">
-                dowiedz się więcej
+                Dowiedz się więcej
               </Link>
             </div>
 
@@ -63,7 +62,7 @@ function CoursesPage() {
               </div>
 
               <Link to="/course-details/2" className="learn-more">
-                dowiedz się więcej
+                Dowiedz się więcej
               </Link>
             </div>
 
@@ -90,7 +89,7 @@ function CoursesPage() {
               </div>
 
               <Link to="/course-details/3" className="learn-more">
-                dowiedz się więcej
+                Dowiedz się więcej
               </Link>
             </div>
 

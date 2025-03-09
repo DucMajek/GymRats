@@ -8,7 +8,7 @@ function DietsPage() {
   return (
     <div className="main">
       <Header />
-      <div className="content-wrapper">
+      <div className="content-wrapper" style={{gap:"0"}}>
         <Sidebar />
         <div className="dietContainer">
           <h2>Diety</h2>

@@ -8,12 +8,12 @@ function TrainingPlanPage() {
   return (
     <div className="main">
       <Header />
-      <div className="content-wrapper">
+      <div className="content-wrapper" style={{gap:"0"}}>
         <Sidebar />
         <div className="training-plans-container">
           {/* lewa kolumna */}
           <div className="left-side">
-            {/*<h2>Przykładowe plany treningowe</h2>*/}
+            <h2 style={{fontSize: "2.5em"}}>Plany treningowe</h2>
             <TraningPlan title="Koszykówka" id={1} />
             <TraningPlan title="Sporty walki" id={2} />
             <TraningPlan title="Piłka nożna" id={3} />
@@ -21,7 +21,7 @@ function TrainingPlanPage() {
 
           {/* prawa kolumna */}
           <div className="right-side">
-            <h2>Indywidualny plan treningowy</h2>
+            <h2 style={{fontSize: "2.5em"}}>Indywidualny plan treningowy</h2>
             {/* przycisk */}
             <div className="circle-plus">+</div>
             <p>
