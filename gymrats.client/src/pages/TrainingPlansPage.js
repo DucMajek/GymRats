@@ -4,6 +4,7 @@ import '../assets/styles/TrainingPlan.css';
 import '../assets/styles/Dashboard.css';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import Footer from '../components/Footer';
 function TrainingPlanPage() {
   return (
     <div className="main">

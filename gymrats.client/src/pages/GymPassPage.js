@@ -3,6 +3,7 @@ import '../assets/styles/GymPass.css';
 import '../assets/styles/Dashboard.css';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import Footer from '../components/Footer';
 function GymPassPage() {
   return (
 

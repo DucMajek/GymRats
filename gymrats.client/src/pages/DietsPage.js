@@ -4,6 +4,7 @@ import '../assets/styles/Dashboard.css';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import '../assets/styles/DietPlan.css';
+import Footer from '../components/Footer';
 function DietsPage() {
   return (
     <div className="main">
@@ -19,7 +20,6 @@ function DietsPage() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }

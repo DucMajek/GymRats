@@ -3,9 +3,10 @@ import '../assets/styles/HomePage.css';
 import headerLogo from '../assets/img/header.png';
 import join from '../assets/img/join.png';
 import GymPassCategory from '../components/GymPass';
-import HomePageFooter from '../components/HomePageFooter';
+import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Courses from'../components/TraningCourse';
+import AboutUs from '../components/AboutUs'
 function HomePage() {
   useEffect(() => {
     const link = document.createElement('link');
@@ -121,7 +122,8 @@ function HomePage() {
       <section className="section__container price__container">
         <Courses/>
       </section>
-      <HomePageFooter/>
+      <AboutUs/>
+      <Footer/>
     </div>
   );
 }

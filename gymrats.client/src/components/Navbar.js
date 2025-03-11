@@ -9,8 +9,8 @@ function Navbar(){
         }
       };
     return(
-        <div>
-            <nav>
+        <div className='stickyNavbar'>
+            <nav sticky="top">
                 <div className="nav__logo">
                     <a href="#"><img src={GymRats_logo} alt="gymRatsLogo_resized" className="img-logo" /></a>
                 </div>

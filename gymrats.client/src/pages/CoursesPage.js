@@ -4,6 +4,7 @@ import '../assets/styles/CoursesPage.css';
 import '../assets/styles/Dashboard.css';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import Footer from '../components/Footer';
 function CoursesPage() {
   return (
     <div className="main">
@@ -95,7 +96,9 @@ function CoursesPage() {
 
           </div>
         </div>
+        
       </div>
+      <span className="bg__blur"></span>
     </div>
   );
 }

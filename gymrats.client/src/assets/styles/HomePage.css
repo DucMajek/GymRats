@@ -85,7 +85,15 @@ nav {
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  
+
+}
+
+.stickyNavbar {
+  position: sticky;
+  top: 0;
+  background-color: #111317;
+  z-index: 1000;
+  opacity: 0.95;
 }
 
 .nav__logo {
@@ -100,23 +108,23 @@ nav {
   gap: 3rem;
   justify-content: center;
   padding: 0;
-  
+
 }
 
-.nav__links a{
+.nav__links a {
   text-align: center;
   font-size: 17px;
-  padding: 6px; 
+  padding: 6px;
   text-decoration: none;
   color: inherit;
-  
+
 }
 
 .link a {
   position: relative;
   padding-bottom: 0.75rem;
   color: var(--white);
-  
+
 }
 
 .link a::after {
@@ -382,6 +390,7 @@ nav {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
 }
+
 .price__card {
   padding: 3rem 2rem;
   display: flex;
@@ -449,7 +458,7 @@ nav {
   gap: 2rem;
 }
 
-.review__container > span {
+.review__container>span {
   font-size: 6rem;
   color: var(--secondary-color);
   opacity: 0.5;
@@ -561,14 +570,14 @@ nav {
   color: var(--white);
 }
 
-.footer__col > a {
+.footer__col>a {
   display: block;
   margin-bottom: 1rem;
   color: var(--text-light);
   transition: 0.3s;
 }
 
-.footer__col > a:hover {
+.footer__col>a:hover {
   color: var(--secondary-color);
 }
 

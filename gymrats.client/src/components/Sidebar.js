@@ -15,7 +15,6 @@ const Sidebar = () => {
         backgroundColor: "#111317",
         color: "white",
         width:'120px',
-
       }}>
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>} style={{ color: 'inherit' }} >
           <a href="/" className="text-decoration-none" style={{ color: 'inherit' }} >
@@ -25,6 +24,9 @@ const Sidebar = () => {
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu >
+          <NavLink exact to="/dashboard" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="user">Profil</CDBSidebarMenuItem>
+            </NavLink>
             <NavLink exact to="/gym-pass" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="ticket-alt">Karnety</CDBSidebarMenuItem>
             </NavLink>
