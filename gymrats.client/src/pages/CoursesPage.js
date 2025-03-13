@@ -9,7 +9,7 @@ function CoursesPage() {
   return (
     <div className="main">
       <Header />
-      <div className="content-wrapper" style={{gap:"0"}}>
+      <div className="content-wrapper" style={{ gap: "0" }}>
         <Sidebar />
         <div className="courses-page">
           <h2>Kursy na trenera</h2>
@@ -47,9 +47,9 @@ function CoursesPage() {
               <h3>TRENER PRZYGOTOWANIA MOTORYCZNEGO</h3>
               <p className="course-label">Opis:</p>
               <p>
-              Oferujemy 90 godzin akademickich zajęć praktycznych i teoretycznych, obejmujących ćwiczenia, wykłady oraz hospitacje. 
-              Pod okiem doświadczonych specjalistów zdobędziesz wiedzę i umiejętności niezbędne do pracy w zawodzie. 
-              W ostatnim dniu kursu uczestnicy przystępują do egzaminu przed komisją CKKS, który potwierdza ich kwalifikacje.
+                Oferujemy 90 godzin akademickich zajęć praktycznych i teoretycznych, obejmujących ćwiczenia, wykłady oraz hospitacje.
+                Pod okiem doświadczonych specjalistów zdobędziesz wiedzę i umiejętności niezbędne do pracy w zawodzie.
+                W ostatnim dniu kursu uczestnicy przystępują do egzaminu przed komisją CKKS, który potwierdza ich kwalifikacje.
               </p>
               <p className="course-price">Cena: 1500 złotych za cały kurs</p>
               <button className="course-button">Wybieram</button>
@@ -84,7 +84,7 @@ function CoursesPage() {
               <div className="course-benefits">
                 <p><strong>Benefity:</strong></p>
                 <ul>
-                  <li>Certyfikat międzynarodowy w języku polskim i angielskim</li>
+                  <li>Certyfikat </li>
                   <li>Materiały szkoleniowe PDF</li>
                 </ul>
               </div>
@@ -93,12 +93,9 @@ function CoursesPage() {
                 Dowiedz się więcej
               </Link>
             </div>
-
           </div>
         </div>
-        
       </div>
-      <span className="bg__blur"></span>
     </div>
   );
 }

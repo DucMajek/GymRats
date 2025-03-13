@@ -401,7 +401,18 @@ nav {
   transition: 0.3s;
 }
 
-.price__card:hover {
+.course__card {
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-color-light);
+  border: 2px solid transparent;
+  border-radius: 10px;
+  transition: 0.3s;
+  padding: auto;
+}
+
+.price__card:hover, .course__card:hover {
   background-color: var(--primary-color-extra-light);
   border-color: var(--secondary-color);
 }
@@ -411,14 +422,14 @@ nav {
   margin-bottom: 2rem;
 }
 
-.price__card h4 {
+.price__card h4, .course__card h4 {
   margin-bottom: 1rem;
   font-size: 1.2rem;
   font-weight: 500;
   color: var(--white);
 }
 
-.price__card h3 {
+.price__card h3, .course__card h3 {
   padding-bottom: 1rem;
   margin-bottom: 2rem;
   font-size: 2rem;

@@ -13,6 +13,7 @@ import Login from "./components/Login";
 import LoginPage from "./pages/LoginPage";
 import { AuthProvider } from './components/AuthContext';
 import UserDashboard from './pages/UserDashboard';
+import UserProfile from './pages/UserProfile';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route exact="true" path="/login" element={<LoginPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<UserDashboard />} />
+            <Route path="/user-profile" element={<UserProfile />} />
             <Route path="/gym-pass" element={<GymPassPage />} />
             <Route path="/diets" element={<DietsPage />} />
             <Route path="/training-plans" element={<TrainingPlansPage />} />

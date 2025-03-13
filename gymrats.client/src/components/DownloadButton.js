@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const DownloadButton = ({ useAlternativeApi, fileId, calories }) => {
     const downloadFile = async () => {
-        const dietUrl = `https://localhost:7200/api/Files/downloadDietFile/${fileId}/${calories}`;
-        const traningPlanUrl = `https://localhost:7200/api/Files/downloadTranningPlanFile/${fileId}`;
+        const dietUrl = `https://localhost:44380/DownloadDietFile/${fileId}/${calories}`;
+        const traningPlanUrl = `https://localhost:44380/DownloadTranningPlanFile/${fileId}`;
         const url = useAlternativeApi ? traningPlanUrl : dietUrl;
 
         try {
@@ -11,16 +11,16 @@ const DownloadButton = ({ useAlternativeApi, fileId, calories }) => {
             const urlBlob = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = urlBlob;
+		 
 
-            // Próbujemy wyciągnąć nazwę pliku z nagłówka
             const contentDisposition = response.headers['content-disposition'];
             let fileName;
-            if(!url){
-                 fileName = 'dieta.pdf';
+
+            if (useAlternativeApi) {
+                fileName = 'Plan treningowy.xlsx';
             } else {
-                 fileName = 'Plan treningowy.xlsx';
+                fileName = 'dieta.pdf';
             }
-                 // Domyślna nazwa pliku
 
             if (contentDisposition) {
                 const fileNameMatch = contentDisposition.split('filename=')[1];
@@ -38,12 +38,13 @@ const DownloadButton = ({ useAlternativeApi, fileId, calories }) => {
         }
     };
 
-
     return (
-        <button onClick={downloadFile} >
+        <button onClick={downloadFile}>
             Pobierz plik
         </button>
+					 
     );
+	 
 };
 
 export default DownloadButton;

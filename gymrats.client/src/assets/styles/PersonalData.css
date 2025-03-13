@@ -22,3 +22,16 @@
     margin-top: 24px;
     border-radius: 8px;
 }
+.blog{
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgb(238, 108, 48);
+    color: white;
+    padding: 1rem 1rem;
+    vertical-align: middle;
+    width: 50%;
+    height: 100%;
+    margin-top: 24px;
+    border-radius: 8px;
+    float: left;
+}

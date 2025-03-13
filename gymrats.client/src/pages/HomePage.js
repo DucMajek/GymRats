@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
-import '../assets/styles/HomePage.css'; 
+import '../assets/styles/HomePage.css';
 import headerLogo from '../assets/img/header.png';
 import join from '../assets/img/join.png';
 import GymPassCategory from '../components/GymPass';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-import Courses from'../components/TraningCourse';
+import Courses from '../components/TraningCourse';
 import AboutUs from '../components/AboutUs'
+import { useLocation } from 'react-router-dom';
+
 function HomePage() {
   useEffect(() => {
     const link = document.createElement('link');
@@ -19,9 +21,20 @@ function HomePage() {
     };
   }, []);
 
+  const location = useLocation();
+  
+  useEffect(() => {
+      if (location.state && location.state.scrollTo) {
+          const element = document.getElementById(location.state.scrollTo);
+          if (element) {
+              element.scrollIntoView({ behavior: 'smooth' });
+          }
+      }
+  }, [location.state]);
+
   return (
-    <div>
-      <Navbar/>
+    <div >
+      <Navbar />
       <header className="section__container header__container">
         <div className="header__content">
           <span className="bg__blur"></span>
@@ -29,9 +42,9 @@ function HomePage() {
           <h4>NAJLEPSZA SIŁOWNIA W MIEŚCIE</h4>
           <h1><span>ZMIEŃ</span> SWOJE ŻYCIE</h1>
           <p>
-          Odkryj swój potencjał i rozpocznij swoją podróż ku większej sile, 
-          lepszej kondycji i większej pewności siebie. Dołącz do nas już dziś i doświadcz niesamowitej transformacji, 
-          na którą zasługuje Twoje ciało!
+            Odkryj swój potencjał i rozpocznij swoją podróż ku większej sile,
+            lepszej kondycji i większej pewności siebie. Dołącz do nas już dziś i doświadcz niesamowitej transformacji,
+            na którą zasługuje Twoje ciało!
           </p>
           <button className="btn">Rozpocznij</button>
         </div>
@@ -75,7 +88,7 @@ function HomePage() {
             <span><i className="ri-restaurant-fill"></i></span>
             <h4>Darmowe Jadłospisy</h4>
             <p>
-             Darmowe jadłospisy, które pomogą Ci zdrowo zwiększyć/zredukować wage.
+              Darmowe jadłospisy, które pomogą Ci zdrowo zwiększyć/zredukować wage.
             </p>
             <a href="#">Dołącz teraz <i className="ri-arrow-right-line"></i></a>
           </div>
@@ -85,8 +98,8 @@ function HomePage() {
       <section className="section__container join__container">
         <h2 className="section__header">DLACZEGO MY?</h2>
         <p className="section__subheader">
-        Nasza różnorodna społeczność tworzy przyjazną i wspierającą atmosferę, 
-        w której możesz nawiązać nowe znajomości i utrzymać motywację.
+          Nasza różnorodna społeczność tworzy przyjazną i wspierającą atmosferę,
+          w której możesz nawiązać nowe znajomości i utrzymać motywację.
         </p>
         <div className="join__image">
           <img src={join} alt="Join" />
@@ -117,13 +130,13 @@ function HomePage() {
       </section>
 
       <section className="section__container price__container">
-        <GymPassCategory/>
+        <GymPassCategory />
       </section>
       <section className="section__container price__container">
-        <Courses/>
+        <Courses />
       </section>
-      <AboutUs/>
-      <Footer/>
+      <AboutUs />
+      <Footer />
     </div>
   );
 }

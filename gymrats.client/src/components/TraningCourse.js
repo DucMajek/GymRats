@@ -66,13 +66,13 @@ function TraningCourse() {
                 celom zawodowym. Oferujemy szeroki wybór programów edukacyjnych, które są dopasowane do osób na różnych etapach kariery.</p>
             <Carousel className="price__grid" responsive={responsive}>
                 {courses.map((course) => (
-                    <div className="price__card" key={course.idKursu}>
+                    <div className="course__card" key={course.idKursu}>
                         <center><h4>{course.nazwa}</h4></center>
                         <center><h3>Czas trwania: {course.czasTrwania}</h3></center>
                         {coaches[course.trenerIdTrenera] ? (
                             <center><h3>Trener:<br/> {coaches[course.trenerIdTrenera].imie} {coaches[course.trenerIdTrenera].nazwisko}</h3></center>
                         ) : (
-                            <center><h3>Ładowanie trenera...</h3></center>
+                            <center><h3>Ładowanie...</h3></center>
                         )}
                         <button className="btn price__btn">Dowiedz się więcej</button>
                     </div>

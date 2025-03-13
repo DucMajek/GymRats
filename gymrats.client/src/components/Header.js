@@ -7,7 +7,7 @@ function Header() {
   return (
 
     <header className="dashboard-header" style={{ width:'1448px', height: '64px', }}>
-        <Link to="/" className="logo"><img src={gymRatsLogo} alt="gymRatsLogo" className="gymRatsLogo"/></Link>
+        <a href='/' className="logo"><img src={gymRatsLogo} alt="gymRatsLogo" className="gymRatsLogo"/></a>
     </header>
   );
 }
