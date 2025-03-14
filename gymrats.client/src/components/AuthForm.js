@@ -5,6 +5,7 @@ import perosn_icon from '../assets/img/person.png';
 
 const AuthForm = ({ action, name, setName, surname, setSurname, email, setEmail, password, setPassword, confirmPassword, setConfirmPassword, onSubmit }) => {
     return (
+
         <form onSubmit={onSubmit}>
             {action === "Sign Up" && (
                 <>
@@ -28,7 +29,7 @@ const AuthForm = ({ action, name, setName, surname, setSurname, email, setEmail,
                             required
                         />
                     </div>
-                </>  
+                </>
             )}
             <div className='input'>
                 <img src={email_icon} alt='' />
@@ -61,8 +62,9 @@ const AuthForm = ({ action, name, setName, surname, setSurname, email, setEmail,
                         required
                     />
                 </div>
+                
             )}
-            <button className='btn' type='submit'>{action}</button>
+            <button className='btn' type='submit' >{action}</button>
         </form>
     );
 };
