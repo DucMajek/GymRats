@@ -67,12 +67,12 @@ function TraningCourse() {
             <Carousel className="price__grid" responsive={responsive}>
                 {courses.map((course) => (
                     <div className="course__card" key={course.idKursu}>
-                        <center><h4>{course.nazwa}</h4></center>
-                        <center><h3>Czas trwania: {course.czasTrwania}</h3></center>
+                        <center><h3>{course.nazwa}</h3></center>
+                        <center><h4>Czas trwania: {course.czasTrwania}</h4></center>
                         {coaches[course.trenerIdTrenera] ? (
-                            <center><h3>Trener:<br/> {coaches[course.trenerIdTrenera].imie} {coaches[course.trenerIdTrenera].nazwisko}</h3></center>
+                            <center><h4>{coaches[course.trenerIdTrenera].imie} {coaches[course.trenerIdTrenera].nazwisko}</h4></center>
                         ) : (
-                            <center><h3>Ładowanie...</h3></center>
+                            <center><h4>Ładowanie...</h4></center>
                         )}
                         <button className="btn price__btn">Dowiedz się więcej</button>
                     </div>

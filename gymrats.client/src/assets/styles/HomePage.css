@@ -410,6 +410,7 @@ nav {
   border-radius: 10px;
   transition: 0.3s;
   padding: auto;
+  height: 342;
 }
 
 .price__card:hover, .course__card:hover {

@@ -14,9 +14,8 @@ function DietsPage() {
         <div className="dietContainer">
           <h2>Diety</h2>
           <div className="diet-plans">
-            <DietPlan title="Sportowa" id={1} />
-            <DietPlan title="Standard" id={2} />
-            <DietPlan title="Wegetariańska" id={3} />
+            <DietPlan title="Standard" id={1} />
+            <DietPlan title="Wegetariańska" id={2} />
           </div>
         </div>
       </div>

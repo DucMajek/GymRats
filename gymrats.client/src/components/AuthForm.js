@@ -2,7 +2,10 @@ import React from 'react';
 import email_icon from '../assets/img/email.png';
 import password_icon from '../assets/img/password.png';
 import perosn_icon from '../assets/img/person.png';
-
+function refreshPage(){
+    window.location.href = "http://localhost:3000/login";
+    
+} 
 const AuthForm = ({ action, name, setName, surname, setSurname, email, setEmail, password, setPassword, confirmPassword, setConfirmPassword, onSubmit }) => {
     return (
 
@@ -16,6 +19,7 @@ const AuthForm = ({ action, name, setName, surname, setSurname, email, setEmail,
                             placeholder='Enter name'
                             value={name}
                             onChange={(e) => setName(e.target.value)}
+                            onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault() }}
                             required
                         />
                     </div>
@@ -26,6 +30,7 @@ const AuthForm = ({ action, name, setName, surname, setSurname, email, setEmail,
                             placeholder='Enter surname'
                             value={surname}
                             onChange={(e) => setSurname(e.target.value)}
+                            onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault() }}
                             required
                         />
                     </div>
@@ -38,6 +43,7 @@ const AuthForm = ({ action, name, setName, surname, setSurname, email, setEmail,
                     placeholder='Enter email'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault() }}
                     required
                 />
             </div>
@@ -48,6 +54,7 @@ const AuthForm = ({ action, name, setName, surname, setSurname, email, setEmail,
                     placeholder='Enter password'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault() }}
                     required
                 />
             </div>
@@ -59,12 +66,13 @@ const AuthForm = ({ action, name, setName, surname, setSurname, email, setEmail,
                         placeholder='Confirm password'
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
+                        onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault() }}
                         required
                     />
                 </div>
                 
             )}
-            <button className='btn' type='submit' >{action}</button>
+            {action === "Sign Up" ? <button className='btn' type='submit' onClick={refreshPage} >{action}</button> : <button className='btn' type='submit' >{action}</button>}
         </form>
     );
 };

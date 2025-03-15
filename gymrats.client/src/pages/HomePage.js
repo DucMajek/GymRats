@@ -121,7 +121,7 @@ function HomePage() {
             <div className="join__card">
               <span><i className="ri-restaurant-fill"></i></span>
               <div className="join__card__content">
-                <h4>Przykładowe rozpis diet</h4>
+                <h4>Przykładowe rozpiski diet</h4>
                 <p>Profesjonalne wsparcie w osiąganiu sukcesów fitnessowych.</p>
               </div>
             </div>
