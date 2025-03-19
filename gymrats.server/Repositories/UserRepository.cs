@@ -33,7 +33,6 @@ namespace gymrats.server.Repositories
                 Adres = string.Empty,
                 NrTel = string.Empty,
                 Plec = string.Empty,
-                Bmi = 0,
                 Waga = 0,
                 Wzrost = 0,
 

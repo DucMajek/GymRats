@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const DownloadButton = ({ useAlternativeApi, fileId, calories }) => {
+const DownloadButton = ({ useAlternativeApi, fileId, calories, type }) => {
     const downloadFile = async () => {
-        const dietUrl = `https://localhost:44380/DownloadDietFile/${fileId}/${calories}`;
+        const dietUrl = `https://localhost:44380/DownloadDietFile/${type}/${calories}`;
         const traningPlanUrl = `https://localhost:44380/DownloadTranningPlanFile/${fileId}`;
         const url = useAlternativeApi ? traningPlanUrl : dietUrl;
 

@@ -19,8 +19,6 @@ public partial class Osoba
 
     public string Plec { get; set; } = null!;
 
-    public float Bmi { get; set; }
-
     public float Waga { get; set; }
 
     public int Wzrost { get; set; }

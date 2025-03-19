@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("gymrats.server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e4d33e7cf69fc66ea5edd3563ea1e8458abb0b62")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+28971d7fc01886065101a554302beeead128b97c")]
 [assembly: System.Reflection.AssemblyProductAttribute("gymrats.server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("gymrats.server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

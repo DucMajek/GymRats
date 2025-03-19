@@ -12,8 +12,8 @@ public class FilesController : ControllerBase
     }
 
     [HttpGet("DownloadTranningPlanFile/{id}")]
-    [HttpGet("DownloadDietFile/{id}/{calorie}")]
-    public async Task<IActionResult> DownloadPdfFile(int id, string? calorie)
+    [HttpGet("DownloadDietFile/{type}/{calorie}")]
+    public async Task<IActionResult> DownloadPdfFile(int id, string type, string? calorie)
     {
         var connectionString = _configuration.GetConnectionString("MyDBConnection");
         byte[]? fileData = null;
@@ -29,11 +29,11 @@ public class FilesController : ControllerBase
             {
                 await connection.OpenAsync();
 
-                var query = "select rodzaj_diety, zawartosc_jadlospisu, kalorycznosc from Jadlospis where id_jadlospisu = @id and kalorycznosc = @kalorycznosc";
+                var query = "select rodzaj_diety, zawartosc_jadlospisu, kalorycznosc from Jadlospis where rodzaj_diety = @type and kalorycznosc = @kalorycznosc";
 
                 using (var command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Id", id);
+                    command.Parameters.AddWithValue("@type", type);
                     command.Parameters.AddWithValue("@kalorycznosc", calorie);
 
                     using (var reader = await command.ExecuteReaderAsync())
