@@ -15,9 +15,10 @@ function TrainingPlanPage() {
           {/* lewa kolumna */}
           <div className="left-side">
             <h2 style={{fontSize: "2.5em"}}>Plany treningowe</h2>
-            <TraningPlan title="Koszykówka" id={1} />
-            <TraningPlan title="Sporty walki" id={2} />
-            <TraningPlan title="Piłka nożna" id={3} />
+            <TraningPlan title="Dla biegacza" id={1} />
+            <TraningPlan title="Dla kolarza" id={2} />
+            <TraningPlan title="Dla narciarza" id={3} />
+            <TraningPlan title="Dla pływaka" id={4} />
           </div>
 
           {/* prawa kolumna */}

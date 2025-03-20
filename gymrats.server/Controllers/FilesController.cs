@@ -29,7 +29,8 @@ public class FilesController : ControllerBase
             {
                 await connection.OpenAsync();
 
-                var query = "select rodzaj_diety, zawartosc_jadlospisu, kalorycznosc from Jadlospis where rodzaj_diety = @type and kalorycznosc = @kalorycznosc";
+                var query = "select rodzaj_diety, zawartosc_jadlospisu, kalorycznosc from Jadlospis " +
+                    "where rodzaj_diety = @type and kalorycznosc = @kalorycznosc";
 
                 using (var command = new SqlCommand(query, connection))
                 {
@@ -41,7 +42,7 @@ public class FilesController : ControllerBase
                         if (await reader.ReadAsync())
                         {
                             calories = reader["kalorycznosc"].ToString();
-                            dietType = reader["rodzaj_diety"].ToString() + calories + ".pdf";
+                            dietType = reader["rodzaj_diety"].ToString() + "_" + calories;
                             fileData = (byte[])reader["zawartosc_jadlospisu"];
                         }
                     }
@@ -59,7 +60,8 @@ public class FilesController : ControllerBase
             {
                 await connection.OpenAsync();
 
-                var query = "select nazwa_planu, zawartosc_planu_treningowego from Plan_treningowy where id_plan_treningowy = @id";
+                var query = "select nazwa_planu, zawartosc_planu_treningowego from Plan_treningowy " + 
+                    "where id_plan_treningowy = @id";
 
                 using (var command = new SqlCommand(query, connection))
                 {
@@ -69,7 +71,7 @@ public class FilesController : ControllerBase
                     {
                         if (await reader.ReadAsync())
                         {
-                            fileName = reader["nazwa_planu"].ToString() + ".xlsx";
+                            fileName = reader["nazwa_planu"].ToString();
                             fileData = (byte[])reader["zawartosc_planu_treningowego"];
                         }
                     }
@@ -81,7 +83,7 @@ public class FilesController : ControllerBase
                 return NotFound();
             }
 
-            return File(fileData, excelType, fileName);
+            return File(fileData, pdfType, fileName);
         }
       
     }

@@ -7,27 +7,34 @@ const DownloadButton = ({ useAlternativeApi, fileId, calories, type }) => {
         const url = useAlternativeApi ? traningPlanUrl : dietUrl;
 
         try {
-            const response = await axios.get(url, { responseType: 'blob' });
+            const response = await axios.get(url, { responseType: 'blob', credentials: true });
             const urlBlob = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = urlBlob;
-		 
+
 
             const contentDisposition = response.headers['content-disposition'];
             let fileName;
 
-            if (useAlternativeApi) {
-                fileName = 'Plan treningowy.xlsx';
-            } else {
-                fileName = 'dieta.pdf';
-            }
-
             if (contentDisposition) {
-                const fileNameMatch = contentDisposition.split('filename=')[1];
-                if (fileNameMatch) {
-                    fileName = fileNameMatch.replace(/"/g, '');
+                const fileNameEncodedMatch = contentDisposition.match(/filename\*=UTF-8''([^;]+)/i);
+                if (fileNameEncodedMatch && fileNameEncodedMatch[1]) {
+                    fileName = decodeURIComponent(fileNameEncodedMatch[1]);
+                } else {
+                    const fileNameMatch = contentDisposition.split('filename=')[1];
+                    if (fileNameMatch) {
+                        fileName = fileNameMatch.replace(/["';]/g, '').trim();
+                    }
                 }
             }
+
+            /*if (useAlternativeApi) {
+                fileName = fileName + '.pdf';
+            } else {
+                fileName = fileName + '.pdf';
+            }*/
+
+            fileName = fileName + ".pdf"
 
             link.setAttribute('download', fileName);
             document.body.appendChild(link);
@@ -42,9 +49,9 @@ const DownloadButton = ({ useAlternativeApi, fileId, calories, type }) => {
         <button onClick={downloadFile}>
             Pobierz plik
         </button>
-					 
+
     );
-	 
+
 };
 
 export default DownloadButton;

@@ -35,6 +35,25 @@
 
 }
 
+.traning-plan h3{
+  text-align: center;
+  
+}
+
+.traning-plan {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: white;
+
+}
+
+.schedule p {
+  margin: 0;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  gap: 245px;
+}
 
 .diet-plan .calories p {
   margin: 0;
@@ -56,6 +75,22 @@
 }
 
 .diet-plan button:hover {
+  background-color: rgba(238, 108, 48, 0.8);
+  color: white;
+}
+
+.schedule button {
+  border-radius: 3px;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  /* Dodane dla efektu hover */
+  background-color: orange;
+}
+
+.schedule button:hover {
   background-color: rgba(238, 108, 48, 0.8);
   color: white;
 }
