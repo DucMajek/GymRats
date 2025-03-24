@@ -1,84 +1,120 @@
 ﻿using gymrats.server.Models;
 using gymrats.server.Models.DTOs;
 using gymrats.server.Repositories;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
-using NuGet.Protocol.Plugins;
+using Microsoft.Extensions.Logging;
 
-namespace gymrats.server.Services
+namespace gymrats.server.Services;
+
+public interface IUserServices
 {
-    public interface IUserServices
+    Task<LoginResponseDto> LoginAsync(LoginRequestDto login, CancellationToken cancellationToken = default);
+
+    Task<RegisterUserResponseDto> RegisterAsync(RegisterUserRequestDto newUser,
+        CancellationToken cancellationToken = default);
+    
+    Task<Osoba?> UserPersonData(string email, CancellationToken cancellationToken = default);
+}
+
+public class UserServices : IUserServices
+{
+    private readonly IUserRepository _userRepository;
+    private readonly ITokenGenerator _tokenGenerator;
+    private readonly ILogger<UserServices> _logger;
+
+    public UserServices(
+        IUserRepository userRepository,
+        ITokenGenerator tokenGenerator,
+        ILogger<UserServices> logger)
     {
-        Task<LoginResponseDto> Login(LoginRequestDto login);
-        Task<RegisterUserResponseDto> Register(RegisterUserRequestDto newUser);
+        _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
+        _tokenGenerator = tokenGenerator ?? throw new ArgumentNullException(nameof(tokenGenerator));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    public class UserServices : IUserServices
+    public async Task<LoginResponseDto> LoginAsync(LoginRequestDto login, CancellationToken cancellationToken = default)
     {
-        private readonly IUserRepository _userRepository;
-        private readonly ITokenGenerator _tokenGenerator;
-
-        public UserServices(IUserRepository userRepository, ITokenGenerator tokenGenerator)
+        try
         {
-            _userRepository = userRepository;
-            _tokenGenerator = tokenGenerator;
-        }
+            var userExists = await _userRepository.UserExistsAsync(login, cancellationToken);
 
-        public async Task<LoginResponseDto?> Login(LoginRequestDto login)
-        {
-            try
+            if (!userExists)
             {
-                var user = await _userRepository.UserExist(login);
-
-                if (!user)
-                    return null;
-
-                var token = _tokenGenerator.GenerateToken(login.Email);
-
+                _logger.LogWarning("Failed login attempt for email: {Email}", login.Email);
                 return new LoginResponseDto
                 {
-                    Token = token,
-                    Message = "Login successful"
+                    Success = false,
+                    Message = "Invalid email or password"
                 };
             }
-            catch (Exception ex)
+
+            var token = _tokenGenerator.GenerateToken(login.Email);
+
+            _logger.LogInformation("Successful login for email: {Email}", login.Email);
+            return new LoginResponseDto
             {
-                return new LoginResponseDto
-                {
-                    Message = "An error occurred during registration: " + ex.Message
-                };
-            }
+                Success = true,
+                Token = token,
+                Message = "Login successful"
+            };
         }
-
-        public async Task<RegisterUserResponseDto> Register(RegisterUserRequestDto newUser)
+        catch (Exception ex)
         {
-            try
+            _logger.LogError(ex, "Error during login for email: {Email}", login.Email);
+            return new LoginResponseDto
             {
-                var user = await _userRepository.EmailExist(newUser);
-                if (user)
-                {
-                    return new RegisterUserResponseDto
-                    {
-                        Message = "Email already exists",
-                        Status = "Error"
-                    };
-                }
+                Success = false,
+                Message = "An error occurred during login"
+            };
+        }
+    }
 
-                await _userRepository.AddNewUser(newUser);
-
+    public async Task<RegisterUserResponseDto> RegisterAsync(RegisterUserRequestDto newUser,
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            var emailExists = await _userRepository.EmailExistsAsync(newUser.Email, cancellationToken);
+            if (emailExists)
+            {
+                _logger.LogWarning("Registration attempt with existing email: {Email}", newUser.Email);
                 return new RegisterUserResponseDto
                 {
-                    Message = "Registration successful!",
-                    Status = "Success"
+                    Success = false,
+                    Message = "Email already exists"
                 };
             }
-            catch (Exception ex)
+
+            var createdUser = await _userRepository.AddNewUserAsync(newUser, cancellationToken);
+
+            _logger.LogInformation("New user registered with email: {Email}", newUser.Email);
+            return new RegisterUserResponseDto
             {
-                return new RegisterUserResponseDto
-                {
-                    Message = "An error occurred during registration: " + ex.Message
-                };
-            }
+                Success = true,
+                Message = "Registration successful!",
+                UserId = createdUser.IdUzytkownika // Assuming Uzytkownik has an Id property
+            };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error during registration for email: {Email}", newUser.Email);
+            return new RegisterUserResponseDto
+            {
+                Success = false,
+                Message = "An error occurred during registration"
+            };
+        }
+    }
+
+    public async Task<Osoba?> UserPersonData(string email, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            return await _userRepository.GetUserPersonalDataAsync(email, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error while retrieving gym pass for user {UserId}", email);
+            return null;
         }
     }
 }

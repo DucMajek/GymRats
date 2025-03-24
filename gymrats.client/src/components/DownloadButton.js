@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const DownloadButton = ({ useAlternativeApi, fileId, calories, type }) => {
     const downloadFile = async () => {
-        const dietUrl = `https://localhost:44380/DownloadDietFile/${type}/${calories}`;
-        const traningPlanUrl = `https://localhost:44380/DownloadTranningPlanFile/${fileId}`;
+        const dietUrl = `https://localhost:44380/trainingPlan/${type}/${calories}`;
+        const traningPlanUrl = `https://localhost:44380/diet/${fileId}`;
         const url = useAlternativeApi ? traningPlanUrl : dietUrl;
 
         try {
@@ -11,7 +11,6 @@ const DownloadButton = ({ useAlternativeApi, fileId, calories, type }) => {
             const urlBlob = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = urlBlob;
-
 
             const contentDisposition = response.headers['content-disposition'];
             let fileName;

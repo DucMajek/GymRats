@@ -1,29 +1,62 @@
 ﻿using gymrats.server.Models;
-using gymrats.server.Repositories;
 using gymrats.server.Services;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace gymrats.server.Controllers
 {
     public class GymPassController : ControllerBase
     {
-        private readonly IGymPassRepository _gymPassRepository;
+        private readonly IGymPassServices _gymPassServices;
+        private readonly ILogger<GymPassController> _logger;
 
-        public GymPassController(IGymPassRepository gymPassRepository)
+        public GymPassController(
+            IGymPassServices gymPassServices,
+            ILogger<GymPassController> logger)
         {
-            _gymPassRepository = gymPassRepository;
+            _gymPassServices = gymPassServices;
+            _logger = logger;
         }
 
-        [HttpGet("/GymPassCategory")]
-        public async Task<IActionResult> GetAllGymPass()
+        [HttpGet("/categories")]
+        public async Task<ActionResult<IReadOnlyList<TypKarnetu>>> GetGymPassCategories(CancellationToken cancellationToken = default)
         {
-            var gymPass = await _gymPassRepository.GetAllGymPass();
-            if(gymPass == null || !gymPass.Any())
-                return BadRequest("Gym pass not exist");
-            return Ok(gymPass);
-        }
+            try
+            {
+                var gymPasses = await _gymPassServices.AvailableGymPass(cancellationToken);
+                
+                if (!gymPasses.Any())
+                {
+                    return NoContent();
+                }
 
+                return Ok(gymPasses);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while retrieving gym pass categories");
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request");
+            }
+        }
         
+        [HttpGet("/membership/{userId}")]
+        public async Task<ActionResult<Karnet>> GetUserGymPass(int userId, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var gymPass = await _gymPassServices.UserGymPass(userId, cancellationToken);
+                
+                if (gymPass == null)
+                {
+                    return NotFound($"Gym pass not found for user {userId}");
+                }
+
+                return Ok(gymPass);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while retrieving gym pass for user {UserId}", userId);
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request");
+            }
+        }
     }
 }

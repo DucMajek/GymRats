@@ -26,14 +26,14 @@ function AboutUs() {
                             które zapewniają maksymalne rezultaty i pełne bezpieczeństwo.
                         </p>
                         <div className="review__footer">
-                            <div class="review__member">
+                            <div className="review__member">
                                 <img src={member} alt="member" />
-                                <div class="review__member__details">
+                                <div className="review__member__details">
                                     <h4>Michał Majek</h4>
                                     <p>PJATK Student</p>
                                 </div>
                                 <img src={member2} alt="member" />
-                                <div class="review__member__details">
+                                <div className="review__member__details">
                                     <h4>Duc Anh Dinh</h4>
                                     <p>PJATK Student</p>
                                 </div>

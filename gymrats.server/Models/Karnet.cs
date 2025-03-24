@@ -7,9 +7,9 @@ public partial class Karnet
 {
     public int IdKarnet { get; set; }
 
-    public DateOnly DataWydania { get; set; }
+    public DateOnly startKarnetu { get; set; }
 
-    public DateOnly DataWygasniecia { get; set; }
+    public DateOnly koniecUmowy { get; set; }
 
     public int TypKarnetuIdTypKarnetu { get; set; }
 

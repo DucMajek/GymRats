@@ -19,9 +19,7 @@ function Navbar(){
                     <li className="link"><a href="#" onClick={(e) => { e.preventDefault(); scrollToSection("price__grid")}}>Karnety</a></li>
                     <li className="link"><a href="#" onClick={(e) => { e.preventDefault(); scrollToSection("courses")}}>Kursy</a></li>
                     <li className="link"><a href="#" onClick={(e) => { e.preventDefault(); scrollToSection("about__us")}}>O nas</a></li>
-                    <li className="link">
                     <li className="link"><a href="/login">Konto</a></li>
-                    </li>
                 </ul>
             </nav>
         </div>

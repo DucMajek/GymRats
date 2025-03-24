@@ -116,8 +116,8 @@ public partial class GymRatsContext : DbContext
             entity.ToTable("Karnet");
 
             entity.Property(e => e.IdKarnet).HasColumnName("id_karnet");
-            entity.Property(e => e.DataWydania).HasColumnName("data_wydania");
-            entity.Property(e => e.DataWygasniecia).HasColumnName("data_wygasniecia");
+            entity.Property(e => e.startKarnetu).HasColumnName("start_karnetu");
+            entity.Property(e => e.koniecUmowy).HasColumnName("koniec_umowy");
             entity.Property(e => e.TypKarnetuIdTypKarnetu).HasColumnName("Typ_Karnetu_id_typ_karnetu");
             entity.Property(e => e.UzytkownikIdUzytkownika).HasColumnName("Uzytkownik_id_uzytkownika");
 

@@ -1,28 +1,54 @@
 using gymrats.server.Models;
 using Microsoft.EntityFrameworkCore;
+
 namespace gymrats.server.Repositories;
 
 public interface IPersonRepository
 {
-    Task<bool> coachExists(int id);
-    Task<Osoba> getOsobaById(int id);
+    Task<bool> CoachExistsAsync(int coachId, CancellationToken cancellationToken = default);
+    Task<Osoba?> GetPersonByCoachIdAsync(int coachId, CancellationToken cancellationToken = default);
 }
+
 public class PersonRepository : IPersonRepository
 {
     private readonly GymRatsContext _context;
-    public PersonRepository(GymRatsContext context)
+    private readonly ILogger<PersonRepository> _logger;
+
+    public PersonRepository(
+        GymRatsContext context,
+        ILogger<PersonRepository> logger)
     {
-        _context = context;
-    }
-    public async Task<bool> coachExists(int id)
-    {
-        return await _context.Treners.AnyAsync(e => e.IdTrenera == id);
+        _context = context ?? throw new ArgumentNullException(nameof(context));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    public async Task<Osoba> getOsobaById(int id)
+    public async Task<bool> CoachExistsAsync(int coachId, CancellationToken cancellationToken = default)
     {
-        return await _context.Osobas
-            .Include(o => o.Treners)
-            .FirstOrDefaultAsync(e => e.Treners.Any(t => t.IdTrenera == id));
+        try
+        {
+            return await _context.Treners
+                .AnyAsync(e => e.IdTrenera == coachId, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error checking if coach with ID {CoachId} exists", coachId);
+            throw;
+        }
+    }
+
+    public async Task<Osoba?> GetPersonByCoachIdAsync(int coachId, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            return await _context.Osobas
+                .Include(o => o.Treners)
+                .FirstOrDefaultAsync(e => e.Treners.Any(t => t.IdTrenera == coachId), 
+                    cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving person for coach ID {CoachId}", coachId);
+            throw;
+        }
     }
 }

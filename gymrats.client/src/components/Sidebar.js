@@ -16,12 +16,13 @@ const Sidebar = () => {
         backgroundColor: "#111317",
         color: "white",
         width: '120px',
-        height:'100%'
-      }}>
+        height: '100%'
+      }} >
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>} style={{ color: 'inherit' }} >
-          <Link to="/dashboard" className="text-decoration-none" style={{ color: 'inherit'}} >
+          {/* <Link to="/dashboard" className="text-decoration-none" style={{ color: 'inherit'}} >
             Imie Nazwisko
-          </Link>
+          </Link> */}
+          Imie Nazwisko
         </CDBSidebarHeader>
 
         <CDBSidebarContent className="sidebar-content" >

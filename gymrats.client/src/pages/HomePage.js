@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import '../assets/styles/HomePage.css';
 import headerLogo from '../assets/img/header.png';
 import join from '../assets/img/join.png';
-import GymPassCategory from '../components/GymPass';
+import GymPassCategory from '../components/GymPassCategories';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Courses from '../components/TraningCourse';

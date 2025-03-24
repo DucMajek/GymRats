@@ -49,6 +49,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<IGymPassRepository, GymPassRepository>();
+builder.Services.AddScoped<IGymPassServices, GymPassServices>();
 builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<ITrainingCourseRepository, TrainingCourseRepository>();

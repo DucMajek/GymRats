@@ -1,3 +1,4 @@
+using gymrats.server.Models;
 using gymrats.server.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,20 +7,37 @@ namespace gymrats.server.Controllers;
 public class PersonController : ControllerBase
 {
     private readonly IPersonServices _personServices;
+    private readonly ILogger<PersonController> _logger;
 
-    public PersonController(IPersonServices personServices)
+    public PersonController(
+        IPersonServices personServices,
+        ILogger<PersonController> logger)
     {
-        _personServices = personServices;
+        _personServices = personServices ?? throw new ArgumentNullException(nameof(personServices));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    [HttpGet("/Coach/{id}")]
-    public async Task<IActionResult> GetPerson(int id)
+    [HttpGet("/coaches/{coachId}")]
+    public async Task<ActionResult<Osoba>> GetCoachPerson(
+        [FromRoute] int coachId,
+        CancellationToken cancellationToken = default)
     {
-        var person = await _personServices.getOsobaById(id);
-        if(person == null)
-            return BadRequest("Person doesn't exist");
-        return Ok(person);
+        try
+        {
+            var person = await _personServices.GetPersonByCoachIdAsync(coachId, cancellationToken);
+            
+            if (person == null)
+            {
+                _logger.LogWarning("Person not found for coach ID {CoachId}", coachId);
+                return NotFound($"Person not found for coach ID {coachId}");
+            }
 
+            return Ok(person);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving person for coach ID {CoachId}", coachId);
+            return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request");
+        }
     }
-
 }

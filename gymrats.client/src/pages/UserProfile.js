@@ -1,22 +1,39 @@
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-function UserProfile(){
-    return (
-        <div className="main">
-          <Header />
-          <div className="content-wrapper">
-            <Sidebar />
-            <main className="main-content">
-              <div className='personalData'>
-                <h2>Personal Data</h2>
+import '../assets/styles/UserProfile.css'
+function UserProfile() {
+  return (
+    <div className="main">
+      <Header />
+      <div className="content-wrapper">
+        <Sidebar />
+        <main className="main-content">
+          <div className='personalData'>
+            <section>
+              <div className='myData'>
+                <h5>Moje dane</h5>
+                <button>zmień hasło</button>
+                <button>edytuj</button>
               </div>
-              <div className='userBmi' >
-                <h2>BMI</h2>
-              </div>
-            </main>
+              <p>Imie Nazwisko</p>
+              <p>email</p>
+              <p>telefon</p>
+              <p>plec</p>
+            </section>
+            <section>
+              <h5>Adres kontaktowy</h5>
+              <p>Imie Nazwisko</p>
+              <p>Adres</p>
+              <p>Kod pocztowy, miasto</p>
+            </section>
           </div>
-        </div>
-      );
+          <div className='userBmi' >
+
+          </div>
+        </main>
+      </div>
+    </div>
+  );
 
 }
 

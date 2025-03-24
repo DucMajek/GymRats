@@ -1,26 +1,50 @@
 using gymrats.server.Models;
 using gymrats.server.Repositories;
+using Microsoft.Extensions.Logging;
 
 namespace gymrats.server.Services;
 
 public interface IPersonServices
 {
-    Task<Osoba> getOsobaById(int id);
+    Task<Osoba?> GetPersonByCoachIdAsync(int coachId, CancellationToken cancellationToken = default);
 }
+
 public class PersonServices : IPersonServices
 {
     private readonly IPersonRepository _personRepository;
+    private readonly ILogger<PersonServices> _logger;
 
-    public PersonServices(IPersonRepository personRepository)
+    public PersonServices(
+        IPersonRepository personRepository,
+        ILogger<PersonServices> logger)
     {
-        _personRepository = personRepository;
+        _personRepository = personRepository ?? throw new ArgumentNullException(nameof(personRepository));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    public async Task<Osoba> getOsobaById(int id)
+    public async Task<Osoba?> GetPersonByCoachIdAsync(int coachId, CancellationToken cancellationToken = default)
     {
-        var personExists = await _personRepository.coachExists(id);
-        if (!personExists)
-            return null;
-        return await _personRepository.getOsobaById(id);
+        try
+        {
+            if (!await _personRepository.CoachExistsAsync(coachId, cancellationToken))
+            {
+                _logger.LogWarning("Coach with ID {CoachId} not found", coachId);
+                return null;
+            }
+
+            var person = await _personRepository.GetPersonByCoachIdAsync(coachId, cancellationToken);
+            
+            if (person == null)
+            {
+                _logger.LogWarning("Person not found for coach ID {CoachId}", coachId);
+            }
+
+            return person;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving person for coach ID {CoachId}", coachId);
+            throw;
+        }
     }
 }

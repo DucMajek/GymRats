@@ -42,7 +42,7 @@ function TraningCourse() {
                     if (!coachData[course.trenerIdTrenera]) {
                         try {
                             const coachResponse = await axios.get(
-                                `https://localhost:44380/Coach/${course.trenerIdTrenera}`
+                                `https://localhost:44380/coaches/${course.trenerIdTrenera}`
                             );
                             coachData[course.trenerIdTrenera] = coachResponse.data;
                         } catch (error) {

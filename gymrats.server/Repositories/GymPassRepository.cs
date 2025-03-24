@@ -5,7 +5,8 @@ namespace gymrats.server.Repositories
 {
     public interface IGymPassRepository 
     {
-        public Task<List<TypKarnetu>> GetAllGymPass();
+        public Task<IReadOnlyList<TypKarnetu>> GetAllGymPass(CancellationToken cancellationToken = default);
+        public Task<Karnet?> GetGymPassByPersonId(int gymPassId,CancellationToken cancellationToken = default);
     }
     public class GymPassRepository : IGymPassRepository 
     {
@@ -17,15 +18,15 @@ namespace gymrats.server.Repositories
             _context = context;
         }
 
-        public async Task<List<TypKarnetu>> GetAllGymPass()
+        public async Task<IReadOnlyList<TypKarnetu>> GetAllGymPass(CancellationToken cancellationToken = default)
         {
-           return await _context.TypKarnetus.Select(e => new TypKarnetu
-           {
-               Nazwa = e.Nazwa,
-               Cena = e.Cena,
-               Opis = e.Opis
+            return await _context.TypKarnetus.ToListAsync(cancellationToken);
+        }
 
-           }).ToListAsync();
+        public async Task<Karnet?> GetGymPassByPersonId(int userId, CancellationToken cancellationToken = default)
+        {
+            return await _context.Karnets
+                .FirstOrDefaultAsync(e => e.UzytkownikIdUzytkownika == userId, cancellationToken);
         }
     }
 }
