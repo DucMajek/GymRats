@@ -1,0 +1,16 @@
+D:\Praca dyplomowa\GymRats\GymRats.Business\obj\Debug\net9.0\GymRats.Business.GeneratedMSBuildEditorConfig.editorconfig
+D:\Praca dyplomowa\GymRats\GymRats.Business\obj\Debug\net9.0\GymRats.Business.AssemblyInfoInputs.cache
+D:\Praca dyplomowa\GymRats\GymRats.Business\obj\Debug\net9.0\GymRats.Business.AssemblyInfo.cs
+D:\Praca dyplomowa\GymRats\GymRats.Business\obj\Debug\net9.0\GymRats.Business.csproj.CoreCompileInputs.cache
+D:\Praca dyplomowa\GymRats\GymRats.Business\obj\Debug\net9.0\GymRats.Business.sourcelink.json
+D:\Praca dyplomowa\GymRats\GymRats.Business\bin\Debug\net9.0\GymRats.Business.deps.json
+D:\Praca dyplomowa\GymRats\GymRats.Business\bin\Debug\net9.0\GymRats.Business.dll
+D:\Praca dyplomowa\GymRats\GymRats.Business\bin\Debug\net9.0\GymRats.Business.pdb
+D:\Praca dyplomowa\GymRats\GymRats.Business\bin\Debug\net9.0\GymRats.Data.dll
+D:\Praca dyplomowa\GymRats\GymRats.Business\bin\Debug\net9.0\GymRats.Data.pdb
+D:\Praca dyplomowa\GymRats\GymRats.Business\obj\Debug\net9.0\GymRats.Business.csproj.AssemblyReference.cache
+D:\Praca dyplomowa\GymRats\GymRats.Business\obj\Debug\net9.0\GymRats..C566136C.Up2Date
+D:\Praca dyplomowa\GymRats\GymRats.Business\obj\Debug\net9.0\GymRats.Business.dll
+D:\Praca dyplomowa\GymRats\GymRats.Business\obj\Debug\net9.0\refint\GymRats.Business.dll
+D:\Praca dyplomowa\GymRats\GymRats.Business\obj\Debug\net9.0\GymRats.Business.pdb
+D:\Praca dyplomowa\GymRats\GymRats.Business\obj\Debug\net9.0\ref\GymRats.Business.dll

@@ -1,0 +1,137 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+
+    width: 600px;
+    background-color: #111317;
+    padding-bottom: 30px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.text {
+    color: orange;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.underline {
+    width: 61px;
+    height: 6px;
+    background: orange;
+    border-radius: 9px;
+}
+
+.inputs {
+    margin-top: 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 480px;
+    height: 80px;
+    background: #EAEAEA;
+    border-radius: 6px;
+}
+
+.input img {
+    margin: 0px 30px;
+    width: auto;
+    height: auto;
+}
+
+.input input {
+    width: 400px;
+    height: 80px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #797979;
+    font-size: 19px;
+}
+
+.forgot-password {
+    padding-left: 62px;
+    margin-top: 27px;
+    color: #797979;
+    font-size: 18px;
+}
+
+.forgot-password:hover span{
+    text-decoration: underline;
+}
+
+.forgot-password span {
+    color: orange;
+    cursor: pointer;
+}
+
+.submit-container {
+    display: flex;
+    gap: 30px;
+    margin: 60px auto;
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 220px;
+    height: 59px;
+    color: #FFF;
+    background-color: Orange;
+    border-radius: 50px;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.submit:hover {
+    background-color: rgba(238, 108, 48, 0.8);
+    color: white;
+}
+
+
+.gray {
+    background-color: #EAEAEA;
+    color: #676767;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: 100px;
+    height: 60px;
+    padding: 5px 10px;
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: rgba(238, 108, 48, 0.8);
+    color: white;
+}

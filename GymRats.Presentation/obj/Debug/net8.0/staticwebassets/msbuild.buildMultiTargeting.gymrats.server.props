@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\gymrats.server.props" />
+</Project>
