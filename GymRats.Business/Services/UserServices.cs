@@ -1,4 +1,5 @@
 ﻿using Business.Interfaces;
+using GymRats.Business.Interfaces;
 using GymRats.Data.Entities;
 using GymRats.Data.Interfaces;
 using GymRats.Data.Repositories;
@@ -25,28 +26,51 @@ public class UserServices : IUserServices
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    public async Task<(bool success, string token)> LoginAsync(string email, string userPassword, CancellationToken cancellationToken = default)
+    public async Task<(bool success, string token, Uzytkownik user)> LoginAsync(
+        string email, 
+        string userPassword, 
+        CancellationToken cancellationToken = default)
     {
         try
         {
             var userExists = await _userRepository.UserExistsAsync(email, cancellationToken);
-            var userHashedPassword = await _userRepository.GetHashedPasswordAsync(email);
-            var isValidPassword = _passwordHasher.VerifyPassword(userPassword, userHashedPassword);
-            if (!userExists || !isValidPassword)
+            if (!userExists)
             {
-                _logger.LogWarning("Failed login attempt for email: {Email}", email);
-                return (false, null);
+                _logger.LogWarning("User does not exist: {Email}", email);
+                return (false, null, null);
             }
 
+            // 2. Pobierz hasło i zweryfikuj
+            var userHashedPassword = await _userRepository.GetHashedPasswordAsync(email);
+            if (string.IsNullOrEmpty(userHashedPassword))
+            {
+                _logger.LogWarning("No password found for user: {Email}", email);
+                return (false, null, null);
+            }
+
+            var isValidPassword = _passwordHasher.VerifyPassword(userPassword, userHashedPassword);
+            if (!isValidPassword)
+            {
+                _logger.LogWarning("Invalid password for user: {Email}", email);
+                return (false, null, null);
+            }
+            
+            var user = await _userRepository.GetUser(email);
+            if (user == null)
+            {
+                _logger.LogError("User data not found despite successful auth: {Email}", email);
+                return (false, null, null);
+            }
+            
             var token = _tokenGenerator.GenerateToken(email);
 
-            _logger.LogInformation("Successful login for email: {Email}", email);
-            return (true, token);
+            _logger.LogInformation("Successful login: {Email}", email);
+            return (true, token, user);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error during login for email: {Email}", email);
-            return (false, null);
+            _logger.LogError(ex, "Login error for {Email}", email);
+            return (false, null, null);
         }
     }
 
@@ -63,7 +87,7 @@ public class UserServices : IUserServices
             }
 
             password = _passwordHasher.HashPassword(password);
-            var createdUser = await _userRepository.AddNewUserAsync(email, password, name, surname,
+            await _userRepository.AddNewUserAsync(email, password, name, surname,
                 cancellationToken);
 
             _logger.LogInformation("New user registered with email: {Email}", email);

@@ -1,4 +1,5 @@
 ﻿using Business.Interfaces;
+using GymRats.Business.Interfaces;
 using GymRats.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using GymRats.Data.Entities;
@@ -35,7 +36,7 @@ namespace GymRats.Presentation.Controllers
                     return BadRequest(ModelState);
                 }
 
-                var (success, token) = await _userService.LoginAsync(login.Email, 
+                var (success, token, user) = await _userService.LoginAsync(login.Email, 
                     login.Password, cancellationToken);
 
                 if (!success)

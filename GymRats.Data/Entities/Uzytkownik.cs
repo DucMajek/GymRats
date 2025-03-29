@@ -9,9 +9,9 @@ public partial class Uzytkownik
 
     public int OsobaIdOsoba { get; set; }
 
-    public string Email { get; set; } = null!;
+    public string? Email { get; set; } = null!;
 
-    public string Haslo { get; set; } = null!;
+    public string? Haslo { get; set; } = null!;
 
     public virtual ICollection<Ankietum> Ankieta { get; set; } = new List<Ankietum>();
 

@@ -12,4 +12,6 @@ public interface IUserRepository
     Task<Osoba?> GetUserPersonalDataAsync(string email, bool isValidPassword, 
         CancellationToken cancellationToken = default);
     Task<string> GetHashedPasswordAsync(string email, CancellationToken cancellationToken = default);
+    
+    Task<Uzytkownik> GetUser(string email, CancellationToken cancellationToken = default);
 }

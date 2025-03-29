@@ -137,5 +137,15 @@ namespace GymRats.Data.Repositories
                 throw;
             }
         }
+
+        public async Task<Uzytkownik> GetUser(string email, CancellationToken cancellationToken = default)
+        {
+            var user = await _context.Uzytkowniks
+                .AsNoTracking()
+                .Where(e => e.Email == email)
+                .FirstOrDefaultAsync();;
+            
+            return user;
+        }
     }
 }
