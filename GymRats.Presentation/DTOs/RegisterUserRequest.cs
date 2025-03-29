@@ -16,18 +16,20 @@ namespace GymRats.Presentation.DTOs
         public string Password { get; set; } = null!;
         
         [Required(ErrorMessage = "Required.")]
-        public string Imie { get; set; } = null!;
+        public string Name { get; set; } = null!;
 
         [Required(ErrorMessage = "Required.")]
-        public string Nazwisko { get; set; } = null!;
+        public string Surname { get; set; } = null!;
+        
+        
     }
 
-    public class RegisterUserPersonalDataRequest
+    /*public class RegisterUserPersonalDataRequest
     {
         [Required(ErrorMessage = "Required.")]
-        public string Imie { get; set; } = null!;
+        public string Name { get; set; } = null!;
 
         [Required(ErrorMessage = "Required.")]
-        public string Nazwisko { get; set; } = null!;
-    }
+        public string Surname { get; set; } = null!;
+    }*/
 }

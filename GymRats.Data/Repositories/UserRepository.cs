@@ -18,7 +18,7 @@ namespace GymRats.Data.Repositories
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Uzytkownik> AddNewUserAsync(Uzytkownik newUser, Osoba newPerson,
+        public async Task<Uzytkownik> AddNewUserAsync(string email, string password, string name, string surname,
             CancellationToken cancellationToken = default)
         {
             await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
@@ -27,8 +27,8 @@ namespace GymRats.Data.Repositories
             {
                 var person = new Osoba
                 {
-                    Imie = newPerson.Imie,
-                    Nazwisko = newPerson.Nazwisko,
+                    Imie = name,
+                    Nazwisko = surname,
                     DataUrodzenia = null,
                     Adres = string.Empty,
                     NrTel = string.Empty,
@@ -42,8 +42,8 @@ namespace GymRats.Data.Repositories
 
                 var user = new Uzytkownik
                 {
-                    Email = newUser.Email,
-                    Haslo = newUser.Haslo,
+                    Email = email,
+                    Haslo = password,
                     OsobaIdOsoba = person.IdOsoba
                 };
 
@@ -52,13 +52,13 @@ namespace GymRats.Data.Repositories
 
                 await transaction.CommitAsync(cancellationToken);
 
-                _logger.LogInformation("Successfully created new user with email {Email}", newUser.Email);
+                _logger.LogInformation("Successfully created new user with email {Email}", email);
                 return user;
             }
             catch (Exception ex)
             {
                 await transaction.RollbackAsync(cancellationToken);
-                _logger.LogError(ex, "Error creating new user with email {Email}", newUser.Email);
+                _logger.LogError(ex, "Error creating new user with email {Email}", email);
                 throw;
             }
         }

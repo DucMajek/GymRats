@@ -50,27 +50,28 @@ public class UserServices : IUserServices
         }
     }
 
-    public async Task<bool> RegisterAsync(Uzytkownik newUser, Osoba newPerson,
+    public async Task<bool> RegisterAsync(string email, string password, string name, string surname,
         CancellationToken cancellationToken = default)
     {
         try
         {
-            var emailExists = await _userRepository.EmailExistsAsync(newUser.Email, cancellationToken);
+            var emailExists = await _userRepository.EmailExistsAsync(email, cancellationToken);
             if (emailExists)
             {
-                _logger.LogWarning("Registration attempt with existing email: {Email}", newUser.Email);
+                _logger.LogWarning("Registration attempt with existing email: {Email}", email);
                 return false;
             }
 
-            newUser.Haslo = _passwordHasher.HashPassword(newUser.Haslo);
-            var createdUser = await _userRepository.AddNewUserAsync(newUser, newPerson, cancellationToken);
+            password = _passwordHasher.HashPassword(password);
+            var createdUser = await _userRepository.AddNewUserAsync(email, password, name, surname,
+                cancellationToken);
 
-            _logger.LogInformation("New user registered with email: {Email}", newUser.Email);
+            _logger.LogInformation("New user registered with email: {Email}", email);
             return true;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error during registration for email: {Email}", newUser.Email);
+            _logger.LogError(ex, "Error during registration for email: {Email}", email);
             return false;
         }
     }

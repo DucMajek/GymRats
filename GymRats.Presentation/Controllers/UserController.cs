@@ -64,9 +64,9 @@ namespace GymRats.Presentation.Controllers
             }
         }
 
-        /*[HttpPost("/register")]
+        [HttpPost("/register")]
         public async Task<ActionResult<RegisterUserResponse>> Register(
-            [FromBody] RegisterUserRequest newUser, RegisterUserPersonalDataRequest newUserPersonalData,
+            [FromBody] RegisterUserRequest newUser,
             CancellationToken cancellationToken = default)
         {
             try
@@ -77,15 +77,16 @@ namespace GymRats.Presentation.Controllers
                     return BadRequest(ModelState);
                 }
 
-                var result = await _userService.RegisterAsync(newUser, newUserPersonalData, cancellationToken);
+                var result = await _userService.RegisterAsync(newUser.Email, newUser.Password,
+                    newUser.Name, newUser.Surname,
+                    cancellationToken);
 
-                /*
-                if (!result.Success)
+                if (!result)
                 {
-                    _logger.LogWarning("Registration failed for {Email}: {Message}",
-                        newUser.Email, result.Message);
+                    _logger.LogWarning("Registration failed for {Email}",
+                        newUser.Email);
                     return BadRequest(result);
-                }#1#
+                }
 
                 _logger.LogInformation("New user registered: {Email}", newUser.Email);
                 return Ok(result);
@@ -95,7 +96,7 @@ namespace GymRats.Presentation.Controllers
                 _logger.LogError(ex, "Error during registration for {Email}", newUser.Email);
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred during registration");
             }
-        }*/
+        }
 
         /*[HttpGet("personal-data/{email}")]
         public async Task<ActionResult<Osoba>> GetUserPersonalData(
