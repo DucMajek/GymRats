@@ -5,12 +5,14 @@ import {
   CDBSidebarHeader,
   CDBSidebarMenu,
   CDBSidebarMenuItem,
+  CDBSidebarFooter
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+function Sidebar(){
 
-const Sidebar = () => {
-  return (
+  return(
     <div style={{ display: 'flex', height: '100%', overflow: 'scroll initial' }}>
       <CDBSidebar style={{
         backgroundColor: "#111317",
@@ -51,6 +53,6 @@ const Sidebar = () => {
       </CDBSidebar>
     </div>
   );
-};
+}
 
 export default Sidebar;

@@ -62,7 +62,6 @@ function Login() {
                     onSubmit={handleSubmit}
                 />
             </div>
-            <div className='forgot-password'>Zapomniałeś hasła? <span>Kliknij tutaj!</span></div>
             <div className='submit-container'>
                 <div className={action === "Zaloguj" ? "submit gray" : "submit"} onClick={() => { setAction("Stwórz konto"); setEmail(""); 
                     setPassword("") }}>Stwórz konto</div>

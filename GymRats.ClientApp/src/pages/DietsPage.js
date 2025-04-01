@@ -18,6 +18,7 @@ function DietsPage() {
             <DietPlan title="Standard" type={"Standard"} />
             <DietPlan title="Wegetariańska" type={"Wegetarianska"} />
           </div>
+          
         </div>
       </div>
     </div>

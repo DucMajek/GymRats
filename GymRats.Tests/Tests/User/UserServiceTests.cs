@@ -39,7 +39,7 @@ public class UserServiceTests
         Assert.NotNull(result.token);
         Assert.Equal(expectedUser.Email, result.user.Email);
     }
-
+ 
     [Fact]
     public async Task UserLogin_WithInvalidPassword_ShouldReturnFailure()
     {

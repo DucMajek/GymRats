@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-around;
   gap: 1vw;
-
+  float: right;
 }
 
 @media (max-width: 768px) {
