@@ -16,14 +16,25 @@
   
 }
 
+.left-side h2{
+  margin-top: 60px;
+  margin-left: 40px;
+  font-weight: bold;
+  font-size: 2.5em;
+}
+
 /* prawy przycisk plus */
 .right-side {
   flex: 1;
   text-align: center;
 }
 
-.right-side h2, p{
+.right-side h2{
   color: white;
+  margin-top: 60px;
+  margin-left: 40px;
+  font-weight: bold;
+  font-size: 2.5em;
 }
 
 

@@ -10,9 +10,9 @@ import {
 import { NavLink } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-function Sidebar(){
+function Sidebar() {
 
-  return(
+  return (
     <div style={{ display: 'flex', height: '100%', overflow: 'scroll initial' }}>
       <CDBSidebar style={{
         backgroundColor: "#111317",
@@ -44,12 +44,13 @@ function Sidebar(){
             <NavLink exact to="/courses" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="graduation-cap">Kursy</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/" activeClassName="activeClicked" reloadDocument>
-              <CDBSidebarMenuItem icon="fa-solid fa-door-open">Wyloguj się</CDBSidebarMenuItem>
-            </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
-
+        <CDBSidebarFooter style={{ textAlign: 'center' }}>
+          <NavLink exact to="/" activeClassName="activeClicked" reloadDocument>
+            <CDBSidebarMenuItem icon="fa-solid fa-door-open" style={{ color: "white" }}>Wyloguj się</CDBSidebarMenuItem>
+          </NavLink>
+        </CDBSidebarFooter>
       </CDBSidebar>
     </div>
   );

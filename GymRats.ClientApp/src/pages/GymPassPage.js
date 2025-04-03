@@ -9,7 +9,7 @@ function GymPassPage() {
 
     <div className="main">
       <Header />
-      <div className="content-wrapper" style={{gap:"0"}}>
+      <div className="d-flex">
         <Sidebar />
         <div className="passContainer">
           <h2>Moje karnety</h2>

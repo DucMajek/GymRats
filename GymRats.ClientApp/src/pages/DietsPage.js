@@ -4,12 +4,11 @@ import '../assets/styles/Dashboard.css';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import '../assets/styles/DietPlan.css';
-import Footer from '../components/Footer';
 function DietsPage() {
   return (
     <div className="main">
       <Header />
-      <div className="content-wrapper" style={{gap:"0"}}>
+      <div className="d-flex">
         <Sidebar />
         <div className="dietContainer">
           <h2>Diety</h2>

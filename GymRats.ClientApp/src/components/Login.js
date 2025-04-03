@@ -63,10 +63,14 @@ function Login() {
                 />
             </div>
             <div className='submit-container'>
-                <div className={action === "Zaloguj" ? "submit gray" : "submit"} onClick={() => { setAction("Stwórz konto"); setEmail(""); 
-                    setPassword("") }}>Stwórz konto</div>
-                <div className={action === "Stwórz konto" ? "submit gray" : "submit"} onClick={() =>{ setAction("Zaloguj"); 
-                    setEmail(""); setPassword(""); setConfirmPassword("") }}>Logowanie</div>
+                <div className={action === "Zaloguj" ? "submit gray" : "submit"} onClick={() => {
+                    setAction("Stwórz konto"); setEmail("");
+                    setPassword("")
+                }}>Stwórz konto</div>
+                <div className={action === "Stwórz konto" ? "submit gray" : "submit"} onClick={() => {
+                    setAction("Zaloguj");
+                    setEmail(""); setPassword(""); setConfirmPassword("")
+                }}>Logowanie</div>
             </div>
         </div>
     );

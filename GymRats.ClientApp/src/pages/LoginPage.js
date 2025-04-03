@@ -14,7 +14,7 @@ function LoginPage() {
                     </a>
                     <ul className="navbar-nav" >
                         <li className="nav-item">
-                            <a className="nav-link hover-orange fontColor" href="/">Strona Główna</a>
+                            <a className="nav-link hover-orange fontColor" style={{marginRight: "20px"}} href="/">Strona Główna</a>
                         </li>
                     </ul>
                 </div>

@@ -9,7 +9,7 @@ function CoursesPage() {
   return (
     <div className="main">
       <Header />
-      <div className="content-wrapper" style={{ gap: "0" }}>
+      <div className="d-flex" >
         <Sidebar />
         <div className="courses-page">
           <h2>Kursy na trenera</h2>
