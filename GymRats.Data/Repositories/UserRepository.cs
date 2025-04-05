@@ -63,7 +63,7 @@ namespace GymRats.Data.Repositories
             }
         }
 
-        public async Task<Osoba?> GetUserPersonalDataAsync(string email, bool isValidPassword,
+        public async Task<Osoba?> GetUserPersonalDataAsync(string email,
             CancellationToken cancellationToken = default)
         {
             try

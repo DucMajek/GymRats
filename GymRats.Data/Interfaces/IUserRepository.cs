@@ -9,7 +9,7 @@ public interface IUserRepository
     Task<Uzytkownik> AddNewUserAsync(string email, string password, string name, string surname,
         CancellationToken cancellationToken = default);
 
-    Task<Osoba?> GetUserPersonalDataAsync(string email, bool isValidPassword, 
+    Task<Osoba?> GetUserPersonalDataAsync(string email, 
         CancellationToken cancellationToken = default);
     Task<string> GetHashedPasswordAsync(string email, CancellationToken cancellationToken = default);
     

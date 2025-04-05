@@ -8,5 +8,5 @@ public interface IUserServices
     Task<bool> RegisterAsync(string email, string password, string name, string surname,
         CancellationToken cancellationToken = default);
 
-    Task<Osoba?> UserPersonData(Uzytkownik user, CancellationToken cancellationToken = default);
+    Task<Osoba?> UserPersonData(string email, CancellationToken cancellationToken = default);
 }

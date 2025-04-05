@@ -11,10 +11,16 @@ public partial class Osoba
 
     public string Nazwisko { get; set; } = null!;
 
-    public DateTime? DataUrodzenia { get; set; }
+    public DateOnly? DataUrodzenia { get; set; }
 
-    public string Adres { get; set; } = null!;
-
+    public string? Adres { get; set; } = null!;
+    
+    public string? NumerBudynku { get; set; } = null!;
+    
+    public string? KodPocztowy { get; set; } = null!;
+    
+    public string? Miejscowosc { get; set; } = null!;
+    
     public string NrTel { get; set; } = null!;
 
     public string Plec { get; set; } = null!;

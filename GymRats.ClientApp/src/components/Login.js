@@ -18,11 +18,11 @@ function Login() {
         if (action === "Zaloguj") {
             axios.post('https://localhost:44380/login', { email, password })
                 .then(result => {
-                    console.log(result);
-
                     if (result.status === 200) {
                         authLogin(email);
                         navigate('/dashboard');
+                        const token = result.data.token;
+                        localStorage.setItem('token', token);
                     }
                 })
                 .catch(err => { console.log(err); });

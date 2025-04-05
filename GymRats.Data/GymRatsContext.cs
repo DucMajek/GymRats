@@ -163,8 +163,19 @@ public partial class GymRatsContext : DbContext
             entity.Property(e => e.Adres)
                 .HasMaxLength(25)
                 .IsUnicode(false);
+            entity.Property(e => e.NumerBudynku)
+                .HasMaxLength(5)
+                .IsUnicode(false)
+                .HasColumnName("numer_budynku");
+            entity.Property(e => e.KodPocztowy)
+                .HasMaxLength(6)
+                .IsUnicode(false)
+                .HasColumnName("kod_pocztowy");
+            entity.Property(e => e.Miejscowosc)
+                .HasMaxLength(20)
+                .IsUnicode(false);
             entity.Property(e => e.DataUrodzenia)
-                .HasColumnType("datetime")
+                .HasColumnType("date")
                 .HasColumnName("Data_urodzenia");
             entity.Property(e => e.Imie)
                 .HasMaxLength(15)

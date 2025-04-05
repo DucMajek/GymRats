@@ -8,10 +8,39 @@ import {
   CDBSidebarFooter
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 function Sidebar() {
+  const [personalData, setPersonalData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  useEffect(() => {
+    const getUserPersonalData = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setError('Brak tokena');
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        const decodedPayload = JSON.parse(atob(token.split('.')[1]));
+        const response = await axios.get(
+          `https://localhost:44380/personal-data/${decodedPayload.email}`,
+          { withCredentials: true }
+        );
+        setPersonalData(response.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    getUserPersonalData();
+  }, []);
   return (
     <div style={{ display: 'flex', height: '100%', overflow: 'scroll initial' }}>
       <CDBSidebar style={{
@@ -24,7 +53,11 @@ function Sidebar() {
           {/* <Link to="/dashboard" className="text-decoration-none" style={{ color: 'inherit'}} >
             Imie Nazwisko
           </Link> */}
-          Imie Nazwisko
+          {personalData && (
+                  <div>
+                    <p className="mb-1">{personalData.imie} {personalData.nazwisko}</p>
+                  </div>
+                )}
         </CDBSidebarHeader>
 
         <CDBSidebarContent className="sidebar-content" >

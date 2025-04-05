@@ -99,7 +99,7 @@ namespace GymRats.Presentation.Controllers
             }
         }
 
-        /*[HttpGet("personal-data/{email}")]
+        [HttpGet("personal-data/{email}")]
         public async Task<ActionResult<Osoba>> GetUserPersonalData(
             [FromRoute] string email,
             CancellationToken cancellationToken = default)
@@ -136,6 +136,6 @@ namespace GymRats.Presentation.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     "An error occurred while processing your request");
             }
-        }*/
+        }
     }
 }

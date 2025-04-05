@@ -100,16 +100,15 @@ public class UserServices : IUserServices
         }
     }
 
-    public async Task<Osoba?> UserPersonData(Uzytkownik user, CancellationToken cancellationToken = default)
+    public async Task<Osoba?> UserPersonData(string email, CancellationToken cancellationToken = default)
     {
         try
         {
-            bool isValidPassword = _passwordHasher.VerifyPassword(user.Haslo, user.Haslo);
-            return await _userRepository.GetUserPersonalDataAsync(user.Email, isValidPassword, cancellationToken);
+            return await _userRepository.GetUserPersonalDataAsync(email, cancellationToken);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error while retrieving gym pass for user {UserId}", user.Email);
+            _logger.LogError(ex, "Error while retrieving gym pass for user {UserId}", email);
             return null;
         }
     }
