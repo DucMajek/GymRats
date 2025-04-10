@@ -273,3 +273,8 @@ D:\Praca dyplomowa\GymRats\GymRats.Presentation\obj\Debug\net9.0\refint\GymRats.
 D:\Praca dyplomowa\GymRats\GymRats.Presentation\obj\Debug\net9.0\GymRats.Presentation.pdb
 D:\Praca dyplomowa\GymRats\GymRats.Presentation\obj\Debug\net9.0\GymRats.Presentation.genruntimeconfig.cache
 D:\Praca dyplomowa\GymRats\GymRats.Presentation\obj\Debug\net9.0\ref\GymRats.Presentation.dll
+D:\Praca dyplomowa\GymRats\GymRats.Presentation\bin\Debug\net9.0\Microsoft.AspNetCore.SpaServices.Extensions.dll
+D:\Praca dyplomowa\GymRats\GymRats.Presentation\bin\Debug\net9.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\Praca dyplomowa\GymRats\GymRats.Presentation\bin\Debug\net9.0\Microsoft.Extensions.FileProviders.Physical.dll
+D:\Praca dyplomowa\GymRats\GymRats.Presentation\bin\Debug\net9.0\Microsoft.Extensions.FileSystemGlobbing.dll
+D:\Praca dyplomowa\GymRats\GymRats.Presentation\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll

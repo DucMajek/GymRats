@@ -40,7 +40,7 @@ function GymPassCategories() {
                                 ))}
                             </p>
                         </div>
-                        <button className="btn price__btn">Kup Teraz</button>
+                        <button className="btn price__btn"><a href = '/login' style={{color:"white"}}>Kup Teraz</a></button>
                     </div>
                 ))}
             </div>

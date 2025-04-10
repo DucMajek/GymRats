@@ -11,6 +11,8 @@ public partial class KursTrenera
 
     public string CzasTrwania { get; set; } = null!;
 
+    public string Opis { get; set; } 
+
     public int TrenerIdTrenera { get; set; }
 
     public virtual Trener TrenerIdTreneraNavigation { get; set; } = null!;

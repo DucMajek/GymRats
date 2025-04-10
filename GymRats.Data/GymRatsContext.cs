@@ -145,6 +145,9 @@ public partial class GymRatsContext : DbContext
             entity.Property(e => e.Nazwa)
                 .IsUnicode(false)
                 .HasColumnName("nazwa");
+            entity.Property(e => e.Opis)
+                .IsUnicode(false)
+                .HasColumnName("opis");
             entity.Property(e => e.TrenerIdTrenera).HasColumnName("Trener_id_trenera");
 
             entity.HasOne(d => d.TrenerIdTreneraNavigation).WithMany(p => p.KursTreneras)

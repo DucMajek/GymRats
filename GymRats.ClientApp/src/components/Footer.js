@@ -25,11 +25,6 @@ function Footer() {
             Zrób pierwszy krok w stronę zdrowszej i silniejszej wersji siebie dzięki naszym atrakcyjnym planom cenowym.
             Ćwicz, osiągaj cele i pokonuj wyzwania razem z nami!
           </p>
-          <div className="footer__socials">
-            <a href="#"><i className="ri-youtube-fill"></i></a>
-            <a href="#"><i className="ri-instagram-line"></i></a>
-            <a href="#"><i className="ri-tiktok-fill"></i></a>
-          </div>
         </div>
 
         <div className="footer__col">

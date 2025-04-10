@@ -23,6 +23,7 @@ public class TrainingCourseRepository : ITrainingCourseRepository
             IdKursu = e.IdKursu,
             Nazwa = e.Nazwa,
             CzasTrwania = e.CzasTrwania,
+            Opis = e.Opis,
             TrenerIdTrenera = e.TrenerIdTrenera,
             TrenerIdTreneraNavigation = e.TrenerIdTreneraNavigation,
         }).ToListAsync();
