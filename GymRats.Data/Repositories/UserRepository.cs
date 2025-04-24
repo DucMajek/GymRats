@@ -1,5 +1,6 @@
-﻿using GymRats.Data.Entities;
+﻿using GymRats.Data;
 using GymRats.Data.Interfaces;
+using GymRats.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -44,7 +45,7 @@ namespace GymRats.Data.Repositories
                 {
                     Email = email,
                     Haslo = password,
-                    OsobaIdOsoba = person.IdOsoba
+                    IdUzytkownik = person.IdOsoba
                 };
 
                 await _context.Uzytkowniks.AddAsync(user, cancellationToken);
@@ -70,7 +71,7 @@ namespace GymRats.Data.Repositories
             {
                 return await _context.Uzytkowniks
                     .Where(u => u.Email == email)
-                    .Select(u => u.OsobaIdOsobaNavigation)
+                    .Select(u => u.IdUzytkownikNavigation)
                     .FirstOrDefaultAsync(cancellationToken);
             }
             catch (Exception ex)

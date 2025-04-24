@@ -9,9 +9,9 @@ public partial class TypKarnetu
 
     public string Nazwa { get; set; } = null!;
 
-    public float Cena { get; set; }
+    public int Cena { get; set; }
 
-    public string? Opis { get; set; }
+    public string Opis { get; set; } = null!;
 
     public virtual ICollection<Karnet> Karnets { get; set; } = new List<Karnet>();
 }

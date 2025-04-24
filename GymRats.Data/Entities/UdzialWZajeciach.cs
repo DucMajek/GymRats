@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace GymRats.Data.Entities;
 
-public partial class UzytkownikKursTrenera
+public partial class UdzialWZajeciach
 {
-    public int IdUzytkownikKursTrenera { get; set; }
+    public int IdUdzial { get; set; }
 
-    public int KursTreneraIdKursu { get; set; }
+    public int ZajeciaGrupoweIdZajec { get; set; }
 
     public int UzytkownikIdUzytkownik { get; set; }
 
-    public virtual KursTrenera KursTreneraIdKursuNavigation { get; set; } = null!;
-
     public virtual Uzytkownik UzytkownikIdUzytkownikNavigation { get; set; } = null!;
+
+    public virtual ZajeciaGrupowe ZajeciaGrupoweIdZajecNavigation { get; set; } = null!;
 }

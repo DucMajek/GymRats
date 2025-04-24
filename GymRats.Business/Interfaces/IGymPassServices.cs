@@ -1,4 +1,5 @@
 
+using GymRats.Data;
 using GymRats.Data.Entities;
 
 namespace GymRats.Business.Interfaces;

@@ -22,12 +22,12 @@ function TraningCourse() {
 
                 const coachData = {};
                 for (const course of courseResponse.data) {
-                    if (!coachData[course.trenerIdTrenera]) {
+                    if (!coachData[course.trenerIdTrener]) {
                         try {
                             const coachResponse = await axios.get(
-                                `https://localhost:44380/coaches/${course.trenerIdTrenera}`
+                                `https://localhost:44380/coaches/${course.trenerIdTrener}`
                             );
-                            coachData[course.trenerIdTrenera] = coachResponse.data;
+                            coachData[course.trenerIdTrener] = coachResponse.data;
                         } catch (error) {
                             console.error(`Failed to fetch coach for course ${course.idKursu}:`, error);
                         }
@@ -87,7 +87,7 @@ function TraningCourse() {
                 <PopupButton
                     onClose={() => setPopup(false)}
                     course={selectedCourse}
-                    coach={selectedCourse ? coaches[selectedCourse.trenerIdTrenera] : null}
+                    coach={selectedCourse ? coaches[selectedCourse.trenerIdTrener] : null}
                 />
             )}
         </div>

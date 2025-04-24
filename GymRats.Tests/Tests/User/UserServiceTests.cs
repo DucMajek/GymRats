@@ -20,7 +20,7 @@ public class UserServiceTests
         var password = "test1";
         var expectedUser = new Data.Entities.Uzytkownik
         {
-            IdUzytkownika = 12,
+            IdUzytkownik = 12,
             Email = email
         };
 

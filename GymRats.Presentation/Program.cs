@@ -9,6 +9,7 @@ using GymRats.Business.Services;
 using GymRats.Data;
 using GymRats.Data.Interfaces;
 using GymRats.Data.Repositories;
+using GymRats.Data.Entities;
 using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);

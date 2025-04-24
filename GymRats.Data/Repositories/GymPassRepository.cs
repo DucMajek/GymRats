@@ -1,5 +1,6 @@
 ﻿using GymRats.Data.Entities;
 using GymRats.Data.Interfaces;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -27,12 +28,12 @@ namespace GymRats.Data.Repositories
             try
             {
                 return await _context.Karnets
-                    .Where(k => k.UzytkownikIdUzytkownika == userId)
+                    .Where(k => k.UzytkownikIdUzytkownik == userId)
                     .Select(k => new Karnet
                     {
-                        UzytkownikIdUzytkownika = k.UzytkownikIdUzytkownika,
-                        startKarnetu = k.startKarnetu,
-                        koniecUmowy = k.koniecUmowy,
+                        UzytkownikIdUzytkownik = k.UzytkownikIdUzytkownik,
+                        StartKarnetu = k.StartKarnetu,
+                        KoniecUmowy = k.KoniecUmowy,
                         TypKarnetuIdTypKarnetu = k.TypKarnetuIdTypKarnetu,
                         TypKarnetuIdTypKarnetuNavigation = k.TypKarnetuIdTypKarnetuNavigation
                     })

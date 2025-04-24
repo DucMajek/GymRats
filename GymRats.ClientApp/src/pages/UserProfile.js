@@ -72,7 +72,7 @@ function UserProfile() {
                   <div>
                     <p className="mb-1">{personalData.imie} {personalData.nazwisko}</p>
                     <p className="mb-1">{email}</p>
-                    <p className="mb-1">+48 {personalData.nrTel}</p>
+                    <p className="mb-1">{personalData.nrTel}</p>
                     <p className="mb-1">{personalData.dataUrodzenia}</p>
                   </div>
                 )}

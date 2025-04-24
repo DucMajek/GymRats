@@ -24,8 +24,8 @@ public class TrainingCourseRepository : ITrainingCourseRepository
             Nazwa = e.Nazwa,
             CzasTrwania = e.CzasTrwania,
             Opis = e.Opis,
-            TrenerIdTrenera = e.TrenerIdTrenera,
-            TrenerIdTreneraNavigation = e.TrenerIdTreneraNavigation,
+            TrenerIdTrener = e.TrenerIdTrener,
+            TrenerIdTrenerNavigation = e.TrenerIdTrenerNavigation,
         }).ToListAsync();
     }
 }

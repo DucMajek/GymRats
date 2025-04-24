@@ -13,23 +13,23 @@ public partial class Osoba
 
     public DateOnly? DataUrodzenia { get; set; }
 
-    public string? Adres { get; set; } = null!;
-    
-    public string? NumerBudynku { get; set; } = null!;
-    
-    public string? KodPocztowy { get; set; } = null!;
-    
-    public string? Miejscowosc { get; set; } = null!;
-    
     public string NrTel { get; set; } = null!;
 
     public string Plec { get; set; } = null!;
 
-    public float Waga { get; set; }
+    public decimal Waga { get; set; }
 
     public int Wzrost { get; set; }
 
-    public virtual ICollection<Trener> Treners { get; set; } = new List<Trener>();
+    public string? Adres { get; set; }
 
-    public virtual ICollection<Uzytkownik> Uzytkowniks { get; set; } = new List<Uzytkownik>();
+    public string? NumerBudynku { get; set; }
+
+    public string? KodPocztowy { get; set; }
+
+    public string? Miejscowosc { get; set; }
+
+    public virtual Trener? Trener { get; set; }
+
+    public virtual Uzytkownik? Uzytkownik { get; set; }
 }

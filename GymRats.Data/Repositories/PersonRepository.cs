@@ -28,7 +28,7 @@ public class PersonRepository : IPersonRepository
         try
         {
             return await _context.Treners
-                .AnyAsync(e => e.IdTrenera == coachId, cancellationToken);
+                .AnyAsync(e => e.IdTrener == coachId, cancellationToken);
         }
         catch (Exception ex)
         {
@@ -42,8 +42,8 @@ public class PersonRepository : IPersonRepository
         try
         {
             return await _context.Osobas
-                .Include(o => o.Treners)
-                .FirstOrDefaultAsync(e => e.Treners.Any(t => t.IdTrenera == coachId), 
+                .Include(o => o.Trener)
+                .FirstOrDefaultAsync(o => o.Trener != null && o.Trener.IdTrener == coachId, 
                     cancellationToken);
         }
         catch (Exception ex)

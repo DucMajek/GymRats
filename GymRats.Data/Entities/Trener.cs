@@ -5,17 +5,15 @@ namespace GymRats.Data.Entities;
 
 public partial class Trener
 {
-    public int OsobaIdOsoba { get; set; }
-
-    public int IdTrenera { get; set; }
+    public int IdTrener { get; set; }
 
     public string Specjalizacja { get; set; } = null!;
 
-    public string Doswiadczenie { get; set; } = null!;
+    public virtual Osoba IdTrenerNavigation { get; set; } = null!;
 
     public virtual ICollection<KursTrenera> KursTreneras { get; set; } = new List<KursTrenera>();
 
-    public virtual Osoba OsobaIdOsobaNavigation { get; set; } = null!;
+    public virtual ICollection<TreningPersonalny> TreningPersonalnies { get; set; } = new List<TreningPersonalny>();
 
-    public virtual ICollection<PlanTreningowy> PlanTreningowies { get; set; } = new List<PlanTreningowy>();
+    public virtual ICollection<ZajeciaGrupowe> ZajeciaGrupowes { get; set; } = new List<ZajeciaGrupowe>();
 }

@@ -22,14 +22,14 @@ function HomePage() {
   }, []);
 
   const location = useLocation();
-  
+
   useEffect(() => {
-      if (location.state && location.state.scrollTo) {
-          const element = document.getElementById(location.state.scrollTo);
-          if (element) {
-              element.scrollIntoView({ behavior: 'smooth' });
-          }
+    if (location.state && location.state.scrollTo) {
+      const element = document.getElementById(location.state.scrollTo);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
       }
+    }
   }, [location.state]);
 
   return (
@@ -46,7 +46,7 @@ function HomePage() {
             lepszej kondycji i większej pewności siebie. Dołącz do nas już dziś i doświadcz niesamowitej transformacji,
             na którą zasługuje Twoje ciało!
           </p>
-          <button className="btn"><a href = '/login' style={{color:"white"}}>Rozpocznij</a></button>
+          <button className="btn"><a href='/login' style={{ color: "white" }}>Rozpocznij</a></button>
         </div>
         <div className="header__image">
           <img src={headerLogo} alt="header" />
@@ -66,7 +66,7 @@ function HomePage() {
             <p>
               Odkryj siłę fizyczną, psychiczną i emocjonalną z naszymi karnetami, które pomogą Ci osiągnąć cel.
             </p>
-            <a href = '/login' style={{color:"white"}}>Dołącz teraz <i className="ri-arrow-right-line"></i></a>
+            <a href='/login'>Dołącz teraz <i className="ri-arrow-right-line" ></i></a>
           </div>
           <div className="explore__card">
             <span><i className="ri-clipboard-fill"></i></span>
@@ -74,7 +74,7 @@ function HomePage() {
             <p>
               Osiągnij swoje cele dzięki indywidualnie dopasowanemu planowi treningowemu.
             </p>
-            <a href = '/login' style={{color:"white"}}>Dołącz teraz <i className="ri-arrow-right-line"></i></a>
+            <a href='/login' >Dołącz teraz <i className="ri-arrow-right-line"></i></a>
           </div>
           <div className="explore__card">
             <span><i className="ri-user-star-fill"></i></span>
@@ -82,7 +82,7 @@ function HomePage() {
             <p>
               Zdobądź wiedzę i umiejętności potrzebne, by zostać profesjonalnym trenerem.
             </p>
-            <a href = '/login' style={{color:"white"}}>Dołącz teraz <i className="ri-arrow-right-line"></i></a>
+            <a href='/login' >Dołącz teraz <i className="ri-arrow-right-line"></i></a>
           </div>
           <div className="explore__card">
             <span><i className="ri-restaurant-fill"></i></span>
@@ -90,7 +90,7 @@ function HomePage() {
             <p>
               Darmowe jadłospisy, które pomogą Ci zdrowo zwiększyć/zredukować wage.
             </p>
-            <a href = '/login' style={{color:"white"}}>Dołącz teraz <i className="ri-arrow-right-line"></i></a>
+            <a href='/login' >Dołącz teraz <i className="ri-arrow-right-line"></i></a>
           </div>
         </div>
       </section>

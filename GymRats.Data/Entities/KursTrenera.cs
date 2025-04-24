@@ -11,11 +11,11 @@ public partial class KursTrenera
 
     public string CzasTrwania { get; set; } = null!;
 
-    public string Opis { get; set; } 
+    public string Opis { get; set; } = null!;
 
-    public int TrenerIdTrenera { get; set; }
+    public int TrenerIdTrener { get; set; }
 
-    public virtual Trener TrenerIdTreneraNavigation { get; set; } = null!;
+    public virtual Trener TrenerIdTrenerNavigation { get; set; } = null!;
 
     public virtual ICollection<UzytkownikKursTrenera> UzytkownikKursTreneras { get; set; } = new List<UzytkownikKursTrenera>();
 }
