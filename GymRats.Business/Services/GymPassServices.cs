@@ -10,39 +10,43 @@ namespace GymRats.Business.Services;
 public class GymPassServices : IGymPassServices
 {
     private readonly IGymPassRepository _gymPassRepository;
+    private readonly IUserRepository _userRepository;
     private readonly ILogger<GymPassServices> _logger;
 
     public GymPassServices(
         IGymPassRepository gymPassRepository,
+        IUserRepository userRepository,
         ILogger<GymPassServices> logger)
     {
         _gymPassRepository = gymPassRepository;
+        _userRepository = userRepository;
         _logger = logger;
     }
 
-    public async Task<IReadOnlyList<TypKarnetu>> AvailableGymPass(CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<TypePass>> AvailableGymPass(CancellationToken cancellationToken = default)
     {
         try
         {
             var gymPass = await _gymPassRepository.GetAllGymPass(cancellationToken);
-            return gymPass ?? Array.Empty<TypKarnetu>();
+            return gymPass ?? Array.Empty<TypePass>();
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error while retrieving available gym passes");
-            return Array.Empty<TypKarnetu>();
+            return Array.Empty<TypePass>();
         }
     }
 
-    public async Task<Karnet?> UserGymPass(int userId, CancellationToken cancellationToken = default)
+    public async Task<UserPass?> UserGymPass(string email, CancellationToken cancellationToken = default)
     {
         try
-        {
-            return await _gymPassRepository.GetGymPassByPersonId(userId, cancellationToken);
+        {   
+            var userId = _userRepository.GetUser(email);
+            return await _gymPassRepository.GetGymPassByPersonId(userId.Id, cancellationToken);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error while retrieving gym pass for user {UserId}", userId);
+            _logger.LogError(ex, "Error while retrieving gym pass for user {Email}", email);
             return null;
         }
     }

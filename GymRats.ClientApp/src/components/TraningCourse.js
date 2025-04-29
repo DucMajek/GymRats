@@ -22,14 +22,14 @@ function TraningCourse() {
 
                 const coachData = {};
                 for (const course of courseResponse.data) {
-                    if (!coachData[course.trenerIdTrener]) {
+                    if (!coachData[course.idCoach]) {
                         try {
                             const coachResponse = await axios.get(
-                                `https://localhost:44380/coaches/${course.trenerIdTrener}`
+                                `https://localhost:44380/coaches/${course.idCoach}`
                             );
-                            coachData[course.trenerIdTrener] = coachResponse.data;
+                            coachData[course.idCoach] = coachResponse.data;
                         } catch (error) {
-                            console.error(`Failed to fetch coach for course ${course.idKursu}:`, error);
+                            console.error(`Failed to fetch coach for course ${course.idCourse}:`, error);
                         }
                     }
                 }
@@ -60,7 +60,7 @@ function TraningCourse() {
                     {courses.map((course, index) => (
                         <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={course.idKursu}>
                             <div className="course__card" style={{ width: 'auto', height: 'auto' }}>
-                                <center><h3>{course.nazwa}</h3></center>
+                                <center><h3>{course.courseName}</h3></center>
                                 <br />
                                 <br />
                                 <button
@@ -87,7 +87,7 @@ function TraningCourse() {
                 <PopupButton
                     onClose={() => setPopup(false)}
                     course={selectedCourse}
-                    coach={selectedCourse ? coaches[selectedCourse.trenerIdTrener] : null}
+                    coach={selectedCourse ? coaches[selectedCourse.idCoach] : null}
                 />
             )}
         </div>

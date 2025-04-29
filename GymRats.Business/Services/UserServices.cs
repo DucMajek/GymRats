@@ -26,9 +26,9 @@ public class UserServices : IUserServices
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    public async Task<(bool success, string token, Uzytkownik user)> LoginAsync(
-        string email, 
-        string userPassword, 
+    public async Task<(bool success, string token, User user)> LoginAsync(
+        string email,
+        string userPassword,
         CancellationToken cancellationToken = default)
     {
         try
@@ -54,14 +54,14 @@ public class UserServices : IUserServices
                 _logger.LogWarning("Invalid password for user: {Email}", email);
                 return (false, null, null);
             }
-            
+
             var user = await _userRepository.GetUser(email);
             if (user == null)
             {
                 _logger.LogError("User data not found despite successful auth: {Email}", email);
                 return (false, null, null);
             }
-            
+
             var token = _tokenGenerator.GenerateToken(email);
 
             _logger.LogInformation("Successful login: {Email}", email);
@@ -100,7 +100,7 @@ public class UserServices : IUserServices
         }
     }
 
-    public async Task<Osoba?> UserPersonData(string email, CancellationToken cancellationToken = default)
+    public async Task<Person?> UserPersonData(string email, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -111,5 +111,11 @@ public class UserServices : IUserServices
             _logger.LogError(ex, "Error while retrieving gym pass for user {UserId}", email);
             return null;
         }
+    }
+
+    public async Task<bool> BuyGymPass(int gymPassId, string email, DateOnly startDate,
+        CancellationToken cancellationToken = default)
+    {
+        return await _userRepository.AddNewBoughtGymPass(gymPassId, email, startDate, cancellationToken);
     }
 }

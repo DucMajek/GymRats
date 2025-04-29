@@ -55,7 +55,7 @@ function Sidebar() {
           </Link> */}
           {personalData && (
                   <div>
-                    <p className="mb-1">{personalData.imie} {personalData.nazwisko}</p>
+                    <p className="mb-1">{personalData.name} {personalData.surname}</p>
                   </div>
                 )}
         </CDBSidebarHeader>

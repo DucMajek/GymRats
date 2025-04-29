@@ -4,8 +4,8 @@ namespace GymRats.Data.Interfaces;
 
 public interface IGymPassRepository
 {
-    public Task<IReadOnlyList<TypKarnetu>> GetAllGymPass(CancellationToken cancellationToken = default);
+    public Task<IReadOnlyList<TypePass>> GetAllGymPass(CancellationToken cancellationToken = default);
 
-    public Task<Karnet?> GetGymPassByPersonId(int gymPassId,
+    public Task<UserPass?> GetGymPassByPersonId(int gymPassId,
         CancellationToken cancellationToken = default);
 }

@@ -18,7 +18,7 @@ public class PersonController : ControllerBase
     }
 
     [HttpGet("/coaches/{coachId}")]
-    public async Task<ActionResult<Osoba>> GetCoachPerson(
+    public async Task<ActionResult<Person>> GetCoachPerson(
         [FromRoute] int coachId,
         CancellationToken cancellationToken = default)
     {

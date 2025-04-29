@@ -19,36 +19,37 @@ namespace GymRats.Data.Repositories
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Uzytkownik> AddNewUserAsync(string email, string password, string name, string surname,
+        public async Task<User> AddNewUserAsync(string email, string password, string name, string surname,
             CancellationToken cancellationToken = default)
         {
             await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
 
             try
             {
-                var person = new Osoba
+                var person = new Person()
                 {
-                    Imie = name,
-                    Nazwisko = surname,
-                    DataUrodzenia = null,
-                    Adres = string.Empty,
-                    NrTel = string.Empty,
-                    Plec = string.Empty,
-                    Waga = 0,
-                    Wzrost = 0,
+                    Name = name,
+                    Surname = surname,
+                    Birthday = null,
+                    Address = string.Empty,
+                    PhoneNumber = string.Empty,
+                    Gender = string.Empty,
+                    Weight = 0,
+                    Height = 0,
                 };
 
-                await _context.Osobas.AddAsync(person, cancellationToken);
+                await _context.People.AddAsync(person, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
 
-                var user = new Uzytkownik
+                var user = new User()
                 {
                     Email = email,
-                    Haslo = password,
-                    IdUzytkownik = person.IdOsoba
+                    Password = password,
+                    IdUser = person.IdPerson,
+                    IdRole = 1
                 };
 
-                await _context.Uzytkowniks.AddAsync(user, cancellationToken);
+                await _context.Users.AddAsync(user, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
 
                 await transaction.CommitAsync(cancellationToken);
@@ -64,14 +65,14 @@ namespace GymRats.Data.Repositories
             }
         }
 
-        public async Task<Osoba?> GetUserPersonalDataAsync(string email,
+        public async Task<Person?> GetUserPersonalDataAsync(string email,
             CancellationToken cancellationToken = default)
         {
             try
             {
-                return await _context.Uzytkowniks
+                return await _context.Users
                     .Where(u => u.Email == email)
-                    .Select(u => u.IdUzytkownikNavigation)
+                    .Select(u => u.IdUserNavigation)
                     .FirstOrDefaultAsync(cancellationToken);
             }
             catch (Exception ex)
@@ -85,7 +86,7 @@ namespace GymRats.Data.Repositories
         {
             try
             {
-                return await _context.Uzytkowniks
+                return await _context.Users
                     .AsNoTracking()
                     .AnyAsync(e => e.Email == email, cancellationToken);
             }
@@ -101,7 +102,7 @@ namespace GymRats.Data.Repositories
         {
             try
             {
-                var user = await _context.Uzytkowniks
+                var user = await _context.Users
                     .AsNoTracking()
                     .FirstOrDefaultAsync(e => e.Email == email, cancellationToken);
 
@@ -124,10 +125,10 @@ namespace GymRats.Data.Repositories
         {
             try
             {
-                var userPassword = await _context.Uzytkowniks
+                var userPassword = await _context.Users
                     .AsNoTracking()
                     .Where(e => e.Email == email)
-                    .Select(e => e.Haslo)
+                    .Select(e => e.Password)
                     .FirstOrDefaultAsync();
 
                 return userPassword;
@@ -139,14 +140,56 @@ namespace GymRats.Data.Repositories
             }
         }
 
-        public async Task<Uzytkownik> GetUser(string email, CancellationToken cancellationToken = default)
+        public async Task<User> GetUser(string email, CancellationToken cancellationToken = default)
         {
-            var user = await _context.Uzytkowniks
+            var user = await _context.Users
                 .AsNoTracking()
                 .Where(e => e.Email == email)
-                .FirstOrDefaultAsync();;
-            
+                .FirstOrDefaultAsync();
+            ;
+
             return user;
+        }
+
+        public async Task<bool> AddNewBoughtGymPass(int idPass, string email, DateOnly startDate, 
+            CancellationToken cancellationToken = default)
+        {
+            await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+            try
+            {
+                var gymPassDuration = await _context.TypePasses
+                    .AsNoTracking()
+                    .Where(e => e.IdTypePass == idPass)
+                    .Select(e => e.DurationPass)
+                    .FirstOrDefaultAsync();
+                
+                var userId = await _context.Users
+                    .AsNoTracking()
+                    .Where(e => e.Email == email)
+                    .Select(e => e.IdUser)
+                    .FirstOrDefaultAsync();
+                
+                var newGymPass = new UserPass()
+                {
+                    DateStart = startDate,
+                    DateEnd = startDate.AddDays(gymPassDuration),
+                    IdTypePass = idPass,
+                    IdUser = userId,
+                    IdStatus = 1,
+                };
+
+                await _context.UserPasses.AddAsync(newGymPass, cancellationToken);
+                await _context.SaveChangesAsync(cancellationToken);
+                _logger.LogInformation("Pass has been added to {Email}", idPass);
+                await transaction.CommitAsync(cancellationToken);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync(cancellationToken);
+                _logger.LogError(ex, "Error buying pass {Email}", idPass);
+                return false;
+            }
         }
     }
 }

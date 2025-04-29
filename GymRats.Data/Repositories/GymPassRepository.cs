@@ -17,25 +17,25 @@ namespace GymRats.Data.Repositories
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<IReadOnlyList<TypKarnetu>> GetAllGymPass(CancellationToken cancellationToken = default)
+        public async Task<IReadOnlyList<TypePass>> GetAllGymPass(CancellationToken cancellationToken = default)
         {
-            return await _context.TypKarnetus.ToListAsync(cancellationToken);
+            return await _context.TypePasses.ToListAsync(cancellationToken);
         }
 
-        public async Task<Karnet?> GetGymPassByPersonId(int userId,
+        public async Task<UserPass?> GetGymPassByPersonId(int userId,
             CancellationToken cancellationToken = default)
         {
             try
             {
-                return await _context.Karnets
-                    .Where(k => k.UzytkownikIdUzytkownik == userId)
-                    .Select(k => new Karnet
+                return await _context.UserPasses
+                    .Where(k => k.IdUser == userId)
+                    .Select(k => new UserPass
                     {
-                        UzytkownikIdUzytkownik = k.UzytkownikIdUzytkownik,
-                        StartKarnetu = k.StartKarnetu,
-                        KoniecUmowy = k.KoniecUmowy,
-                        TypKarnetuIdTypKarnetu = k.TypKarnetuIdTypKarnetu,
-                        TypKarnetuIdTypKarnetuNavigation = k.TypKarnetuIdTypKarnetuNavigation
+                        IdUser = k.IdUser,
+                        DateStart = k.DateStart,
+                        DateEnd = k.DateEnd,
+                        IdTypePass = k.IdTypePass,
+                        IdTypePassNavigation = k.IdTypePassNavigation
                     })
                     .AsNoTracking()
                     .FirstOrDefaultAsync(cancellationToken);

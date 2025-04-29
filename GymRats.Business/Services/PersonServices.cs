@@ -19,7 +19,7 @@ public class PersonServices : IPersonServices
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    public async Task<Osoba?> GetPersonByCoachIdAsync(int coachId, CancellationToken cancellationToken = default)
+    public async Task<Person?> GetPersonByCoachIdAsync(int coachId, CancellationToken cancellationToken = default)
     {
         try
         {

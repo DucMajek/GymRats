@@ -70,10 +70,10 @@ function UserProfile() {
                 <hr className="text-white-50" />
                 {personalData && (
                   <div>
-                    <p className="mb-1">{personalData.imie} {personalData.nazwisko}</p>
+                    <p className="mb-1">{personalData.imie} {personalData.surname}</p>
                     <p className="mb-1">{email}</p>
-                    <p className="mb-1">{personalData.nrTel}</p>
-                    <p className="mb-1">{personalData.dataUrodzenia}</p>
+                    <p className="mb-1">{personalData.phoneNumber}</p>
+                    <p className="mb-1">{personalData.birthday}</p>
                   </div>
                 )}
                 <hr className="text-white-50" />
@@ -90,10 +90,10 @@ function UserProfile() {
                 <hr className="text-white-50" />
                 {personalData && (
                   <div>
-                    <p className="mb-1">{personalData.imie} {personalData.nazwisko}</p>
-                    <p className="mb-1">{personalData.adres} {personalData.numerBudynku}</p>
-                    <p className="mb-1">{personalData.kodPocztowy}</p>
-                    <p className="mb-1">{personalData.miejscowosc}</p>
+                    <p className="mb-1">{personalData.imie} {personalData.surname}</p>
+                    <p className="mb-1">{personalData.adres} {personalData.flatNumber}</p>
+                    <p className="mb-1">{personalData.zipCode}</p>
+                    <p className="mb-1">{personalData.place}</p>
                   </div>
                 )}
                 

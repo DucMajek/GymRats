@@ -7,7 +7,7 @@ namespace GymRats.Data.Repositories;
 public interface IPersonRepository
 {
     Task<bool> CoachExistsAsync(int coachId, CancellationToken cancellationToken = default);
-    Task<Osoba?> GetPersonByCoachIdAsync(int coachId, CancellationToken cancellationToken = default);
+    Task<Person?> GetPersonByCoachIdAsync(int coachId, CancellationToken cancellationToken = default);
 }
 
 public class PersonRepository : IPersonRepository
@@ -27,8 +27,8 @@ public class PersonRepository : IPersonRepository
     {
         try
         {
-            return await _context.Treners
-                .AnyAsync(e => e.IdTrener == coachId, cancellationToken);
+            return await _context.Coaches
+                .AnyAsync(e => e.IdCoach == coachId, cancellationToken);
         }
         catch (Exception ex)
         {
@@ -37,13 +37,13 @@ public class PersonRepository : IPersonRepository
         }
     }
 
-    public async Task<Osoba?> GetPersonByCoachIdAsync(int coachId, CancellationToken cancellationToken = default)
+    public async Task<Person?> GetPersonByCoachIdAsync(int coachId, CancellationToken cancellationToken = default)
     {
         try
         {
-            return await _context.Osobas
-                .Include(o => o.Trener)
-                .FirstOrDefaultAsync(o => o.Trener != null && o.Trener.IdTrener == coachId, 
+            return await _context.People
+                .Include(o => o.Coach)
+                .FirstOrDefaultAsync(o => o.Coach != null && o.Coach.IdCoach == coachId, 
                     cancellationToken);
         }
         catch (Exception ex)

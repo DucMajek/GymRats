@@ -5,7 +5,7 @@ namespace GymRats.Data.Repositories;
 
 public interface ITrainingCourseRepository
 {
-    public Task<List<KursTrenera>> GetAllTrainingCourses();
+    public Task<List<TrainerCourse>> GetAllTrainingCourses();
 }
 
 public class TrainingCourseRepository : ITrainingCourseRepository
@@ -16,16 +16,16 @@ public class TrainingCourseRepository : ITrainingCourseRepository
     {
         _context = context;
     }
-    public async Task<List<KursTrenera>> GetAllTrainingCourses()
+    public async Task<List<TrainerCourse>> GetAllTrainingCourses()
     {
-        return await _context.KursTreneras.Select(e => new KursTrenera
+        return await _context.TrainerCourses.Select(e => new TrainerCourse
         {
-            IdKursu = e.IdKursu,
-            Nazwa = e.Nazwa,
-            CzasTrwania = e.CzasTrwania,
-            Opis = e.Opis,
-            TrenerIdTrener = e.TrenerIdTrener,
-            TrenerIdTrenerNavigation = e.TrenerIdTrenerNavigation,
+            IdCourse = e.IdCourse,
+            CourseName = e.CourseName,
+            Duration = e.Duration,
+            Description = e.Description,
+            IdCoach = e.IdCoach,
+            IdCoachNavigation = e.IdCoachNavigation,
         }).ToListAsync();
     }
 }

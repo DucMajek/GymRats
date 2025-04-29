@@ -4,5 +4,5 @@ namespace Business.Interfaces;
 
 public interface IPersonServices
 {
-    Task<Osoba?> GetPersonByCoachIdAsync(int coachId, CancellationToken cancellationToken = default);
+    Task<Person?> GetPersonByCoachIdAsync(int coachId, CancellationToken cancellationToken = default);
 }

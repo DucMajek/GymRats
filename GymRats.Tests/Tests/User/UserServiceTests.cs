@@ -18,9 +18,9 @@ public class UserServiceTests
     {
         var email = "mmajek@example.com";
         var password = "test1";
-        var expectedUser = new Data.Entities.Uzytkownik
+        var expectedUser = new Data.Entities.User()
         {
-            IdUzytkownik = 12,
+            IdUser = 12,
             Email = email
         };
 

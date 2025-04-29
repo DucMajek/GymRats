@@ -4,14 +4,14 @@ namespace GymRats.Presentation.DTOs
 {
     public class GymPassResponse
     {
-        public int UzytkownikIdUzytkownika { get; set; }
+        public int IdUser { get; set; }
     
-        public DateOnly startKarnetu { get; set; }
+        public DateOnly StartDate { get; set; }
 
-        public DateOnly koniecUmowy { get; set; }
+        public DateOnly EndDate { get; set; }
 
-        public int TypKarnetuIdTypKarnetu { get; set; }
+        public int IdTypePass { get; set; }
     
-        public virtual TypKarnetu TypKarnetuIdTypKarnetuNavigation { get; set; } = null!;
+        public virtual TypePass TypePass { get; set; } = null!;
     }    
 }

@@ -27,12 +27,12 @@ function PopupButton({ onClose, course, coach }) {
                 
                 <center>
                 <div className="text-white space-y-4">
-                    <h1 className='text-2xl font-bold'>{course?.nazwa || "Brak danych"}</h1>
-                    <p><strong>Czas trwania:</strong> {course?.czasTrwania || "Brak danych"}</p>
+                    <h1 className='text-2xl font-bold'>{course?.courseName || "Brak danych"}</h1>
+                    <p><strong>Czas trwania:</strong> {course?.duration || "Brak danych"}</p>
                     {coach && (
-                        <p><strong>Trener:</strong> {coach.imie} {coach.nazwisko}</p>
+                        <p><strong>Trener:</strong> {coach.name} {coach.surname}</p>
                     )}
-                    <p>{course?.opis || "Brak danych"}</p>
+                    <p>{course?.description || "Brak danych"}</p>
                 </div>
                 </center>
             </div>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GymRats.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymRats.Data.Entities;
@@ -16,338 +15,383 @@ public partial class GymRatsContext : DbContext
     {
     }
 
-    public virtual DbSet<Jadlospi> Jadlospis { get; set; }
+    public virtual DbSet<Coach> Coaches { get; set; }
 
-    public virtual DbSet<Karnet> Karnets { get; set; }
+    public virtual DbSet<FoodEbook> FoodEbooks { get; set; }
 
-    public virtual DbSet<KursTrenera> KursTreneras { get; set; }
+    public virtual DbSet<GroupClass> GroupClasses { get; set; }
 
-    public virtual DbSet<Osoba> Osobas { get; set; }
+    public virtual DbSet<ParticipationInClass> ParticipationInClasses { get; set; }
 
-    public virtual DbSet<PlanTreningowy> PlanTreningowies { get; set; }
+    public virtual DbSet<PassStatus> PassStatuses { get; set; }
 
-    public virtual DbSet<PlanTreningowyUzytkownik> PlanTreningowyUzytkowniks { get; set; }
+    public virtual DbSet<Person> People { get; set; }
 
-    public virtual DbSet<Trener> Treners { get; set; }
+    public virtual DbSet<PersonalTraining> PersonalTrainings { get; set; }
 
-    public virtual DbSet<TreningPersonalny> TreningPersonalnies { get; set; }
+    public virtual DbSet<PurchasedCourse> PurchasedCourses { get; set; }
 
-    public virtual DbSet<TypKarnetu> TypKarnetus { get; set; }
+    public virtual DbSet<Role> Roles { get; set; }
 
-    public virtual DbSet<UdzialWZajeciach> UdzialWZajeciaches { get; set; }
+    public virtual DbSet<TrainerCourse> TrainerCourses { get; set; }
 
-    public virtual DbSet<Uzytkownik> Uzytkowniks { get; set; }
+    public virtual DbSet<TrainingPlan> TrainingPlans { get; set; }
 
-    public virtual DbSet<UzytkownikJadlospi> UzytkownikJadlospis { get; set; }
+    public virtual DbSet<TypePass> TypePasses { get; set; }
 
-    public virtual DbSet<UzytkownikKursTrenera> UzytkownikKursTreneras { get; set; }
+    public virtual DbSet<User> Users { get; set; }
 
-    public virtual DbSet<ZajeciaGrupowe> ZajeciaGrupowes { get; set; }
+    public virtual DbSet<UserEbook> UserEbooks { get; set; }
+
+    public virtual DbSet<UserPass> UserPasses { get; set; }
+
+    public virtual DbSet<UserTrainingPlan> UserTrainingPlans { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-RAS4J05;Database=GymRats;Trusted_Connection=True;Encrypt=False;");
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-RAS4J05;Database=GymRats;Trusted_Connection=True;Encrypt=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Jadlospi>(entity =>
+        modelBuilder.Entity<Coach>(entity =>
         {
-            entity.HasKey(e => e.IdJadlospisu).HasName("Jadlospis_pk");
+            entity.HasKey(e => e.IdCoach).HasName("Coach_pk");
 
-            entity.Property(e => e.IdJadlospisu).HasColumnName("id_jadlospisu");
-            entity.Property(e => e.Kalorycznosc)
-                .IsUnicode(false)
-                .HasColumnName("kalorycznosc");
-            entity.Property(e => e.RodzajDiety)
-                .IsUnicode(false)
-                .HasColumnName("rodzaj_diety");
-            entity.Property(e => e.ZawartoscJadlospisu).HasColumnName("zawartosc_jadlospisu");
-        });
+            entity.ToTable("Coach");
 
-        modelBuilder.Entity<Karnet>(entity =>
-        {
-            entity.HasKey(e => e.IdKarnet).HasName("Karnet_pk");
-
-            entity.ToTable("Karnet");
-
-            entity.Property(e => e.IdKarnet).HasColumnName("id_karnet");
-            entity.Property(e => e.Aktywny).HasColumnName("aktywny");
-            entity.Property(e => e.KoniecUmowy).HasColumnName("koniec_umowy");
-            entity.Property(e => e.StartKarnetu).HasColumnName("start_karnetu");
-            entity.Property(e => e.TypKarnetuIdTypKarnetu).HasColumnName("Typ_Karnetu_id_typ_karnetu");
-            entity.Property(e => e.UzytkownikIdUzytkownik).HasColumnName("Uzytkownik_id_uzytkownik");
-
-            entity.HasOne(d => d.TypKarnetuIdTypKarnetuNavigation).WithMany(p => p.Karnets)
-                .HasForeignKey(d => d.TypKarnetuIdTypKarnetu)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Karnet_Typ_Karnetu");
-
-            entity.HasOne(d => d.UzytkownikIdUzytkownikNavigation).WithMany(p => p.Karnets)
-                .HasForeignKey(d => d.UzytkownikIdUzytkownik)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Karnet_Uzytkownik");
-        });
-
-        modelBuilder.Entity<KursTrenera>(entity =>
-        {
-            entity.HasKey(e => e.IdKursu).HasName("Kurs_Trenera_pk");
-
-            entity.ToTable("Kurs_Trenera");
-
-            entity.Property(e => e.IdKursu).HasColumnName("id_kursu");
-            entity.Property(e => e.CzasTrwania)
-                .IsUnicode(false)
-                .HasColumnName("czas_trwania");
-            entity.Property(e => e.Nazwa)
-                .IsUnicode(false)
-                .HasColumnName("nazwa");
-            entity.Property(e => e.Opis)
-                .IsUnicode(false)
-                .HasColumnName("opis");
-            entity.Property(e => e.TrenerIdTrener).HasColumnName("Trener_id_trener");
-
-            entity.HasOne(d => d.TrenerIdTrenerNavigation).WithMany(p => p.KursTreneras)
-                .HasForeignKey(d => d.TrenerIdTrener)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Kurs_Trenera_Trener");
-        });
-
-        modelBuilder.Entity<Osoba>(entity =>
-        {
-            entity.HasKey(e => e.IdOsoba).HasName("Osoba_pk");
-
-            entity.ToTable("Osoba");
-
-            entity.Property(e => e.IdOsoba).HasColumnName("id_osoba");
-            entity.Property(e => e.Adres)
-                .IsUnicode(false)
-                .HasColumnName("adres");
-            entity.Property(e => e.DataUrodzenia).HasColumnName("data_urodzenia");
-            entity.Property(e => e.Imie)
-                .IsUnicode(false)
-                .HasColumnName("imie");
-            entity.Property(e => e.KodPocztowy)
-                .IsUnicode(false)
-                .HasColumnName("kod_pocztowy");
-            entity.Property(e => e.Miejscowosc)
-                .IsUnicode(false)
-                .HasColumnName("miejscowosc");
-            entity.Property(e => e.Nazwisko)
-                .IsUnicode(false)
-                .HasColumnName("nazwisko");
-            entity.Property(e => e.NrTel)
-                .IsUnicode(false)
-                .HasColumnName("nr_tel");
-            entity.Property(e => e.NumerBudynku)
-                .IsUnicode(false)
-                .HasColumnName("numer_budynku");
-            entity.Property(e => e.Plec)
-                .IsUnicode(false)
-                .HasColumnName("plec");
-            entity.Property(e => e.Waga)
-                .HasColumnType("decimal(4, 2)")
-                .HasColumnName("waga");
-            entity.Property(e => e.Wzrost).HasColumnName("wzrost");
-        });
-
-        modelBuilder.Entity<PlanTreningowy>(entity =>
-        {
-            entity.HasKey(e => e.IdPlanTreningowy).HasName("Plan_treningowy_pk");
-
-            entity.ToTable("Plan_treningowy");
-
-            entity.Property(e => e.IdPlanTreningowy).HasColumnName("id_plan_treningowy");
-            entity.Property(e => e.NazwaPlanu)
-                .IsUnicode(false)
-                .HasColumnName("nazwa_planu");
-            entity.Property(e => e.ZawartoscPlanuTreningowego).HasColumnName("zawartosc_planu_treningowego");
-        });
-
-        modelBuilder.Entity<PlanTreningowyUzytkownik>(entity =>
-        {
-            entity.HasKey(e => e.IdPlanTreningowy).HasName("Plan_treningowy_Uzytkownik_pk");
-
-            entity.ToTable("Plan_treningowy_Uzytkownik");
-
-            entity.Property(e => e.IdPlanTreningowy).HasColumnName("id_plan_treningowy");
-            entity.Property(e => e.PlanTreningowyIdPlanTreningowy).HasColumnName("Plan_treningowy_id_plan_treningowy");
-            entity.Property(e => e.UzytkownikIdUzytkownik).HasColumnName("Uzytkownik_id_uzytkownik");
-
-            entity.HasOne(d => d.PlanTreningowyIdPlanTreningowyNavigation).WithMany(p => p.PlanTreningowyUzytkowniks)
-                .HasForeignKey(d => d.PlanTreningowyIdPlanTreningowy)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Plan_treningowy_Uzytkownik_Plan_treningowy");
-
-            entity.HasOne(d => d.UzytkownikIdUzytkownikNavigation).WithMany(p => p.PlanTreningowyUzytkowniks)
-                .HasForeignKey(d => d.UzytkownikIdUzytkownik)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Plan_treningowy_Uzytkownik_Uzytkownik");
-        });
-
-        modelBuilder.Entity<Trener>(entity =>
-        {
-            entity.HasKey(e => e.IdTrener).HasName("Trener_pk");
-
-            entity.ToTable("Trener");
-
-            entity.Property(e => e.IdTrener)
+            entity.Property(e => e.IdCoach)
                 .ValueGeneratedNever()
-                .HasColumnName("id_trener");
-            entity.Property(e => e.Specjalizacja)
+                .HasColumnName("id_coach");
+            entity.Property(e => e.Specialization)
                 .IsUnicode(false)
-                .HasColumnName("specjalizacja");
+                .HasColumnName("specialization");
 
-            entity.HasOne(d => d.IdTrenerNavigation).WithOne(p => p.Trener)
-                .HasForeignKey<Trener>(d => d.IdTrener)
+            entity.HasOne(d => d.IdCoachNavigation).WithOne(p => p.Coach)
+                .HasForeignKey<Coach>(d => d.IdCoach)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Trener_Osoba");
         });
 
-        modelBuilder.Entity<TreningPersonalny>(entity =>
+        modelBuilder.Entity<FoodEbook>(entity =>
         {
-            entity.HasKey(e => e.IdTreninguPersonalnego).HasName("Trening_Personalny_pk");
+            entity.HasKey(e => e.IdEbook).HasName("Food_ebook_pk");
 
-            entity.ToTable("Trening_Personalny");
+            entity.ToTable("Food_ebook");
 
-            entity.Property(e => e.IdTreninguPersonalnego).HasColumnName("id_treningu_personalnego");
-            entity.Property(e => e.DataDo).HasColumnName("data_do");
-            entity.Property(e => e.DataOd).HasColumnName("data_od");
-            entity.Property(e => e.TrenerIdTrener).HasColumnName("Trener_id_trener");
-            entity.Property(e => e.UzytkownikIdUzytkownik).HasColumnName("Uzytkownik_id_uzytkownik");
+            entity.Property(e => e.IdEbook).HasColumnName("id_ebook");
+            entity.Property(e => e.Calories)
+                .IsUnicode(false)
+                .HasColumnName("calories");
+            entity.Property(e => e.DietType)
+                .IsUnicode(false)
+                .HasColumnName("diet_type");
+            entity.Property(e => e.EbookFile).HasColumnName("ebook_file");
+        });
 
-            entity.HasOne(d => d.TrenerIdTrenerNavigation).WithMany(p => p.TreningPersonalnies)
-                .HasForeignKey(d => d.TrenerIdTrener)
+        modelBuilder.Entity<GroupClass>(entity =>
+        {
+            entity.HasKey(e => e.IdGroup).HasName("Group_classes_pk");
+
+            entity.ToTable("Group_classes");
+
+            entity.Property(e => e.IdGroup).HasColumnName("id_group");
+            entity.Property(e => e.ClassType)
+                .IsUnicode(false)
+                .HasColumnName("class_type");
+            entity.Property(e => e.GroupSize).HasColumnName("group_size");
+            entity.Property(e => e.IdCoach).HasColumnName("id_coach");
+            entity.Property(e => e.StartDate)
+                .HasColumnType("datetime")
+                .HasColumnName("start_date");
+
+            entity.HasOne(d => d.IdCoachNavigation).WithMany(p => p.GroupClasses)
+                .HasForeignKey(d => d.IdCoach)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Zajecia_Grupowe_Trener");
+        });
+
+        modelBuilder.Entity<ParticipationInClass>(entity =>
+        {
+            entity.HasKey(e => e.IdParticipation).HasName("Participation_in_classes_pk");
+
+            entity.ToTable("Participation_in_classes");
+
+            entity.Property(e => e.IdParticipation).HasColumnName("id_participation");
+            entity.Property(e => e.IdGroup).HasColumnName("id_group");
+            entity.Property(e => e.IdUser).HasColumnName("id_user");
+
+            entity.HasOne(d => d.IdGroupNavigation).WithMany(p => p.ParticipationInClasses)
+                .HasForeignKey(d => d.IdGroup)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Udzial_w_zajeciach_Zajecia_Grupowe");
+
+            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.ParticipationInClasses)
+                .HasForeignKey(d => d.IdUser)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Udzial_w_zajeciach_Uzytkownik");
+        });
+
+        modelBuilder.Entity<PassStatus>(entity =>
+        {
+            entity.HasKey(e => e.IdStatus).HasName("Pass_status_pk");
+
+            entity.ToTable("Pass_status");
+
+            entity.Property(e => e.IdStatus).HasColumnName("id_status");
+            entity.Property(e => e.StatusType)
+                .IsUnicode(false)
+                .HasColumnName("status_type");
+        });
+
+        modelBuilder.Entity<Person>(entity =>
+        {
+            entity.HasKey(e => e.IdPerson).HasName("Person_pk");
+
+            entity.ToTable("Person");
+
+            entity.Property(e => e.IdPerson).HasColumnName("id_person");
+            entity.Property(e => e.Address)
+                .IsUnicode(false)
+                .HasColumnName("address");
+            entity.Property(e => e.Birthday).HasColumnName("birthday");
+            entity.Property(e => e.FlatNumber)
+                .IsUnicode(false)
+                .HasColumnName("flat_number");
+            entity.Property(e => e.Gender)
+                .IsUnicode(false)
+                .HasColumnName("gender");
+            entity.Property(e => e.Height).HasColumnName("height");
+            entity.Property(e => e.Name)
+                .IsUnicode(false)
+                .HasColumnName("name");
+            entity.Property(e => e.PhoneNumber)
+                .IsUnicode(false)
+                .HasColumnName("phone_number");
+            entity.Property(e => e.Place)
+                .IsUnicode(false)
+                .HasColumnName("place");
+            entity.Property(e => e.Surname)
+                .IsUnicode(false)
+                .HasColumnName("surname");
+            entity.Property(e => e.Weight)
+                .HasColumnType("decimal(4, 2)")
+                .HasColumnName("weight");
+            entity.Property(e => e.ZipCode)
+                .IsUnicode(false)
+                .HasColumnName("zip_code");
+        });
+
+        modelBuilder.Entity<PersonalTraining>(entity =>
+        {
+            entity.HasKey(e => e.IdPersonalTraining).HasName("Personal_training_pk");
+
+            entity.ToTable("Personal_training");
+
+            entity.Property(e => e.IdPersonalTraining).HasColumnName("id_personal_training");
+            entity.Property(e => e.IdCoach).HasColumnName("id_coach");
+            entity.Property(e => e.IdUser).HasColumnName("id_user");
+            entity.Property(e => e.ReservationDateTime)
+                .HasColumnType("datetime")
+                .HasColumnName("reservation_date_time");
+
+            entity.HasOne(d => d.IdCoachNavigation).WithMany(p => p.PersonalTrainings)
+                .HasForeignKey(d => d.IdCoach)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Trening_Personalny_Trener");
 
-            entity.HasOne(d => d.UzytkownikIdUzytkownikNavigation).WithMany(p => p.TreningPersonalnies)
-                .HasForeignKey(d => d.UzytkownikIdUzytkownik)
+            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.PersonalTrainings)
+                .HasForeignKey(d => d.IdUser)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Trening_Personalny_Uzytkownik");
         });
 
-        modelBuilder.Entity<TypKarnetu>(entity =>
+        modelBuilder.Entity<PurchasedCourse>(entity =>
         {
-            entity.HasKey(e => e.IdTypKarnetu).HasName("Typ_Karnetu_pk");
+            entity.HasKey(e => e.IdPurchasedCourse).HasName("Purchased_course_pk");
 
-            entity.ToTable("Typ_Karnetu");
+            entity.ToTable("Purchased_course");
 
-            entity.Property(e => e.IdTypKarnetu).HasColumnName("id_typ_karnetu");
-            entity.Property(e => e.Cena).HasColumnName("cena");
-            entity.Property(e => e.Nazwa)
-                .IsUnicode(false)
-                .HasColumnName("nazwa");
-            entity.Property(e => e.Opis)
-                .IsUnicode(false)
-                .HasColumnName("opis");
-        });
+            entity.Property(e => e.IdPurchasedCourse).HasColumnName("id_purchased_course");
+            entity.Property(e => e.IdCourse).HasColumnName("id_course");
+            entity.Property(e => e.IdUser).HasColumnName("id_user");
 
-        modelBuilder.Entity<UdzialWZajeciach>(entity =>
-        {
-            entity.HasKey(e => e.IdUdzial).HasName("Udzial_w_zajeciach_pk");
-
-            entity.ToTable("Udzial_w_zajeciach");
-
-            entity.Property(e => e.IdUdzial).HasColumnName("id_udzial");
-            entity.Property(e => e.UzytkownikIdUzytkownik).HasColumnName("Uzytkownik_id_uzytkownik");
-            entity.Property(e => e.ZajeciaGrupoweIdZajec).HasColumnName("Zajecia_Grupowe_id_zajec");
-
-            entity.HasOne(d => d.UzytkownikIdUzytkownikNavigation).WithMany(p => p.UdzialWZajeciaches)
-                .HasForeignKey(d => d.UzytkownikIdUzytkownik)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Udzial_w_zajeciach_Uzytkownik");
-
-            entity.HasOne(d => d.ZajeciaGrupoweIdZajecNavigation).WithMany(p => p.UdzialWZajeciaches)
-                .HasForeignKey(d => d.ZajeciaGrupoweIdZajec)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Table_43_Zajecia_Grupowe");
-        });
-
-        modelBuilder.Entity<Uzytkownik>(entity =>
-        {
-            entity.HasKey(e => e.IdUzytkownik).HasName("Uzytkownik_pk");
-
-            entity.ToTable("Uzytkownik");
-
-            entity.Property(e => e.IdUzytkownik)
-                .ValueGeneratedNever()
-                .HasColumnName("id_uzytkownik");
-            entity.Property(e => e.Email)
-                .HasMaxLength(255)
-                .IsUnicode(false)
-                .HasColumnName("email");
-            entity.Property(e => e.Haslo)
-                .HasMaxLength(255)
-                .IsUnicode(false)
-                .HasColumnName("haslo");
-
-            entity.HasOne(d => d.IdUzytkownikNavigation).WithOne(p => p.Uzytkownik)
-                .HasForeignKey<Uzytkownik>(d => d.IdUzytkownik)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Uzytkownik_Osoba");
-        });
-
-        modelBuilder.Entity<UzytkownikJadlospi>(entity =>
-        {
-            entity.HasKey(e => e.IdUzytkownikJadlospis).HasName("Uzytkownik_Jadlospis_pk");
-
-            entity.ToTable("Uzytkownik_Jadlospis");
-
-            entity.Property(e => e.IdUzytkownikJadlospis).HasColumnName("id_uzytkownik_jadlospis");
-            entity.Property(e => e.JadlospisIdJadlospisu).HasColumnName("Jadlospis_id_jadlospisu");
-            entity.Property(e => e.UzytkownikIdUzytkownik).HasColumnName("Uzytkownik_id_uzytkownik");
-
-            entity.HasOne(d => d.JadlospisIdJadlospisuNavigation).WithMany(p => p.UzytkownikJadlospis)
-                .HasForeignKey(d => d.JadlospisIdJadlospisu)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Uzytkownik_Jadlospis_Jadlospis");
-
-            entity.HasOne(d => d.UzytkownikIdUzytkownikNavigation).WithMany(p => p.UzytkownikJadlospis)
-                .HasForeignKey(d => d.UzytkownikIdUzytkownik)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Uzytkownik_Jadlospis_Uzytkownik");
-        });
-
-        modelBuilder.Entity<UzytkownikKursTrenera>(entity =>
-        {
-            entity.HasKey(e => e.IdUzytkownikKursTrenera).HasName("Uzytkownik_Kurs_Trenera_pk");
-
-            entity.ToTable("Uzytkownik_Kurs_Trenera");
-
-            entity.Property(e => e.IdUzytkownikKursTrenera).HasColumnName("id_uzytkownik_kurs_trenera");
-            entity.Property(e => e.KursTreneraIdKursu).HasColumnName("Kurs_Trenera_id_kursu");
-            entity.Property(e => e.UzytkownikIdUzytkownik).HasColumnName("Uzytkownik_id_uzytkownik");
-
-            entity.HasOne(d => d.KursTreneraIdKursuNavigation).WithMany(p => p.UzytkownikKursTreneras)
-                .HasForeignKey(d => d.KursTreneraIdKursu)
+            entity.HasOne(d => d.IdCourseNavigation).WithMany(p => p.PurchasedCourses)
+                .HasForeignKey(d => d.IdCourse)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Uzytkownik_Kurs_Trenera_Kurs_Trenera");
 
-            entity.HasOne(d => d.UzytkownikIdUzytkownikNavigation).WithMany(p => p.UzytkownikKursTreneras)
-                .HasForeignKey(d => d.UzytkownikIdUzytkownik)
+            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.PurchasedCourses)
+                .HasForeignKey(d => d.IdUser)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Uzytkownik_Kurs_Trenera_Uzytkownik");
         });
 
-        modelBuilder.Entity<ZajeciaGrupowe>(entity =>
+        modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.IdZajec).HasName("Zajecia_Grupowe_pk");
+            entity.HasKey(e => e.IdRole).HasName("Role_pk");
 
-            entity.ToTable("Zajecia_Grupowe");
+            entity.ToTable("Role");
 
-            entity.Property(e => e.IdZajec).HasColumnName("id_zajec");
-            entity.Property(e => e.Data)
-                .HasColumnType("datetime")
-                .HasColumnName("data");
-            entity.Property(e => e.NazwaZajec)
+            entity.Property(e => e.IdRole).HasColumnName("id_role");
+            entity.Property(e => e.RoleName)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .HasColumnName("nazwa_zajec");
-            entity.Property(e => e.TrenerIdTrener).HasColumnName("Trener_id_trener");
+                .HasColumnName("role_name");
+        });
 
-            entity.HasOne(d => d.TrenerIdTrenerNavigation).WithMany(p => p.ZajeciaGrupowes)
-                .HasForeignKey(d => d.TrenerIdTrener)
+        modelBuilder.Entity<TrainerCourse>(entity =>
+        {
+            entity.HasKey(e => e.IdCourse).HasName("Trainer_Course_pk");
+
+            entity.ToTable("Trainer_Course");
+
+            entity.Property(e => e.IdCourse).HasColumnName("id_course");
+            entity.Property(e => e.CourseName)
+                .IsUnicode(false)
+                .HasColumnName("course_name");
+            entity.Property(e => e.Description)
+                .IsUnicode(false)
+                .HasColumnName("description");
+            entity.Property(e => e.Duration)
+                .IsUnicode(false)
+                .HasColumnName("duration");
+            entity.Property(e => e.IdCoach).HasColumnName("id_coach");
+
+            entity.HasOne(d => d.IdCoachNavigation).WithMany(p => p.TrainerCourses)
+                .HasForeignKey(d => d.IdCoach)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Zajecia_Grupowe_Trener");
+                .HasConstraintName("Kurs_Trenera_Trener");
+        });
+
+        modelBuilder.Entity<TrainingPlan>(entity =>
+        {
+            entity.HasKey(e => e.IdTrainingPlan).HasName("Training_plan_pk");
+
+            entity.ToTable("Training_plan");
+
+            entity.Property(e => e.IdTrainingPlan).HasColumnName("id_training_plan");
+            entity.Property(e => e.TrainingPlanFile).HasColumnName("training_plan_file");
+            entity.Property(e => e.TrainingPlanName)
+                .IsUnicode(false)
+                .HasColumnName("training_plan_name");
+        });
+
+        modelBuilder.Entity<TypePass>(entity =>
+        {
+            entity.HasKey(e => e.IdTypePass).HasName("Type_pass_pk");
+
+            entity.ToTable("Type_pass");
+
+            entity.Property(e => e.IdTypePass).HasColumnName("id_type_pass");
+            entity.Property(e => e.Description)
+                .IsUnicode(false)
+                .HasColumnName("description");
+            entity.Property(e => e.DurationPass).HasColumnName("duration_pass");
+            entity.Property(e => e.GymPassName)
+                .IsUnicode(false)
+                .HasColumnName("gym_pass_name");
+            entity.Property(e => e.Price).HasColumnName("price");
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.IdUser).HasName("User_pk");
+
+            entity.ToTable("User");
+
+            entity.Property(e => e.IdUser)
+                .ValueGeneratedNever()
+                .HasColumnName("id_user");
+            entity.Property(e => e.Email)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("email");
+            entity.Property(e => e.IdRole).HasColumnName("id_role");
+            entity.Property(e => e.Password)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("password");
+
+            entity.HasOne(d => d.IdRoleNavigation).WithMany(p => p.Users)
+                .HasForeignKey(d => d.IdRole)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Uzytkownik_Rola");
+
+            entity.HasOne(d => d.IdUserNavigation).WithOne(p => p.User)
+                .HasForeignKey<User>(d => d.IdUser)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Uzytkownik_Osoba");
+        });
+
+        modelBuilder.Entity<UserEbook>(entity =>
+        {
+            entity.HasKey(e => e.IdUserEbook).HasName("User_ebook_pk");
+
+            entity.ToTable("User_ebook");
+
+            entity.Property(e => e.IdUserEbook).HasColumnName("id_user_ebook");
+            entity.Property(e => e.IdEbook).HasColumnName("id_ebook");
+            entity.Property(e => e.IdUser).HasColumnName("id_user");
+
+            entity.HasOne(d => d.IdEbookNavigation).WithMany(p => p.UserEbooks)
+                .HasForeignKey(d => d.IdEbook)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Uzytkownik_Jadlospis_Jadlospis");
+
+            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.UserEbooks)
+                .HasForeignKey(d => d.IdUser)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Uzytkownik_Jadlospis_Uzytkownik");
+        });
+
+        modelBuilder.Entity<UserPass>(entity =>
+        {
+            entity.HasKey(e => e.IdPass).HasName("User_pass_pk");
+
+            entity.ToTable("User_pass");
+
+            entity.Property(e => e.IdPass).HasColumnName("id_pass");
+            entity.Property(e => e.DateEnd).HasColumnName("date_end");
+            entity.Property(e => e.DateStart).HasColumnName("date_start");
+            entity.Property(e => e.IdStatus).HasColumnName("id_status");
+            entity.Property(e => e.IdTypePass).HasColumnName("id_type_pass");
+            entity.Property(e => e.IdUser).HasColumnName("id_user");
+
+            entity.HasOne(d => d.IdStatusNavigation).WithMany(p => p.UserPasses)
+                .HasForeignKey(d => d.IdStatus)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("User_pass_Pass_status");
+
+            entity.HasOne(d => d.IdTypePassNavigation).WithMany(p => p.UserPasses)
+                .HasForeignKey(d => d.IdTypePass)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Karnet_Typ_Karnetu");
+
+            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.UserPasses)
+                .HasForeignKey(d => d.IdUser)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Karnet_Uzytkownik");
+        });
+
+        modelBuilder.Entity<UserTrainingPlan>(entity =>
+        {
+            entity.HasKey(e => e.IdUserTrainingPlan).HasName("User_training_plan_pk");
+
+            entity.ToTable("User_training_plan");
+
+            entity.Property(e => e.IdUserTrainingPlan).HasColumnName("id_user_training_plan");
+            entity.Property(e => e.IdTrainingPlan).HasColumnName("id_training_plan");
+            entity.Property(e => e.IdUser).HasColumnName("id_user");
+
+            entity.HasOne(d => d.IdTrainingPlanNavigation).WithMany(p => p.UserTrainingPlans)
+                .HasForeignKey(d => d.IdTrainingPlan)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Plan_treningowy_Uzytkownik_Plan_treningowy");
+
+            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.UserTrainingPlans)
+                .HasForeignKey(d => d.IdUser)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Plan_treningowy_Uzytkownik_Uzytkownik");
         });
 
         OnModelCreatingPartial(modelBuilder);

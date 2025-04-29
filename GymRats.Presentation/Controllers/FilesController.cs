@@ -7,7 +7,6 @@ public class FilesController : ControllerBase
     private readonly IConfiguration _configuration;
     private readonly ILogger<FilesController> _logger;
     private const string PdfMimeType = "application/pdf";
-    private const string ExcelMimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
     public FilesController(IConfiguration configuration, ILogger<FilesController> logger)
     {
@@ -50,16 +49,16 @@ public class FilesController : ControllerBase
         var connectionString = _configuration.GetConnectionString("MyDBConnection");
         
         const string query = @"
-            SELECT rodzaj_diety, zawartosc_jadlospisu, kalorycznosc 
-            FROM Jadlospis 
-            WHERE rodzaj_diety = @type AND kalorycznosc = @kalorycznosc";
+            SELECT *
+            FROM Food_ebook
+            WHERE diet_type = @diet_type AND calories = @calories";
 
         await using var connection = new SqlConnection(connectionString);
         await connection.OpenAsync(cancellationToken);
 
         await using var command = new SqlCommand(query, connection);
-        command.Parameters.AddWithValue("@type", type);
-        command.Parameters.AddWithValue("@kalorycznosc", calorie);
+        command.Parameters.AddWithValue("@diet_type", type);
+        command.Parameters.AddWithValue("@calories", calorie);
 
         await using var reader = await command.ExecuteReaderAsync(cancellationToken);
         
@@ -69,8 +68,8 @@ public class FilesController : ControllerBase
             return NotFound();
         }
 
-        var fileData = (byte[])reader["zawartosc_jadlospisu"];
-        var dietType = $"{reader["rodzaj_diety"]}_{reader["kalorycznosc"]}";
+        var fileData = (byte[])reader["ebook_file"];
+        var dietType = $"{reader["diet_type"]}_{reader["calories"]}";
 
         return File(fileData, PdfMimeType, dietType);
     }
@@ -80,9 +79,9 @@ public class FilesController : ControllerBase
         var connectionString = _configuration.GetConnectionString("MyDBConnection");
         
         const string query = @"
-            SELECT nazwa_planu, zawartosc_planu_treningowego 
-            FROM Plan_treningowy 
-            WHERE id_plan_treningowy = @id";
+            SELECT * 
+            FROM Training_Plan 
+            WHERE id_training_plan = @id";
 
         await using var connection = new SqlConnection(connectionString);
         await connection.OpenAsync(cancellationToken);
@@ -98,8 +97,8 @@ public class FilesController : ControllerBase
             return NotFound();
         }
 
-        var fileData = (byte[])reader["zawartosc_planu_treningowego"];
-        var fileName = reader["nazwa_planu"].ToString();
+        var fileData = (byte[])reader["training_plan_file"];
+        var fileName = reader["training_plan_name"].ToString();
 
         return File(fileData, PdfMimeType, fileName);
     }

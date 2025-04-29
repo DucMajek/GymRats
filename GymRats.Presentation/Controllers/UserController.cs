@@ -100,7 +100,7 @@ namespace GymRats.Presentation.Controllers
         }
 
         [HttpGet("personal-data/{email}")]
-        public async Task<ActionResult<Osoba>> GetUserPersonalData(
+        public async Task<ActionResult<Person>> GetUserPersonalData(
             [FromRoute] string email,
             CancellationToken cancellationToken = default)
         {
@@ -119,6 +119,44 @@ namespace GymRats.Presentation.Controllers
                 }
 
                 return Ok(personalData);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                _logger.LogWarning(ex, "User not found for email: {Email}", email);
+                return NotFound(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                _logger.LogWarning(ex, "Invalid operation for email: {Email}", email);
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving personal data for email: {Email}", email);
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "An error occurred while processing your request");
+            }
+        }
+
+        [HttpPut("buyGymPass/{gymPassId}/{email}/{startDate}")]
+        public async Task<ActionResult<UserPass>> BuyGymPass(int gymPassId, string email, DateOnly startDate,
+            CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(email))
+                {
+                    return BadRequest("Email is required");
+                }
+
+                var AddGymPass = await _userService.BuyGymPass(gymPassId, email, startDate, cancellationToken);
+
+                if (!AddGymPass)
+                {
+                    return NotFound($"Cannot add gym pass for: {email}");
+                }
+
+                return Ok(AddGymPass);
             }
             catch (KeyNotFoundException ex)
             {

@@ -6,6 +6,6 @@ namespace GymRats.Business.Interfaces;
 
 public interface IGymPassServices
 {
-    Task<Karnet?> UserGymPass(int userId, CancellationToken cancellationToken = default);
-    Task<IReadOnlyList<TypKarnetu>> AvailableGymPass(CancellationToken cancellationToken = default);
+    Task<UserPass?> UserGymPass(string email, CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<TypePass>> AvailableGymPass(CancellationToken cancellationToken = default);
 }

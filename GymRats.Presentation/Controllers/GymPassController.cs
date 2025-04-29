@@ -19,7 +19,7 @@ namespace GymRats.Presentation.Controllers
         }
 
         [HttpGet("/categories")]
-        public async Task<ActionResult<IReadOnlyList<TypKarnetu>>> GetGymPassCategories(CancellationToken cancellationToken = default)
+        public async Task<ActionResult<IReadOnlyList<TypePass>>> GetGymPassCategories(CancellationToken cancellationToken = default)
         {
             try
             {
@@ -39,23 +39,23 @@ namespace GymRats.Presentation.Controllers
             }
         }
         
-        [HttpGet("/membership/{userId}")]
-        public async Task<ActionResult<GymPassResponse>> GetUserGymPass(int userId, CancellationToken cancellationToken = default)
+        [HttpGet("/membership/{userEmail}")]
+        public async Task<ActionResult<GymPassResponse>> GetUserGymPass(string email, CancellationToken cancellationToken = default)
         {
             try
             {
-                var gymPass = await _gymPassServices.UserGymPass(userId, cancellationToken);
+                var gymPass = await _gymPassServices.UserGymPass(email, cancellationToken);
                 
                 if (gymPass == null)
                 {
-                    return NotFound($"Gym pass not found for user {userId}");
+                    return NotFound($"Gym pass not found for Email {email}");
                 }
 
                 return Ok(gymPass);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error while retrieving gym pass for user {UserId}", userId);
+                _logger.LogError(ex, "Error while retrieving gym pass for Email {Email}", email);
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request");
             }
         }

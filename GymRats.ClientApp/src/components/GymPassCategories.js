@@ -28,10 +28,10 @@ function GymPassCategories() {
                 {Array.isArray(gymPassCategory) && gymPassCategory.map((item) => (
                     <div className="price__card" key={item.id || item.name || Math.random()}>
                         <div className="price__card__content">
-                            <h4><center>{item.nazwa}</center></h4>
-                            <h3><center>{item.cena} PLN</center></h3>
+                            <h4><center>{item.gymPassName}</center></h4>
+                            <h3><center>{item.price} PLN</center></h3>
                             <p>
-                                {item.opis.split('\n').map((line, index) => (
+                                {item.description.split('\n').map((line, index) => (
                                     <React.Fragment key={`${item.id || item.name}-line-${index}`}>
                                         <i className="ri-checkbox-circle-line"></i>
                                         {line}
