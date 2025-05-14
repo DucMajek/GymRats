@@ -1,11 +1,8 @@
-﻿using Business.Interfaces;
-using GymRats.Business.Interfaces;
+﻿using GymRats.Business.Interfaces;
 using GymRats.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
-using GymRats.Data.Entities;
 using GymRats.Presentation.DTOs;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Logging;
 
 namespace GymRats.Presentation.Controllers
 {
@@ -22,10 +19,11 @@ namespace GymRats.Presentation.Controllers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
+        [Authorize]
         [AllowAnonymous]
         [HttpPost("/login")]
         public async Task<ActionResult<LoginResponse>> UserLogin(
-            [FromBody] LoginRequest login,
+            LoginRequest login,
             CancellationToken cancellationToken = default)
         {
             try
@@ -36,7 +34,7 @@ namespace GymRats.Presentation.Controllers
                     return BadRequest(ModelState);
                 }
 
-                var (success, token, user) = await _userService.LoginAsync(login.Email, 
+                var (success, token, user) = await _userService.LoginAsync(login.Email,
                     login.Password, cancellationToken);
 
                 if (!success)
@@ -56,7 +54,7 @@ namespace GymRats.Presentation.Controllers
                 Response.Cookies.Append("jwt", token, cookieOptions);
 
                 _logger.LogInformation("Successful login for {Email}", login.Email);
-                return Ok(new LoginResponse {Success = true, Token = token, Message = "Login successful"});
+                return Ok(new LoginResponse { Success = true, Token = token, Message = "Login successful" });
             }
             catch (Exception ex)
             {
@@ -67,7 +65,7 @@ namespace GymRats.Presentation.Controllers
 
         [HttpPost("/register")]
         public async Task<ActionResult<RegisterUserResponse>> Register(
-            [FromBody] RegisterUserRequest newUser,
+            RegisterUserRequest newUser,
             CancellationToken cancellationToken = default)
         {
             try
@@ -99,7 +97,7 @@ namespace GymRats.Presentation.Controllers
             }
         }
 
-        [HttpGet("personal-data/{email}")]
+        [HttpGet("user/personal-data/{email}")]
         public async Task<ActionResult<Person>> GetUserPersonalData(
             [FromRoute] string email,
             CancellationToken cancellationToken = default)
@@ -138,8 +136,8 @@ namespace GymRats.Presentation.Controllers
             }
         }
 
-        [HttpPut("buyGymPass/{gymPassId}/{email}/{startDate}")]
-        public async Task<ActionResult<UserPass>> BuyGymPass(int gymPassId, string email, DateOnly startDate,
+        [HttpPost("buyGymPass/{gymPassId}/{email}")]
+        public async Task<ActionResult<UserPass>> BuyGymPass(int gymPassId, string email,
             CancellationToken cancellationToken = default)
         {
             try
@@ -149,31 +147,91 @@ namespace GymRats.Presentation.Controllers
                     return BadRequest("Email is required");
                 }
 
-                var AddGymPass = await _userService.BuyGymPass(gymPassId, email, startDate, cancellationToken);
+                var addGymPass = await _userService.BuyGymPass(gymPassId, email, cancellationToken);
 
-                if (!AddGymPass)
+                if (!addGymPass)
                 {
                     return NotFound($"Cannot add gym pass for: {email}");
                 }
 
-                return Ok(AddGymPass);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                _logger.LogWarning(ex, "User not found for email: {Email}", email);
-                return NotFound(ex.Message);
-            }
-            catch (InvalidOperationException ex)
-            {
-                _logger.LogWarning(ex, "Invalid operation for email: {Email}", email);
-                return BadRequest(ex.Message);
+                return Ok(addGymPass);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error retrieving personal data for email: {Email}", email);
+                _logger.LogError(ex, "Error adding data for email: {Email}", email);
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     "An error occurred while processing your request");
             }
+        }
+
+        [HttpGet("user/membership/{email}")]
+        public async Task<ActionResult<UserPass>> GetUserPass(string email,
+            CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var gymPass = await _userService.UserPassData(email, cancellationToken);
+
+                if (gymPass is null)
+                {
+                    return NotFound($"Cannot find gym pass for: {email}");
+                }
+
+                return Ok(gymPass);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving pass data for email: {Email}", email);
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "An error occurred while processing your request");
+            }
+        }
+
+        [HttpGet("user/groupClasses")]
+        public async Task<ActionResult<List<GroupClass>>> GetGroupClasses()
+        {
+            var groupClasses = await _userService.GetGroupClasses();
+
+            if (!groupClasses.Any())
+            {
+                return NotFound("No group classes found");
+            }
+
+            return Ok(groupClasses);
+        }
+
+        [HttpPost("user/signInToGroup/{email}/{groupId}")]
+        public async Task<ActionResult<ParticipationInClass>> SignInToGroup(string email, int groupId,
+            CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var signInToGroup = await _userService.SignUpForGroup(groupId, email, cancellationToken);
+                if (signInToGroup == null)
+                {
+                    return NotFound($"User is already sign up for group {groupId}");
+                }
+
+                return Ok(signInToGroup);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error user is already sign up to the group {Group}", groupId);
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "An error occurred while processing your request");
+            }
+        }
+        
+        [HttpGet("user/participationInClass/{email}")]
+        public async Task<ActionResult<List<ParticipationInClass>>> GetParticipationInClasses(string email,
+            CancellationToken cancellationToken = default)
+        {
+            var participationInClasses = await _userService.GetParticipationInClasses(email, cancellationToken);
+            if (!participationInClasses.Any())
+            {
+                return NotFound("No participation in classes found");
+            }
+            return Ok(participationInClasses);
         }
     }
 }

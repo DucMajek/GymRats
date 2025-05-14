@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace GymRats.Data.Entities;
-
 public partial class GymRatsContext : DbContext
 {
     public GymRatsContext()

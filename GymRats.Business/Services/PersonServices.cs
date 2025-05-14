@@ -1,6 +1,6 @@
-using Business.Interfaces;
-using GymRats.Data.Entities;
+using GymRats.Business.Interfaces;
 using GymRats.Data.Repositories;
+using GymRats.Data.Entities;
 using Microsoft.Extensions.Logging;
 
 namespace GymRats.Business.Services;

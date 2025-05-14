@@ -1,4 +1,4 @@
-using Business.Interfaces;
+using GymRats.Business.Interfaces;
 using GymRats.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 

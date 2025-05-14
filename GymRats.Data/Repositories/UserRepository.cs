@@ -1,6 +1,5 @@
-﻿using GymRats.Data;
+﻿using GymRats.Data.Entities;
 using GymRats.Data.Interfaces;
-using GymRats.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -121,7 +120,7 @@ namespace GymRats.Data.Repositories
             }
         }
 
-        public async Task<string> GetHashedPasswordAsync(string email, CancellationToken cancellationToken = default)
+        public async Task<string?> GetHashedPasswordAsync(string email, CancellationToken cancellationToken = default)
         {
             try
             {
@@ -140,18 +139,17 @@ namespace GymRats.Data.Repositories
             }
         }
 
-        public async Task<User> GetUser(string email, CancellationToken cancellationToken = default)
+        public async Task<User?> GetUser(string email, CancellationToken cancellationToken = default)
         {
             var user = await _context.Users
                 .AsNoTracking()
                 .Where(e => e.Email == email)
-                .FirstOrDefaultAsync();
-            ;
+                .FirstAsync();
 
             return user;
         }
 
-        public async Task<bool> AddNewBoughtGymPass(int idPass, string email, DateOnly startDate, 
+        public async Task<bool> AddNewBoughtGymPass(int idPass, string email,
             CancellationToken cancellationToken = default)
         {
             await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
@@ -162,17 +160,17 @@ namespace GymRats.Data.Repositories
                     .Where(e => e.IdTypePass == idPass)
                     .Select(e => e.DurationPass)
                     .FirstOrDefaultAsync();
-                
+
                 var userId = await _context.Users
                     .AsNoTracking()
                     .Where(e => e.Email == email)
                     .Select(e => e.IdUser)
                     .FirstOrDefaultAsync();
-                
+
                 var newGymPass = new UserPass()
                 {
-                    DateStart = startDate,
-                    DateEnd = startDate.AddDays(gymPassDuration),
+                    DateStart = DateOnly.FromDateTime(DateTime.Now),
+                    DateEnd = DateOnly.FromDateTime(DateTime.Now).AddDays(gymPassDuration),
                     IdTypePass = idPass,
                     IdUser = userId,
                     IdStatus = 1,
@@ -190,6 +188,120 @@ namespace GymRats.Data.Repositories
                 _logger.LogError(ex, "Error buying pass {Email}", idPass);
                 return false;
             }
+        }
+
+        public async Task<UserPass?> GetUserPass(string email, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var user = GetUser(email, cancellationToken);
+
+                return await _context.UserPasses
+                    .AsNoTracking()
+                    .Where(e => e.IdUser == user.Id)
+                    .Include(p => p.IdTypePassNavigation)
+                    .Include(p => p.IdStatusNavigation)
+                    .FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting user pass {Email}", email);
+                return null;
+            }
+        }
+
+        public async Task<List<GroupClass>> GetGroupClasses()
+        {
+            return await _context.GroupClasses
+                .AsNoTracking()
+                .Select(e => new GroupClass()
+                {
+                    IdGroup = e.IdGroup,
+                    ClassType = e.ClassType,
+                    StartDate = e.StartDate,
+                    GroupSize = e.GroupSize,
+                    IdCoach = e.IdCoach,
+                    IdCoachNavigation = e.IdCoachNavigation,
+                }).ToListAsync();
+        }
+
+        public async Task<bool> UserIsAlreadyInGroup(int groupId, string email,
+            CancellationToken cancellationToken = default)
+        {
+            var user = await GetUser(email, cancellationToken);
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            var userIsSignedUp = await _context.ParticipationInClasses
+                .AsNoTracking()
+                .Where(e => e.IdUser == user.IdUser)
+                .AnyAsync(e => e.IdGroup == groupId, cancellationToken);
+
+            return userIsSignedUp;
+        }
+
+        public async Task<ParticipationInClass> SignUpForGroup(int groupId, string email, CancellationToken cancellationToken = default)
+        {
+            await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+
+            try
+            {
+                var user = await GetUser(email, cancellationToken);
+                var getGroupName = await _context.GroupClasses
+                    .AsNoTracking()
+                    .Where(e => e.IdGroup == groupId)
+                    .Select(e => e.ClassType)
+                    .FirstOrDefaultAsync();
+
+                if (user == null)
+                {
+                    throw new Exception("User not found");
+                }
+
+                var signUpForGroup = new ParticipationInClass()
+                {
+                    IdGroup = groupId,
+                    IdUser = user.IdUser,
+                };
+
+                await _context.ParticipationInClasses.AddAsync(signUpForGroup, cancellationToken);
+                await _context.SaveChangesAsync(cancellationToken);
+
+                await transaction.CommitAsync(cancellationToken);
+
+                _logger.LogInformation("Successfully sign in to the group {Group}", getGroupName);
+                return signUpForGroup;
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync(cancellationToken);
+                _logger.LogError(ex, "Error in saving user to the group {Group}", groupId);
+                throw;
+            }
+        }
+
+        public async Task<List<ParticipationInClass>> GetUserParticipationInClass(string email,
+            CancellationToken cancellationToken = default)
+        {
+            var user = await GetUser(email, cancellationToken);
+            if (user == null)
+            {
+                throw new Exception("User is not found");
+            }
+
+            var useGroupActivities = await _context.ParticipationInClasses
+                .AsNoTracking()
+                .Where(e => e.IdUser == user.IdUser)
+                .Include(p => p.IdGroupNavigation)
+                .ToListAsync();
+            if (useGroupActivities == null)
+            {
+                throw new Exception("User is not registered for any activities");
+            }
+
+            return useGroupActivities;
         }
     }
 }

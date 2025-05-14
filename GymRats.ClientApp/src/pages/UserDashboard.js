@@ -12,9 +12,6 @@ function UserDashboard() {
       <div className="content-wrapper">
         <Sidebar />
         <main className="main-content">
-          <div className='blog' >
-            <h2>Blog</h2>
-          </div>
         </main>
       </div>
     </div>

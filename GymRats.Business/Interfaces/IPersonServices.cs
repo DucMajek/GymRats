@@ -1,6 +1,6 @@
 using GymRats.Data.Entities;
 
-namespace Business.Interfaces;
+namespace GymRats.Business.Interfaces;
 
 public interface IPersonServices
 {
