@@ -28,7 +28,7 @@ function UserProfile() {
         setEmail(decodedPayload.email);
 
         const response = await axios.get(
-          `https://localhost:44380/personal-data/${decodedPayload.email}`,
+          `https://localhost:44380/user/personal-data/${decodedPayload.email}`,
           { withCredentials: true }
         );
         setPersonalData(response.data);

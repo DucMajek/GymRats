@@ -1,6 +1,5 @@
 ﻿using GymRats.Business.Interfaces;
 using GymRats.Data.Entities;
-using GymRats.Presentation.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymRats.Presentation.Controllers
@@ -35,27 +34,6 @@ namespace GymRats.Presentation.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error while retrieving gym pass categories");
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request");
-            }
-        }
-        
-        [HttpGet("/membership/{userEmail}")]
-        public async Task<ActionResult<GymPassResponse>> GetUserGymPass(string email, CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                var gymPass = await _gymPassServices.UserGymPass(email, cancellationToken);
-                
-                if (gymPass == null)
-                {
-                    return NotFound($"Gym pass not found for Email {email}");
-                }
-
-                return Ok(gymPass);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error while retrieving gym pass for Email {Email}", email);
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request");
             }
         }

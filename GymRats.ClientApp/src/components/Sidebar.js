@@ -1,92 +1,99 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   CDBSidebar,
-  CDBSidebarContent,
   CDBSidebarHeader,
+  CDBSidebarContent,
   CDBSidebarMenu,
   CDBSidebarMenuItem,
   CDBSidebarFooter
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
+import '../assets/styles/Sidebar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState, useEffect } from 'react';
 import axios from 'axios';
-function Sidebar() {
+
+export default function Sidebar() {
   const [personalData, setPersonalData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError]        = useState(null);
+  const [open, setOpen]         = useState(false);
+
 
   useEffect(() => {
-    const getUserPersonalData = async () => {
+    (async () => {
       const token = localStorage.getItem('token');
       if (!token) {
         setError('Brak tokena');
-        setIsLoading(false);
         return;
       }
-
       try {
-        const decodedPayload = JSON.parse(atob(token.split('.')[1]));
-        const response = await axios.get(
-          `https://localhost:44380/personal-data/${decodedPayload.email}`,
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        const email = payload.email;
+        const res = await axios.get(
+          `https://localhost:44380/user/personal-data/${encodeURIComponent(email)}`,
           { withCredentials: true }
         );
-        setPersonalData(response.data);
+        setPersonalData(res.data);
       } catch (err) {
-        setError(err.message);
-      } finally {
-        setIsLoading(false);
+        if (err.response?.status === 404) {
+          setError('Dane osobowe nie znalezione.');
+        } else {
+          setError('Coś poszło nie tak: ' + err.message);
+        }
       }
-    };
-
-    getUserPersonalData();
+    })();
   }, []);
-  return (
-    <div style={{ display: 'flex', height: '100%', overflow: 'scroll initial' }}>
-      <CDBSidebar style={{
-        backgroundColor: "#111317",
-        color: "white",
-        width: '120px',
-        height: '100%'
-      }} >
-        <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>} style={{ color: 'inherit' }} >
-          {/* <Link to="/dashboard" className="text-decoration-none" style={{ color: 'inherit'}} >
-            Imie Nazwisko
-          </Link> */}
-          {personalData && (
-                  <div>
-                    <p className="mb-1">{personalData.name} {personalData.surname}</p>
-                  </div>
-                )}
-        </CDBSidebarHeader>
 
-        <CDBSidebarContent className="sidebar-content" >
-          <CDBSidebarMenu >
-            <NavLink exact to="/user-profile" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Moje konto</CDBSidebarMenuItem>
+  return (
+    <>
+      {/* Mobile hamburger */}
+      <button
+        className="sidebar-toggle"
+        onClick={() => setOpen(o => !o)}
+      >
+        <i className="fa fa-bars" />
+      </button>
+
+      {/* Sidebar full-screen on mobile, fixed on desktop */}
+      <div className={`sidebar-wrapper${open ? ' open' : ''}`}>
+        <CDBSidebar className="app-sidebar">
+          <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>
+            {error 
+              ? <span className="text-danger">{error}</span>
+              : personalData 
+                ? `${personalData.name} ${personalData.surname}`
+                : null}
+          </CDBSidebarHeader>
+
+          <CDBSidebarContent>
+            <CDBSidebarMenu>
+              <NavLink exact to="/user-profile">
+                <CDBSidebarMenuItem icon="user">Moje konto</CDBSidebarMenuItem>
+              </NavLink>
+              <NavLink exact to="/gym-pass">
+                <CDBSidebarMenuItem icon="ticket-alt">Karnety</CDBSidebarMenuItem>
+              </NavLink>
+              <NavLink exact to="/diets">
+                <CDBSidebarMenuItem icon="carrot">Diety</CDBSidebarMenuItem>
+              </NavLink>
+              <NavLink exact to="/training-plans">
+                <CDBSidebarMenuItem icon="clipboard-list">Plany treningowe</CDBSidebarMenuItem>
+              </NavLink>
+              <NavLink exact to="/courses">
+                <CDBSidebarMenuItem icon="graduation-cap">Kursy</CDBSidebarMenuItem>
+              </NavLink>
+              <NavLink exact to="/Groupclass">
+                <CDBSidebarMenuItem icon="calendar-alt">Groupclass</CDBSidebarMenuItem>
+              </NavLink>
+            </CDBSidebarMenu>
+          </CDBSidebarContent>
+
+          <CDBSidebarFooter className="app-sidebar-footer">
+            <NavLink exact to="/" reloadDocument>
+              <CDBSidebarMenuItem icon="door-open">Wyloguj się</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/gym-pass" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="ticket-alt">Karnety</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/diets" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="carrot">Diety</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/training-plans" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="clipboard-list">Plany treningowe</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/courses" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="graduation-cap">Kursy</CDBSidebarMenuItem>
-            </NavLink>
-          </CDBSidebarMenu>
-        </CDBSidebarContent>
-        <CDBSidebarFooter style={{ textAlign: 'center' }}>
-          <NavLink exact to="/" activeClassName="activeClicked" reloadDocument>
-            <CDBSidebarMenuItem icon="fa-solid fa-door-open" style={{ color: "white" }}>Wyloguj się</CDBSidebarMenuItem>
-          </NavLink>
-        </CDBSidebarFooter>
-      </CDBSidebar>
-    </div>
+          </CDBSidebarFooter>
+        </CDBSidebar>
+      </div>
+    </>
   );
 }
-
-export default Sidebar;

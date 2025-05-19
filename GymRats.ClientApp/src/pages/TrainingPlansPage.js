@@ -20,16 +20,6 @@ function TrainingPlanPage() {
             <TraningPlan title="Dla narciarza" id={3} />
             <TraningPlan title="Dla pływaka" id={4} />
           </div>
-
-          {/* prawa kolumna */}
-          <div className="right-side">
-            <h2>Indywidualny plan treningowy</h2>
-            {/* przycisk */}
-            <div className="circle-plus">+</div>
-            <p>
-              opis
-            </p>
-          </div>
         </div>
       </div>
     </div>

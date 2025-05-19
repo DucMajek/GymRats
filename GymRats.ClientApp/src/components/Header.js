@@ -1,39 +1,19 @@
+// src/components/Header.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import gymRatsLogo from '../assets/img/GymRats_Logo.png'
-
+import gymRatsLogo from '../assets/img/GymRats_Logo.png';
+import '../assets/styles/Header.css'; // Import your CSS file for styling
 
 function Header() {
   return (
-    <header className="dashboard-header" style={{
-      width: '100%',
-      height: '64px',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: '0 20px',
-      boxSizing: 'border-box'
-    }}>
-      <a href='/' className="logo" style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100%',
-        width: '100%',
-        maxWidth: '1448px'
-      }}>
+    <header className="dashboard-header">
+      <Link to="/" className="logo">
         <img
           src={gymRatsLogo}
-          alt="gymRatsLogo"
-          style={{
-            maxWidth: '90%',
-            height: 'auto',
-            maxHeight: '50px',
-            objectFit: 'contain'
-          }}
+          alt="GymRats Logo"
           className="gymRatsLogo"
         />
-      </a>
+      </Link>
     </header>
   );
 }

@@ -27,7 +27,7 @@ function Login() {
                 })
                 .catch(err => { console.log(err); });
         } else if (action === "Stwórz konto") {
-            axios.post(`https://localhost:44380/register?Email=${email}&Password=${password}&Imie=${name}&Nazwisko=${surname}`, { email, password, name, surname })
+            axios.post(`https://localhost:44380/register?Email=${email}&Password=${password}&Name=${name}&Surname=${surname}`, { email, password, name, surname })
                 .then(result => {
                     if (result.status === 200) {
                     }

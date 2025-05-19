@@ -1,8 +1,6 @@
-﻿using Business.Interfaces;
-using GymRats.Business.Interfaces;
+﻿using GymRats.Business.Interfaces;
 using GymRats.Data.Entities;
 using GymRats.Data.Interfaces;
-using GymRats.Data.Repositories;
 using Microsoft.Extensions.Logging;
 
 namespace GymRats.Business.Services;
@@ -40,7 +38,6 @@ public class UserServices : IUserServices
                 return (false, null, null);
             }
 
-            // 2. Pobierz hasło i zweryfikuj
             var userHashedPassword = await _userRepository.GetHashedPasswordAsync(email);
             if (string.IsNullOrEmpty(userHashedPassword))
             {
@@ -62,7 +59,7 @@ public class UserServices : IUserServices
                 return (false, null, null);
             }
 
-            var token = _tokenGenerator.GenerateToken(email);
+            var token = _tokenGenerator.GenerateToken(user);
 
             _logger.LogInformation("Successful login: {Email}", email);
             return (true, token, user);
@@ -113,9 +110,60 @@ public class UserServices : IUserServices
         }
     }
 
-    public async Task<bool> BuyGymPass(int gymPassId, string email, DateOnly startDate,
+    public async Task<bool> BuyGymPass(int gymPassId, string email,
         CancellationToken cancellationToken = default)
     {
-        return await _userRepository.AddNewBoughtGymPass(gymPassId, email, startDate, cancellationToken);
+        try
+        {
+            return await _userRepository.AddNewBoughtGymPass(gymPassId, email, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error while buying pass {UserId}", email);
+            return false;
+        }
+    }
+
+    public async Task<UserPass?> UserPassData(string email, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            return await _userRepository.GetUserPass(email, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error fetching pass data {UserId}", email);
+            return null;
+        }
+    }
+
+    public async Task<List<GroupClass>> GetGroupClasses()
+    {
+        return await _userRepository.GetGroupClasses();
+    }
+
+    public async Task<ParticipationInClass?> SignUpForGroup(int groupId, string email,
+        CancellationToken cancellationToken = default)
+    {
+        var userIsInGroupList = await _userRepository.UserIsAlreadyInGroup(groupId, email, cancellationToken);
+        if (!userIsInGroupList)
+        {
+            var signUp = await _userRepository.SignUpForGroup(groupId, email, cancellationToken);
+            var user = await _userRepository.GetUser(email, cancellationToken);
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            return signUp;
+        }
+
+        return null;
+    }
+
+    public async Task<List<ParticipationInClass>> GetParticipationInClasses(string email,
+        CancellationToken cancellationToken = default)
+    {
+        return await _userRepository.GetUserParticipationInClass(email, cancellationToken);
     }
 }

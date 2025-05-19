@@ -14,6 +14,7 @@ import LoginPage from "./pages/LoginPage";
 import { AuthProvider } from './components/AuthContext';
 import UserDashboard from './pages/UserDashboard';
 import UserProfile from './pages/UserProfile';
+import GroupClassPage from './pages/GroupClassPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <div className="app">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/Groupclass" element={<GroupClassPage />} />
             <Route exact="true" path="/login" element={<LoginPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<UserDashboard />} />

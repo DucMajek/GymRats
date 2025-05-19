@@ -3,15 +3,16 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using GymRats.Data.Entities;
 
 public interface ITokenGenerator
 {
-    public string GenerateToken(string login);
+    public string GenerateToken(User user);
 }
 
 public class TokenGenerator : ITokenGenerator
 {
-    public string GenerateToken(string email)
+    public string GenerateToken(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.UTF8.GetBytes("ForTheGymBrothersWhoLostHisLoveCuzSheCheatedOfHim");
@@ -19,7 +20,8 @@ public class TokenGenerator : ITokenGenerator
         var claims = new List<Claim>
         {
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new(JwtRegisteredClaimNames.Email, email)
+            new(JwtRegisteredClaimNames.Email, user.Email),
+            new("roleId", user.IdRole.ToString())
         };
 
         var tokenDescriptor = new SecurityTokenDescriptor
