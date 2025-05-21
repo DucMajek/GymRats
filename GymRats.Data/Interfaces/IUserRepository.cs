@@ -6,7 +6,10 @@ public interface IUserRepository
 {
     Task<bool> UserExistsAsync(string email, CancellationToken cancellationToken = default);
     Task<bool> EmailExistsAsync(string email, CancellationToken cancellationToken = default);
+
     Task<User> AddNewUserAsync(string email, string password, string name, string surname,
+        DateOnly birthday, string phoneNumber, string gender, string address, string flatNumber, string zipCode,
+        string place,
         CancellationToken cancellationToken = default);
 
     Task<Person?> GetUserPersonalDataAsync(string email, 
@@ -24,4 +27,6 @@ public interface IUserRepository
     Task<ParticipationInClass> SignUpForGroup(int groupId, string email, CancellationToken cancellationToken = default);
     Task<bool> UserIsAlreadyInGroup(int groupId, string email, CancellationToken cancellationToken = default);
     Task<List<ParticipationInClass>> GetUserParticipationInClass(string email, CancellationToken cancellationToken = default);
+    Task<bool> ChangePassword(string newPassword, string email, CancellationToken cancellationToken = default);
+    Task<bool> PassCancellation(int idUser, CancellationToken cancellationToken = default);
 }

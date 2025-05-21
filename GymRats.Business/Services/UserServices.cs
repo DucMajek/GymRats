@@ -2,6 +2,7 @@
 using GymRats.Data.Entities;
 using GymRats.Data.Interfaces;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace GymRats.Business.Services;
 
@@ -31,6 +32,16 @@ public class UserServices : IUserServices
     {
         try
         {
+            if (email.IsNullOrEmpty())
+            {
+                throw new ArgumentException("Email is required");
+            }
+
+            if (userPassword.IsNullOrEmpty())
+            {
+                throw new ArgumentException("Password is required");
+            }
+
             var userExists = await _userRepository.UserExistsAsync(email, cancellationToken);
             if (!userExists)
             {
@@ -72,6 +83,8 @@ public class UserServices : IUserServices
     }
 
     public async Task<bool> RegisterAsync(string email, string password, string name, string surname,
+        DateOnly birthday, string phoneNumber, string gender, string address, string flatNumber, string zipCode,
+        string place,
         CancellationToken cancellationToken = default)
     {
         try
@@ -84,7 +97,8 @@ public class UserServices : IUserServices
             }
 
             password = _passwordHasher.HashPassword(password);
-            await _userRepository.AddNewUserAsync(email, password, name, surname,
+            await _userRepository.AddNewUserAsync(email, password, name, surname, birthday, phoneNumber, gender,
+                address, flatNumber, zipCode, place,
                 cancellationToken);
 
             _logger.LogInformation("New user registered with email: {Email}", email);
@@ -99,29 +113,13 @@ public class UserServices : IUserServices
 
     public async Task<Person?> UserPersonData(string email, CancellationToken cancellationToken = default)
     {
-        try
-        {
-            return await _userRepository.GetUserPersonalDataAsync(email, cancellationToken);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error while retrieving gym pass for user {UserId}", email);
-            return null;
-        }
+        return await _userRepository.GetUserPersonalDataAsync(email, cancellationToken);
     }
 
     public async Task<bool> BuyGymPass(int gymPassId, string email,
         CancellationToken cancellationToken = default)
     {
-        try
-        {
-            return await _userRepository.AddNewBoughtGymPass(gymPassId, email, cancellationToken);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error while buying pass {UserId}", email);
-            return false;
-        }
+        return await _userRepository.AddNewBoughtGymPass(gymPassId, email, cancellationToken);
     }
 
     public async Task<UserPass?> UserPassData(string email, CancellationToken cancellationToken = default)
@@ -152,7 +150,7 @@ public class UserServices : IUserServices
             var user = await _userRepository.GetUser(email, cancellationToken);
             if (user == null)
             {
-                throw new Exception("User not found");
+                throw new ArgumentException("User not found");
             }
 
             return signUp;
@@ -166,4 +164,35 @@ public class UserServices : IUserServices
     {
         return await _userRepository.GetUserParticipationInClass(email, cancellationToken);
     }
+
+    public async Task<bool> ChangeUserPassword(string email, string oldPassword, string newPassword,
+        CancellationToken cancellationToken = default)
+    {
+        if (oldPassword.IsNullOrEmpty() || newPassword.IsNullOrEmpty())
+        {
+            throw new ArgumentException("Old password or new password is required");
+        }
+
+        var user = await _userRepository.GetUser(email, cancellationToken);
+        var verifyPassword = _passwordHasher.VerifyPassword(oldPassword, user.Password);
+        if (!verifyPassword)
+        {
+            throw new ArgumentException("Password not match");
+        }
+
+        var hashedPassword = _passwordHasher.HashPassword(newPassword);
+
+        var changePassword = await _userRepository.ChangePassword(hashedPassword, email);
+        return changePassword;
+    }
+
+    public async Task<bool> PassCancellation(string email, CancellationToken cancellationToken = default)
+    {
+        var user = await _userRepository.GetUser(email, cancellationToken);
+        if (user == null)
+            return false;
+
+        return await _userRepository.PassCancellation(user.IdUser, cancellationToken);
+    }
+
 }

@@ -23,7 +23,7 @@ namespace GymRats.Presentation.Controllers
         [AllowAnonymous]
         [HttpPost("/login")]
         public async Task<ActionResult<LoginResponse>> UserLogin(
-            LoginRequest login,
+            [FromBody] LoginRequest login,
             CancellationToken cancellationToken = default)
         {
             try
@@ -77,7 +77,8 @@ namespace GymRats.Presentation.Controllers
                 }
 
                 var result = await _userService.RegisterAsync(newUser.Email, newUser.Password,
-                    newUser.Name, newUser.Surname,
+                    newUser.Name, newUser.Surname, newUser.Birthday, newUser.PhoneNumber, newUser.Gender,
+                    newUser.Address, newUser.FlatNumber, newUser.ZipCode, newUser.Place,
                     cancellationToken);
 
                 if (!result)
@@ -221,7 +222,7 @@ namespace GymRats.Presentation.Controllers
                     "An error occurred while processing your request");
             }
         }
-        
+
         [HttpGet("user/participationInClass/{email}")]
         public async Task<ActionResult<List<ParticipationInClass>>> GetParticipationInClasses(string email,
             CancellationToken cancellationToken = default)
@@ -231,7 +232,33 @@ namespace GymRats.Presentation.Controllers
             {
                 return NotFound("No participation in classes found");
             }
+
             return Ok(participationInClasses);
+        }
+
+        [HttpPut("user/changePassword/{email}/{oldPassword}/{newPassword}")]
+        public async Task<ActionResult<User>> ChangeUserPassword(string email, string oldPassword, string newPassword,
+            CancellationToken cancellationToken = default)
+        {
+            var changePassword =
+                await _userService.ChangeUserPassword(email, oldPassword, newPassword, cancellationToken);
+            if (!changePassword)
+            {
+                return NotFound($"Invalid password for {email}");
+            }
+
+            return Ok(changePassword);
+        }
+
+        [HttpDelete("user/passCancellation/{email}")]
+        public async Task<ActionResult> PassCancellation(string email, CancellationToken cancellationToken = default)
+        {
+            var resignation = await _userService.PassCancellation(email, cancellationToken);
+            if (!resignation)
+            {
+               return NotFound($"User has no active gym passes"); 
+            }
+            return Ok("User gym pass has been cancelled");
         }
     }
 }

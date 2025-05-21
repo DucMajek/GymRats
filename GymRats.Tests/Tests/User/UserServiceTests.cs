@@ -39,7 +39,7 @@ public class UserServiceTests
         Assert.NotNull(result.token);
         Assert.Equal(expectedUser.Email, result.user.Email);
     }
- 
+
     [Fact]
     public async Task UserLogin_WithInvalidPassword_ShouldReturnFailure()
     {
@@ -70,16 +70,25 @@ public class UserServiceTests
                 "strongPassword",
                 "Jan",
                 "Kowalski",
+                DateOnly.Parse("2001-12-12"),
+                "1234567",
+                "M",
+                "Kwiatowa",
+                "31",
+                "01-000",
+                "Warszawa",
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(true);
 
         var result = await _userServicesMock.Object.RegisterAsync(
-            "existing@example.com", "strongPassword", "Jan", "Kowalski", CancellationToken.None);
+            "existing@example.com", "strongPassword", "Jan", "Kowalski",
+            DateOnly.Parse("2001-12-12"), "1234567", "M", "Kwiatowa", "31", "01-000", "Warszawa",
+            CancellationToken.None);
 
         Assert.True(result);
     }
-    
-    
+
+
     [Fact]
     public async Task UserRegister_WithInvalidCredentials_ShouldReturnFalse()
     {
@@ -89,11 +98,20 @@ public class UserServiceTests
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
+                It.IsAny<DateOnly>(),
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<string>(),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(false);
 
         var result = await _userServicesMock.Object.RegisterAsync(
-            "existing@example.com", "strongPassword", "Jan", "Kowalski", CancellationToken.None);
+            "existing@example.com", "strongPassword", "Jan", "Kowalski",
+            DateOnly.Parse("2001-12-12"), "", "", "", "", "01-000", "Warszawa",
+            CancellationToken.None);
 
         Assert.False(result);
     }

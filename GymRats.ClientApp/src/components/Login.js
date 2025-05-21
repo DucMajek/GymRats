@@ -16,7 +16,7 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (action === "Zaloguj") {
-            axios.post('https://localhost:44380/login', { email, password })
+            axios.post(`https://localhost:44380/login`, { email, password })
                 .then(result => {
                     if (result.status === 200) {
                         authLogin(email);

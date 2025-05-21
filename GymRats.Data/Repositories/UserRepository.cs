@@ -19,6 +19,7 @@ namespace GymRats.Data.Repositories
         }
 
         public async Task<User> AddNewUserAsync(string email, string password, string name, string surname,
+            DateOnly birthday, string phoneNumber, string gender, string address, string flatNumber, string zipCode, string place,
             CancellationToken cancellationToken = default)
         {
             await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
@@ -29,12 +30,15 @@ namespace GymRats.Data.Repositories
                 {
                     Name = name,
                     Surname = surname,
-                    Birthday = null,
-                    Address = string.Empty,
-                    PhoneNumber = string.Empty,
-                    Gender = string.Empty,
+                    Birthday = birthday,
+                    PhoneNumber = phoneNumber,
+                    Gender = gender.Equals("M", StringComparison.OrdinalIgnoreCase) ? "Mezczyzna" : "Kobieta",
                     Weight = 0,
                     Height = 0,
+                    Address = address,
+                    FlatNumber = flatNumber,
+                    ZipCode = zipCode,
+                    Place = place
                 };
 
                 await _context.People.AddAsync(person, cancellationToken);
@@ -67,33 +71,17 @@ namespace GymRats.Data.Repositories
         public async Task<Person?> GetUserPersonalDataAsync(string email,
             CancellationToken cancellationToken = default)
         {
-            try
-            {
-                return await _context.Users
-                    .Where(u => u.Email == email)
-                    .Select(u => u.IdUserNavigation)
-                    .FirstOrDefaultAsync(cancellationToken);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error checking if email {Email} exists", email);
-                throw;
-            }
+            return await _context.Users
+                .Where(u => u.Email == email)
+                .Select(u => u.IdUserNavigation)
+                .FirstOrDefaultAsync(cancellationToken);
         }
 
         public async Task<bool> EmailExistsAsync(string email, CancellationToken cancellationToken = default)
         {
-            try
-            {
-                return await _context.Users
-                    .AsNoTracking()
-                    .AnyAsync(e => e.Email == email, cancellationToken);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error checking if email {Email} exists", email);
-                throw;
-            }
+            return await _context.Users
+                .AsNoTracking()
+                .AnyAsync(e => e.Email == email, cancellationToken);
         }
 
         public async Task<bool> UserExistsAsync(string email,
@@ -160,7 +148,7 @@ namespace GymRats.Data.Repositories
                     .Where(e => e.IdTypePass == idPass)
                     .Select(e => e.DurationPass)
                     .FirstOrDefaultAsync();
-
+                    
                 var userId = await _context.Users
                     .AsNoTracking()
                     .Where(e => e.Email == email)
@@ -194,11 +182,14 @@ namespace GymRats.Data.Repositories
         {
             try
             {
-                var user = GetUser(email, cancellationToken);
-
+                var user = await GetUser(email, cancellationToken);
+                if (user == null)
+                {
+                    return null;
+                }
                 return await _context.UserPasses
                     .AsNoTracking()
-                    .Where(e => e.IdUser == user.Id)
+                    .Where(e => e.IdUser == user.IdUser)
                     .Include(p => p.IdTypePassNavigation)
                     .Include(p => p.IdStatusNavigation)
                     .FirstOrDefaultAsync();
@@ -242,7 +233,8 @@ namespace GymRats.Data.Repositories
             return userIsSignedUp;
         }
 
-        public async Task<ParticipationInClass> SignUpForGroup(int groupId, string email, CancellationToken cancellationToken = default)
+        public async Task<ParticipationInClass> SignUpForGroup(int groupId, string email,
+            CancellationToken cancellationToken = default)
         {
             await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
 
@@ -302,6 +294,35 @@ namespace GymRats.Data.Repositories
             }
 
             return useGroupActivities;
+        }
+
+        public async Task<bool> ChangePassword(string newPassword, string email,
+            CancellationToken cancellationToken = default)
+        {
+            var user = await _context.Users
+                .Where(e => e.Email == email)
+                .FirstOrDefaultAsync(cancellationToken);
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.Password = newPassword;
+            await _context.SaveChangesAsync(cancellationToken);
+            return true;
+        }
+
+        public async Task<bool> PassCancellation(int idUser, CancellationToken cancellationToken = default)
+        {
+       
+            var userPass = _context.UserPasses.FirstOrDefault(e => e.IdUser == idUser);
+            if (userPass == null)
+            {
+                return false;
+            }
+            _context.Remove(userPass);
+            await _context.SaveChangesAsync(cancellationToken);
+            return true;
         }
     }
 }
