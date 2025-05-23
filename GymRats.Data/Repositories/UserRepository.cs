@@ -19,7 +19,8 @@ namespace GymRats.Data.Repositories
         }
 
         public async Task<User> AddNewUserAsync(string email, string password, string name, string surname,
-            DateOnly birthday, string phoneNumber, string gender, string address, string flatNumber, string zipCode, string place,
+            DateOnly birthday, string phoneNumber, string gender, string address, string flatNumber, string zipCode,
+            string place,
             CancellationToken cancellationToken = default)
         {
             await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
@@ -133,7 +134,6 @@ namespace GymRats.Data.Repositories
                 .AsNoTracking()
                 .Where(e => e.Email == email)
                 .FirstAsync();
-
             return user;
         }
 
@@ -148,7 +148,7 @@ namespace GymRats.Data.Repositories
                     .Where(e => e.IdTypePass == idPass)
                     .Select(e => e.DurationPass)
                     .FirstOrDefaultAsync();
-                    
+
                 var userId = await _context.Users
                     .AsNoTracking()
                     .Where(e => e.Email == email)
@@ -187,6 +187,7 @@ namespace GymRats.Data.Repositories
                 {
                     return null;
                 }
+
                 return await _context.UserPasses
                     .AsNoTracking()
                     .Where(e => e.IdUser == user.IdUser)
@@ -314,15 +315,51 @@ namespace GymRats.Data.Repositories
 
         public async Task<bool> PassCancellation(int idUser, CancellationToken cancellationToken = default)
         {
-       
             var userPass = _context.UserPasses.FirstOrDefault(e => e.IdUser == idUser);
             if (userPass == null)
             {
                 return false;
             }
+
             _context.Remove(userPass);
             await _context.SaveChangesAsync(cancellationToken);
             return true;
+        }
+
+        public async Task<PurchasedCourse> AddCourse(int courseId, int userId,
+            CancellationToken cancellationToken = default)
+        {
+            await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+            
+
+            var addNewCourseForUser = new PurchasedCourse()
+            {
+                IdCourse = courseId,
+                IdUser = userId
+            };
+            await _context.PurchasedCourses.AddAsync(addNewCourseForUser, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
+            await transaction.CommitAsync(cancellationToken);
+            return addNewCourseForUser;
+        }
+
+        public async Task<bool> CheckUserCourseExists(int courseId, int userId,
+            CancellationToken cancellationToken = default)
+        {
+
+            return await _context.PurchasedCourses
+                .AnyAsync(e => e.IdCourse == courseId && e.IdUser == userId, cancellationToken);
+
+        }
+
+        public async Task<List<PurchasedCourse>> GetPurchasedCourses(int userId,
+            CancellationToken cancellationToken = default)
+        {
+            return await _context.PurchasedCourses
+                .AsNoTracking()
+                .Where(e => e.IdUser == userId)
+                .Include(p => p.IdCourseNavigation)
+                .ToListAsync();
         }
     }
 }

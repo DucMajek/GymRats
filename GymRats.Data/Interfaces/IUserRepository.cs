@@ -29,4 +29,7 @@ public interface IUserRepository
     Task<List<ParticipationInClass>> GetUserParticipationInClass(string email, CancellationToken cancellationToken = default);
     Task<bool> ChangePassword(string newPassword, string email, CancellationToken cancellationToken = default);
     Task<bool> PassCancellation(int idUser, CancellationToken cancellationToken = default);
+    Task<PurchasedCourse> AddCourse(int courseId, int userId, CancellationToken cancellationToken = default);
+    Task<bool> CheckUserCourseExists(int courseId, int userId, CancellationToken cancellationToken = default);
+    Task<List<PurchasedCourse>> GetPurchasedCourses(int userId, CancellationToken cancellationToken = default);
 }

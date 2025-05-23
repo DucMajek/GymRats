@@ -82,7 +82,8 @@ public class UserServiceTests
 
         var result = await _userServicesMock.Object.RegisterAsync(
             "existing@example.com", "strongPassword", "Jan", "Kowalski",
-            DateOnly.Parse("2001-12-12"), "1234567", "M", "Kwiatowa", "31", "01-000", "Warszawa",
+            DateOnly.Parse("2001-12-12"), "1234567", "M", "Kwiatowa", 
+            "31", "01-000", "Warszawa",
             CancellationToken.None);
 
         Assert.True(result);

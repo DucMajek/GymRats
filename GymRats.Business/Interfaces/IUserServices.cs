@@ -31,4 +31,9 @@ public interface IUserServices
 
     Task<bool> PassCancellation(string email,
         CancellationToken cancellationToken = default);
+
+    Task<PurchasedCourse> AddCourse(int courseId, string email,
+        CancellationToken cancellationToken = default);
+    
+    Task<List<PurchasedCourse>> GetCourses(string email, CancellationToken cancellationToken = default);
 }

@@ -195,4 +195,23 @@ public class UserServices : IUserServices
         return await _userRepository.PassCancellation(user.IdUser, cancellationToken);
     }
 
+    public async Task<PurchasedCourse> AddCourse(int courseId, string email,
+        CancellationToken cancellationToken = default)
+    {
+        var user = await _userRepository.GetUser(email, cancellationToken);
+        var checkUserCourses = await _userRepository.CheckUserCourseExists(courseId, user.IdUser, cancellationToken);
+        if (!checkUserCourses)
+            return await _userRepository.AddCourse(courseId, user.IdUser, cancellationToken);
+
+        throw new InvalidOperationException("The course is already assigned to the user.");
+    }
+
+    public async Task<List<PurchasedCourse>> GetCourses(string email, CancellationToken cancellationToken = default)
+    {
+        var user = await _userRepository.GetUser(email, cancellationToken);
+        var getUserCourses = await _userRepository.GetPurchasedCourses(user.IdUser, cancellationToken);
+        if(getUserCourses.Count == 0)
+            throw new InvalidOperationException("No has user courses");
+        return getUserCourses;
+    }
 }

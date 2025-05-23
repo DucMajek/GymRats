@@ -256,9 +256,40 @@ namespace GymRats.Presentation.Controllers
             var resignation = await _userService.PassCancellation(email, cancellationToken);
             if (!resignation)
             {
-               return NotFound($"User has no active gym passes"); 
+                return NotFound($"User has no active gym passes");
             }
+
             return Ok("User gym pass has been cancelled");
+        }
+
+        [HttpPost("user/buyCourse/{idCourse}/{email}")]
+        public async Task<ActionResult<PurchasedCourse>> BuyTrainerCourse(int idCourse, string email,
+            CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var buyCourse = await _userService.AddCourse(idCourse, email, cancellationToken);
+                return Ok(buyCourse);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict("The user already has this course"); 
+            }
+        }
+        
+        [HttpPost("user/courses/{email}")]
+        public async Task<ActionResult<PurchasedCourse>> BuyTrainerCourse(string email,
+            CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var userCourse = await _userService.GetCourses(email, cancellationToken);
+                return Ok(userCourse);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict("The user has no courses"); 
+            }
         }
     }
 }
