@@ -278,7 +278,7 @@ namespace GymRats.Presentation.Controllers
         }
         
         [HttpPost("user/courses/{email}")]
-        public async Task<ActionResult<PurchasedCourse>> BuyTrainerCourse(string email,
+        public async Task<ActionResult<PurchasedCourse>> GetUserCourses(string email,
             CancellationToken cancellationToken = default)
         {
             try

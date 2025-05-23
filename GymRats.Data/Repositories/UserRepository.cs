@@ -346,10 +346,8 @@ namespace GymRats.Data.Repositories
         public async Task<bool> CheckUserCourseExists(int courseId, int userId,
             CancellationToken cancellationToken = default)
         {
-
             return await _context.PurchasedCourses
                 .AnyAsync(e => e.IdCourse == courseId && e.IdUser == userId, cancellationToken);
-
         }
 
         public async Task<List<PurchasedCourse>> GetPurchasedCourses(int userId,
