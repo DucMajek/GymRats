@@ -25,7 +25,7 @@ public class UserServices : IUserServices
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    public async Task<(bool success, string token, User user)> LoginAsync(
+    public async Task<(bool success, string token, User user)> Login(
         string email,
         string userPassword,
         CancellationToken cancellationToken = default)
@@ -42,14 +42,14 @@ public class UserServices : IUserServices
                 throw new ArgumentException("Password is required");
             }
 
-            var userExists = await _userRepository.UserExistsAsync(email, cancellationToken);
+            var userExists = await _userRepository.UserExists(email, cancellationToken);
             if (!userExists)
             {
                 _logger.LogWarning("User does not exist: {Email}", email);
                 return (false, null, null);
             }
 
-            var userHashedPassword = await _userRepository.GetHashedPasswordAsync(email);
+            var userHashedPassword = await _userRepository.GetHashedPassword(email);
             if (string.IsNullOrEmpty(userHashedPassword))
             {
                 _logger.LogWarning("No password found for user: {Email}", email);
@@ -82,14 +82,14 @@ public class UserServices : IUserServices
         }
     }
 
-    public async Task<bool> RegisterAsync(string email, string password, string name, string surname,
+    public async Task<bool> Register(string email, string password, string name, string surname,
         DateOnly birthday, string phoneNumber, string gender, string address, string flatNumber, string zipCode,
         string place,
         CancellationToken cancellationToken = default)
     {
         try
         {
-            var emailExists = await _userRepository.EmailExistsAsync(email, cancellationToken);
+            var emailExists = await _userRepository.EmailExists(email, cancellationToken);
             if (emailExists)
             {
                 _logger.LogWarning("Registration attempt with existing email: {Email}", email);
@@ -97,7 +97,7 @@ public class UserServices : IUserServices
             }
 
             password = _passwordHasher.HashPassword(password);
-            await _userRepository.AddNewUserAsync(email, password, name, surname, birthday, phoneNumber, gender,
+            await _userRepository.AddNewUser(email, password, name, surname, birthday, phoneNumber, gender,
                 address, flatNumber, zipCode, place,
                 cancellationToken);
 
@@ -113,7 +113,7 @@ public class UserServices : IUserServices
 
     public async Task<Person?> UserPersonData(string email, CancellationToken cancellationToken = default)
     {
-        return await _userRepository.GetUserPersonalDataAsync(email, cancellationToken);
+        return await _userRepository.GetUserPersonalData(email, cancellationToken);
     }
 
     public async Task<bool> BuyGymPass(int gymPassId, string email,
@@ -182,7 +182,7 @@ public class UserServices : IUserServices
 
         var hashedPassword = _passwordHasher.HashPassword(newPassword);
 
-        var changePassword = await _userRepository.ChangePassword(hashedPassword, email);
+        var changePassword = await _userRepository.UpdatePassword(hashedPassword, email, cancellationToken);
         return changePassword;
     }
 
@@ -192,14 +192,14 @@ public class UserServices : IUserServices
         if (user == null)
             return false;
 
-        return await _userRepository.PassCancellation(user.IdUser, cancellationToken);
+        return await _userRepository.DeleteGymPass(user.IdUser, cancellationToken);
     }
 
     public async Task<PurchasedCourse> AddCourse(int courseId, string email,
         CancellationToken cancellationToken = default)
     {
         var user = await _userRepository.GetUser(email, cancellationToken);
-        var checkUserCourses = await _userRepository.CheckUserCourseExists(courseId, user.IdUser, cancellationToken);
+        var checkUserCourses = await _userRepository.IsCoursePurchasedByUser(courseId, user.IdUser, cancellationToken);
         if (!checkUserCourses)
             return await _userRepository.AddCourse(courseId, user.IdUser, cancellationToken);
 
@@ -209,9 +209,59 @@ public class UserServices : IUserServices
     public async Task<List<PurchasedCourse>> GetCourses(string email, CancellationToken cancellationToken = default)
     {
         var user = await _userRepository.GetUser(email, cancellationToken);
-        var getUserCourses = await _userRepository.GetPurchasedCourses(user.IdUser, cancellationToken);
-        if(getUserCourses.Count == 0)
+        var getUserCourses = await _userRepository.GetUserPurchasedCourses(user.IdUser, cancellationToken);
+        if (getUserCourses.Count == 0)
             throw new InvalidOperationException("No has user courses");
         return getUserCourses;
+    }
+
+    public async Task<bool> IsTimeSlotFree(List<GroupClass> trainerGroupClasses, DateTime start)
+    {
+        foreach (var trainerGroupClass in trainerGroupClasses)
+        {
+            if (trainerGroupClass.StartDate == start)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public async Task<GroupClass> AddNewGroupClass(string email, string classType, DateTime start, int duration,
+        int groupSize,
+        CancellationToken cancellationToken = default)
+    {
+        var user = await _userRepository.GetUser(email, cancellationToken);
+        var isUserTrainer = await _userRepository.IsTrainer(user.IdUser, cancellationToken);
+        if (!isUserTrainer)
+        {
+            throw new InvalidOperationException("User is not trainer");
+        }
+
+        var getTrainerGroupClasses = await _userRepository.GetGroupClasses();
+        var isSlotFree = await IsTimeSlotFree(getTrainerGroupClasses, start);
+        if (!isSlotFree)
+        {
+            throw new InvalidOperationException($"The group class is already assigned for this date {start}");
+        }
+
+        return await _userRepository.AddNewGroupClass(user.IdUser, classType, start, duration, groupSize,
+            cancellationToken);
+    }
+
+    public async Task<List<PersonalTraining>> GetPersonalTrainings(string email,
+        CancellationToken cancellationToken = default)
+    {
+        var user = await _userRepository.GetUser(email, cancellationToken);
+        return await _userRepository.GetPersonalTraining(user.IdUser, cancellationToken);
+    }
+
+    public async Task<List<Coach>> GetCoachesList()
+    {
+        var coaches = await _userRepository.GetCoaches();
+        if (coaches.Count == 0)
+            throw new InvalidOperationException("No trainers available");
+        return coaches;
     }
 }

@@ -10,6 +10,7 @@ public partial class GroupClass
     public string ClassType { get; set; } = null!;
 
     public DateTime? StartDate { get; set; }
+    public int Duration { get; set; }
 
     public int GroupSize { get; set; }
 

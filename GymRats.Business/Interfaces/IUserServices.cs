@@ -4,10 +4,10 @@ namespace GymRats.Business.Interfaces;
 
 public interface IUserServices
 {
-    Task<(bool success, string token, User user)> LoginAsync(string email, string userPassword,
+    Task<(bool success, string token, User user)> Login(string email, string userPassword,
         CancellationToken cancellationToken = default);
 
-    Task<bool> RegisterAsync(string email, string password, string name, string surname,
+    Task<bool> Register(string email, string password, string name, string surname,
         DateOnly birthday, string phoneNumber, string gender, string address, string flatNumber, string zipCode,
         string place,
         CancellationToken cancellationToken = default);
@@ -36,4 +36,10 @@ public interface IUserServices
         CancellationToken cancellationToken = default);
     
     Task<List<PurchasedCourse>> GetCourses(string email, CancellationToken cancellationToken = default);
+    
+    Task<GroupClass> AddNewGroupClass(string email, string classType, DateTime start, int duration, int groupSize,
+        CancellationToken cancellationToken = default);
+
+    Task<List<PersonalTraining>> GetPersonalTrainings(string email, CancellationToken cancellationToken = default);
+    Task<List<Coach>> GetCoachesList();
 }

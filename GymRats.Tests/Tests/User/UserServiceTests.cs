@@ -25,13 +25,13 @@ public class UserServiceTests
         };
 
         _userServicesMock
-            .Setup(x => x.LoginAsync(
+            .Setup(x => x.Login(
                 email,
                 password,
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync((true, "mock_token", expectedUser));
 
-        var result = await _userServicesMock.Object.LoginAsync(
+        var result = await _userServicesMock.Object.Login(
             email, password,
             CancellationToken.None);
 
@@ -44,14 +44,14 @@ public class UserServiceTests
     public async Task UserLogin_WithInvalidPassword_ShouldReturnFailure()
     {
         _userServicesMock
-            .Setup(x => x.LoginAsync(
+            .Setup(x => x.Login(
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync((false, null, null));
 
         var result =
-            await _userServicesMock.Object.LoginAsync(
+            await _userServicesMock.Object.Login(
                 "wrong@example.com",
                 "wrong_pass",
                 CancellationToken.None);
@@ -65,7 +65,7 @@ public class UserServiceTests
     public async Task UserRegister_WithValidCredentials_ShouldReturnTrue()
     {
         _userServicesMock
-            .Setup(x => x.RegisterAsync(
+            .Setup(x => x.Register(
                 "existing@example.com",
                 "strongPassword",
                 "Jan",
@@ -80,7 +80,7 @@ public class UserServiceTests
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(true);
 
-        var result = await _userServicesMock.Object.RegisterAsync(
+        var result = await _userServicesMock.Object.Register(
             "existing@example.com", "strongPassword", "Jan", "Kowalski",
             DateOnly.Parse("2001-12-12"), "1234567", "M", "Kwiatowa", 
             "31", "01-000", "Warszawa",
@@ -94,7 +94,7 @@ public class UserServiceTests
     public async Task UserRegister_WithInvalidCredentials_ShouldReturnFalse()
     {
         _userServicesMock
-            .Setup(x => x.RegisterAsync(
+            .Setup(x => x.Register(
                 "existing@example.com",
                 It.IsAny<string>(),
                 It.IsAny<string>(),
@@ -109,9 +109,10 @@ public class UserServiceTests
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(false);
 
-        var result = await _userServicesMock.Object.RegisterAsync(
+        var result = await _userServicesMock.Object.Register(
             "existing@example.com", "strongPassword", "Jan", "Kowalski",
-            DateOnly.Parse("2001-12-12"), "", "", "", "", "01-000", "Warszawa",
+            DateOnly.Parse("2001-12-12"), "", "", "", "", 
+            "01-000", "Warszawa",
             CancellationToken.None);
 
         Assert.False(result);

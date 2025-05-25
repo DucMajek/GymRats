@@ -18,7 +18,7 @@ namespace GymRats.Data.Repositories
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<User> AddNewUserAsync(string email, string password, string name, string surname,
+        public async Task<User> AddNewUser(string email, string password, string name, string surname,
             DateOnly birthday, string phoneNumber, string gender, string address, string flatNumber, string zipCode,
             string place,
             CancellationToken cancellationToken = default)
@@ -69,7 +69,7 @@ namespace GymRats.Data.Repositories
             }
         }
 
-        public async Task<Person?> GetUserPersonalDataAsync(string email,
+        public async Task<Person?> GetUserPersonalData(string email,
             CancellationToken cancellationToken = default)
         {
             return await _context.Users
@@ -78,14 +78,14 @@ namespace GymRats.Data.Repositories
                 .FirstOrDefaultAsync(cancellationToken);
         }
 
-        public async Task<bool> EmailExistsAsync(string email, CancellationToken cancellationToken = default)
+        public async Task<bool> EmailExists(string email, CancellationToken cancellationToken = default)
         {
             return await _context.Users
                 .AsNoTracking()
                 .AnyAsync(e => e.Email == email, cancellationToken);
         }
 
-        public async Task<bool> UserExistsAsync(string email,
+        public async Task<bool> UserExists(string email,
             CancellationToken cancellationToken = default)
         {
             try
@@ -109,7 +109,7 @@ namespace GymRats.Data.Repositories
             }
         }
 
-        public async Task<string?> GetHashedPasswordAsync(string email, CancellationToken cancellationToken = default)
+        public async Task<string?> GetHashedPassword(string email, CancellationToken cancellationToken = default)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace GymRats.Data.Repositories
                     .AsNoTracking()
                     .Where(e => e.Email == email)
                     .Select(e => e.Password)
-                    .FirstOrDefaultAsync();
+                    .FirstOrDefaultAsync(cancellationToken);
 
                 return userPassword;
             }
@@ -133,7 +133,7 @@ namespace GymRats.Data.Repositories
             var user = await _context.Users
                 .AsNoTracking()
                 .Where(e => e.Email == email)
-                .FirstAsync();
+                .FirstAsync(cancellationToken);
             return user;
         }
 
@@ -147,13 +147,13 @@ namespace GymRats.Data.Repositories
                     .AsNoTracking()
                     .Where(e => e.IdTypePass == idPass)
                     .Select(e => e.DurationPass)
-                    .FirstOrDefaultAsync();
+                    .FirstOrDefaultAsync(cancellationToken);
 
                 var userId = await _context.Users
                     .AsNoTracking()
                     .Where(e => e.Email == email)
                     .Select(e => e.IdUser)
-                    .FirstOrDefaultAsync();
+                    .FirstOrDefaultAsync(cancellationToken);
 
                 var newGymPass = new UserPass()
                 {
@@ -193,7 +193,7 @@ namespace GymRats.Data.Repositories
                     .Where(e => e.IdUser == user.IdUser)
                     .Include(p => p.IdTypePassNavigation)
                     .Include(p => p.IdStatusNavigation)
-                    .FirstOrDefaultAsync();
+                    .FirstOrDefaultAsync(cancellationToken);
             }
             catch (Exception ex)
             {
@@ -246,7 +246,7 @@ namespace GymRats.Data.Repositories
                     .AsNoTracking()
                     .Where(e => e.IdGroup == groupId)
                     .Select(e => e.ClassType)
-                    .FirstOrDefaultAsync();
+                    .FirstOrDefaultAsync(cancellationToken);
 
                 if (user == null)
                 {
@@ -288,7 +288,7 @@ namespace GymRats.Data.Repositories
                 .AsNoTracking()
                 .Where(e => e.IdUser == user.IdUser)
                 .Include(p => p.IdGroupNavigation)
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
             if (useGroupActivities == null)
             {
                 throw new Exception("User is not registered for any activities");
@@ -297,7 +297,7 @@ namespace GymRats.Data.Repositories
             return useGroupActivities;
         }
 
-        public async Task<bool> ChangePassword(string newPassword, string email,
+        public async Task<bool> UpdatePassword(string newPassword, string email,
             CancellationToken cancellationToken = default)
         {
             var user = await _context.Users
@@ -313,7 +313,7 @@ namespace GymRats.Data.Repositories
             return true;
         }
 
-        public async Task<bool> PassCancellation(int idUser, CancellationToken cancellationToken = default)
+        public async Task<bool> DeleteGymPass(int idUser, CancellationToken cancellationToken = default)
         {
             var userPass = _context.UserPasses.FirstOrDefault(e => e.IdUser == idUser);
             if (userPass == null)
@@ -330,7 +330,7 @@ namespace GymRats.Data.Repositories
             CancellationToken cancellationToken = default)
         {
             await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
-            
+
 
             var addNewCourseForUser = new PurchasedCourse()
             {
@@ -343,20 +343,65 @@ namespace GymRats.Data.Repositories
             return addNewCourseForUser;
         }
 
-        public async Task<bool> CheckUserCourseExists(int courseId, int userId,
+        public async Task<bool> IsCoursePurchasedByUser(int courseId, int userId,
             CancellationToken cancellationToken = default)
         {
             return await _context.PurchasedCourses
                 .AnyAsync(e => e.IdCourse == courseId && e.IdUser == userId, cancellationToken);
         }
 
-        public async Task<List<PurchasedCourse>> GetPurchasedCourses(int userId,
+        public async Task<List<PurchasedCourse>> GetUserPurchasedCourses(int userId,
             CancellationToken cancellationToken = default)
         {
             return await _context.PurchasedCourses
                 .AsNoTracking()
                 .Where(e => e.IdUser == userId)
                 .Include(p => p.IdCourseNavigation)
+                .ToListAsync(cancellationToken);
+        }
+
+        public async Task<bool> IsTrainer(int userId, CancellationToken cancellationToken = default)
+        {
+            return await _context.Users
+                .AsNoTracking()
+                .AnyAsync(e => e.IdUser == userId && e.IdRole == 2, cancellationToken);
+        }
+
+        public async Task<GroupClass> AddNewGroupClass(int coachId, string classType, DateTime start, int duration,
+            int groupSize,
+            CancellationToken cancellationToken = default)
+        {
+            await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+            var newGroup = new GroupClass()
+            {
+                ClassType = classType,
+                StartDate = start,
+                Duration = duration,
+                GroupSize = groupSize,
+                IdCoach = coachId
+            };
+            await _context.GroupClasses.AddAsync(newGroup, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
+            await transaction.CommitAsync(cancellationToken);
+            return newGroup;
+        }
+
+        public async Task<List<PersonalTraining>> GetPersonalTraining(int userId,
+            CancellationToken cancellationToken = default)
+        {
+            return await _context.PersonalTrainings
+                .AsNoTracking()
+                .Where(e => e.IdUser == userId)
+                .ToListAsync(cancellationToken);
+        }
+
+        public async Task<List<Coach>> GetCoaches()
+        {
+            
+            return await _context
+                .Coaches
+                .AsNoTracking()
+                .Include(p => p.IdCoachNavigation)
                 .ToListAsync();
         }
     }

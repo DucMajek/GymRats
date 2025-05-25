@@ -34,7 +34,7 @@ namespace GymRats.Presentation.Controllers
                     return BadRequest(ModelState);
                 }
 
-                var (success, token, user) = await _userService.LoginAsync(login.Email,
+                var (success, token, user) = await _userService.Login(login.Email,
                     login.Password, cancellationToken);
 
                 if (!success)
@@ -76,7 +76,7 @@ namespace GymRats.Presentation.Controllers
                     return BadRequest(ModelState);
                 }
 
-                var result = await _userService.RegisterAsync(newUser.Email, newUser.Password,
+                var result = await _userService.Register(newUser.Email, newUser.Password,
                     newUser.Name, newUser.Surname, newUser.Birthday, newUser.PhoneNumber, newUser.Gender,
                     newUser.Address, newUser.FlatNumber, newUser.ZipCode, newUser.Place,
                     cancellationToken);
@@ -273,10 +273,10 @@ namespace GymRats.Presentation.Controllers
             }
             catch (InvalidOperationException ex)
             {
-                return Conflict("The user already has this course"); 
+                return BadRequest(ex.Message);
             }
         }
-        
+
         [HttpPost("user/courses/{email}")]
         public async Task<ActionResult<PurchasedCourse>> GetUserCourses(string email,
             CancellationToken cancellationToken = default)
@@ -288,7 +288,49 @@ namespace GymRats.Presentation.Controllers
             }
             catch (InvalidOperationException ex)
             {
-                return Conflict("The user has no courses"); 
+                return Conflict(ex.Message);
+            }
+        }
+
+        [HttpPost("user/addNewGroupClass/{email}/{classType}/{start}/{duration}/{groupSize}")]
+        public async Task<ActionResult<GroupClass>> AddNewGroupClass(string email, string classType, DateTime start,
+            int duration,
+            int groupSize,
+            CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var addGroupClass = await _userService.AddNewGroupClass(email, classType, start, duration, groupSize,
+                    cancellationToken);
+                return Ok(addGroupClass);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
+            }
+        }
+
+        [HttpGet("user/personalTraning/{email}")]
+        public async Task<ActionResult<List<PersonalTraining>>> PersonalTraining(string email,
+            CancellationToken cancellationToken = default)
+        {
+            var personalTranings = await _userService.GetPersonalTrainings(email, cancellationToken);
+            if (!personalTranings.Any())
+                return NotFound("No personal training data found");
+            return Ok(personalTranings);
+        }
+
+        [HttpGet("user/trainersList")]
+        public async Task<ActionResult<List<PersonalTraining>>> TrainerList()
+        {
+            try
+            {
+                var trainerList = await _userService.GetCoachesList();
+                return Ok(trainerList);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(ex.Message);
             }
         }
     }
