@@ -2,7 +2,7 @@
 import React from "react";
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import Footer from '../components/Footer';
+
 import '../assets/styles/Dashboard.css';
 import '../assets/styles/PersonalData.css';
 function UserDashboard() {

@@ -16,17 +16,17 @@ export default function GroupClassCard({
 
       <div className="group-card-middle">
         {signedIn ? (
-          <span className="signin-status">Signed In ✓</span>
+          <span className="signin-status">Zapisany ✓</span>
         ) : (
           <button className="sign-in-button" onClick={onSignIn}>
-            Sign In
+            Zapisz się
           </button>
         )}
       </div>
 
       <div className="group-card-stats">
-        <span className="stats-size">Size: {groupSize}</span>
-        <span className="stats-coach">{coachName}</span>
+        <span className="stats-size">Rozmiar grupy: {groupSize}</span>
+        <span className="stats-coach">Trener: {coachName}</span>
       </div>
     </div>
   );

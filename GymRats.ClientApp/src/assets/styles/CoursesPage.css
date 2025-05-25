@@ -26,6 +26,7 @@
 }
 
 .course-card {
+  margin-left: 40px;
   width: 100%; 
   max-width: 400px; 
   height: auto; 
@@ -152,4 +153,25 @@
     margin-top: 60px;
     flex-wrap: wrap;
   }
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.header-actions .action-button {
+  margin-left: 1rem;
+  margin-top: 0.5rem; /* obniża przycisk względem tytułu */
+}
+
+
+.header-actions {
+  display: flex;
+  align-items: flex-start; /* wyrównuje elementy do góry kontenera */
+}
+
+.header-actions .action-button {
+  margin-left: 1rem;   /* odstęp od tytułu */
+  margin-top: 3rem;    /* obniża przycisk względem tytułu */
 }

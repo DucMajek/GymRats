@@ -32,11 +32,11 @@ export default function GroupClassPage() {
           <Sidebar />
         </aside>
         <main className="dashboard-main">
-          <h2 className="group-classes-title">Group Classes</h2>
+          <h2 className="group-classes-title">Zajęcia grupowe</h2>
 
           {/* ─── Filter UI ───────────────────────── */}
           <div className="group-filter">
-            <label htmlFor="coachFilter">Filter by coach:</label>
+            <label htmlFor="coachFilter">Filtruj przez imie trenera:</label>
             <select
               id="coachFilter"
               value={coachFilter}

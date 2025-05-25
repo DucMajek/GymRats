@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GymRats.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a0e459353811c96bbb26b0182db02335bf843a4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aaa5d0adaeb2c526483d67ae051f8f31e7163336")]
 [assembly: System.Reflection.AssemblyProductAttribute("GymRats.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GymRats.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
