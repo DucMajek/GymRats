@@ -1,6 +1,0 @@
-@gymrats.server_HostAddress = http://localhost:5119
-
-GET {{gymrats.server_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

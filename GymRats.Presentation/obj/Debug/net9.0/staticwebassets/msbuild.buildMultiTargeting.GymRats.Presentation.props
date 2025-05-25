@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\GymRats.Presentation.props" />
-</Project>
