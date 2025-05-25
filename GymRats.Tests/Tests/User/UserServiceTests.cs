@@ -70,7 +70,7 @@ public class UserServiceTests
                 "strongPassword",
                 "Jan",
                 "Kowalski",
-                DateOnly.Parse("2001-12-12"),
+                "2001-12-12",
                 "1234567",
                 "M",
                 "Kwiatowa",
@@ -82,7 +82,7 @@ public class UserServiceTests
 
         var result = await _userServicesMock.Object.Register(
             "existing@example.com", "strongPassword", "Jan", "Kowalski",
-            DateOnly.Parse("2001-12-12"), "1234567", "M", "Kwiatowa", 
+            "2001-12-12", "1234567", "M", "Kwiatowa", 
             "31", "01-000", "Warszawa",
             CancellationToken.None);
 
@@ -99,7 +99,7 @@ public class UserServiceTests
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
-                It.IsAny<DateOnly>(),
+                It.IsAny<string>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
@@ -111,7 +111,7 @@ public class UserServiceTests
 
         var result = await _userServicesMock.Object.Register(
             "existing@example.com", "strongPassword", "Jan", "Kowalski",
-            DateOnly.Parse("2001-12-12"), "", "", "", "", 
+            "2001-12-12", "", "", "", "", 
             "01-000", "Warszawa",
             CancellationToken.None);
 

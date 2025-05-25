@@ -70,9 +70,9 @@ function HomePage() {
           </div>
           <div className="explore__card">
             <span><i className="ri-clipboard-fill"></i></span>
-            <h4>Plany Treningowe</h4>
+            <h4>Zajęcia grupowe</h4>
             <p>
-              Osiągnij swoje cele dzięki indywidualnie dopasowanemu planowi treningowemu.
+              Zapisz się na zajęcia grupowe, które pomogą Ci wzmocnić ciało i umysł oraz nawiązać nowe znajomości.
             </p>
             <a href='/login' >Dołącz teraz <i className="ri-arrow-right-line"></i></a>
           </div>

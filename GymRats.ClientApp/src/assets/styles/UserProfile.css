@@ -2,3 +2,119 @@ p {
     color: white;
     
 }
+
+/* Base / desktop styles */
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main > .d-flex {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  flex: 0 0 250px;
+  background: #222;
+}
+
+.content {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  margin-top: 20px;  
+}
+
+/* “Zmień hasło” button offset on desktop */
+.zmien-haslo-btn {
+  margin-left: 20px !important;
+}
+
+/* Typography */
+h2.fs-1 {
+  font-size: 2.5rem;
+}
+h5 {
+  font-size: 1.25rem;
+}
+
+/* Section spacing */
+section.mb-4 {
+  margin-bottom: 2rem;
+}
+
+/* Personal-data paragraphs */
+p.mb-1 {
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
+}
+
+/* Mobile (iPhone sizing ~375px wide) */
+@media (max-width: 480px) {
+  /* Stack sidebar above content */
+  .main > .d-flex {
+    flex-direction: column;
+  }
+  .sidebar {
+    display: none;               /* hide sidebar on phone */
+  }
+  .content {
+    padding: 1rem;
+  }
+
+  /* Stack header/title & button */
+  .content .d-flex.justify-content-between {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  /* Full‑width Zmień hasło */
+  .zmien-haslo-btn {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  /* Shrink headings */
+  h2.fs-1 {
+    font-size: 1.75rem;
+  }
+  h5 {
+    font-size: 1rem;
+  }
+
+  /* Shrink text */
+  p.mb-1 {
+    font-size: 0.9rem;
+  }
+
+  /* Reduce section spacing */
+  section.mb-4 {
+    margin-bottom: 1.5rem;
+  }
+}
+/* —————— Make the profile content full‑width and left‑aligned —————— */
+.content .container-md {
+  /* stop Bootstrap from capping the width and centering */
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* optional: tighten up your content padding now that it’s full‑width */
+.content {
+  padding: 1.5rem;  /* or whatever you prefer */
+}
+
+/* a shorter horizontal rule */
+.short-hr {
+  width: 20%;          /* only 60% of the container */
+  margin: 0.5rem 0;    /* small vertical spacing */
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* you can tweak 60% to what feels right */

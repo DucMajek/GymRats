@@ -3,7 +3,7 @@
   justify-content: space-around;
   gap: 1vw;
   float: right;
-  margin-left: 30px;
+  margin-left: 40px;
 }
 
 @media (max-width: 768px) {
@@ -27,6 +27,7 @@
   align-items: center;
   gap: 20px;
   border-radius: 8px;
+  
 }
 
 .diet-plan h3 {

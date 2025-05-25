@@ -1,5 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
+import { useLocation, NavLink, useNavigate } from 'react-router-dom';
 import {
   CDBSidebar,
   CDBSidebarHeader,
@@ -8,62 +8,59 @@ import {
   CDBSidebarMenuItem,
   CDBSidebarFooter
 } from 'cdbreact';
-import { NavLink } from 'react-router-dom';
+import { useAuth } from './AuthContext';
+import axios from 'axios';
+
 import '../assets/styles/Sidebar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
 
 export default function Sidebar() {
   const [personalData, setPersonalData] = useState(null);
-  const [error, setError]        = useState(null);
-  const [open, setOpen]         = useState(false);
+  const [error, setError] = useState(null);
+  const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { email, token, logout } = useAuth();
 
-  // Fetch user data once
   useEffect(() => {
-    (async () => {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        setError('Brak tokena');
-        return;
-      }
+    const fetchData = async () => {
+      if (!email || !token) return;
+
       try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        const email = payload.email;
-        // Note: use the correct API route with 'user/personal-data'
-        const res = await axios.get(
+        const response = await axios.get(
           `https://localhost:44380/user/personal-data/${encodeURIComponent(email)}`,
-          { withCredentials: true }
+          { headers: { Authorization: `Bearer ${token}` } }
         );
-        setPersonalData(res.data);
-      } catch (err) {
-        if (err.response?.status === 404) {
-          setError('Dane osobowe nie znalezione.');
-        } else {
-          setError('Coś poszło nie tak: ' + err.message);
-        }
+        setPersonalData(response.data);
+      } catch (error) {
+        console.error('Błąd pobierania danych:', error);
+        setError(error.response?.data?.message || error.message);
+        if (error.response?.status === 401) logout();
       }
-    })();
-  }, []);
+    };
+
+    fetchData();
+  }, [location, email, token, logout]);
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');  // Tutaj dodajemy przekierowanie
+  };
 
   return (
     <>
-      {/* Mobile hamburger */}
-      <button
-        className="sidebar-toggle"
-        onClick={() => setOpen(o => !o)}
-      >
+      <button className="sidebar-toggle" onClick={() => setOpen(o => !o)}>
         <i className="fa fa-bars" />
       </button>
 
-      {/* Sidebar full-screen on mobile, fixed on desktop */}
       <div className={`sidebar-wrapper${open ? ' open' : ''}`}>
         <CDBSidebar className="app-sidebar">
           <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>
-            {error 
-              ? <span className="text-danger">{error}</span>
-              : personalData 
-                ? `${personalData.name} ${personalData.surname}`
-                : null}
+            {personalData ? (
+              `${personalData.name} ${personalData.surname}`
+            ) : (
+              <span className="text-warning">{error || 'Ładowanie...'}</span>
+            )}
           </CDBSidebarHeader>
 
           <CDBSidebarContent>
@@ -83,14 +80,14 @@ export default function Sidebar() {
               <NavLink exact to="/courses">
                 <CDBSidebarMenuItem icon="graduation-cap">Kursy</CDBSidebarMenuItem>
               </NavLink>
-              <NavLink exact to="/calendar">
-                <CDBSidebarMenuItem icon="calendar-alt">Kalendarz</CDBSidebarMenuItem>
+              <NavLink exact to="/Groupclass">
+                <CDBSidebarMenuItem icon="calendar-alt">Zajęcia grupowe</CDBSidebarMenuItem>
               </NavLink>
             </CDBSidebarMenu>
           </CDBSidebarContent>
 
           <CDBSidebarFooter className="app-sidebar-footer">
-            <NavLink exact to="/" reloadDocument>
+            <NavLink exact to="/" onClick={handleLogout}>
               <CDBSidebarMenuItem icon="door-open">Wyloguj się</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarFooter>

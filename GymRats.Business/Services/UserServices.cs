@@ -83,7 +83,7 @@ public class UserServices : IUserServices
     }
 
     public async Task<bool> Register(string email, string password, string name, string surname,
-        DateOnly birthday, string phoneNumber, string gender, string address, string flatNumber, string zipCode,
+        string birthday, string phoneNumber, string gender, string address, string flatNumber, string zipCode,
         string place,
         CancellationToken cancellationToken = default)
     {

@@ -1,0 +1,65 @@
+/* 1. Wrapper + slide animation */
+.sidebar-wrapper {
+    display: flex;
+    height: 100%;
+    overflow: auto;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+  
+  /* On mobile (≤768px): hide the sidebar full-screen off-screen by default */
+  @media (max-width: 768px) {
+    .sidebar-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      width: 100vw;
+      height: 100vh;
+      transform: translateX(-100vw);
+    }
+    .sidebar-wrapper.open {
+      transform: translateX(0);
+    }
+  }
+  
+  /* 2. Actual CDBSidebar styling */
+  .app-sidebar {
+    background-color: #111317 !important;
+    color: white !important;
+    height: 100vh;
+  }
+  @media (min-width: 769px) {
+    .app-sidebar {
+      width: 120px;
+    }
+  }
+  @media (max-width: 768px) {
+    .app-sidebar {
+      width: 100vw;
+    }
+  }
+  
+  /* 3. Hamburger toggle button */
+  .sidebar-toggle {
+    display: none; /* hidden on desktop */
+  }
+  @media (max-width: 768px) {
+    .sidebar-toggle {
+      display: block;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+  }
+  
+  /* 4. Footer centering */
+  .app-sidebar-footer {
+    text-align: center;
+  }
+  

@@ -19,7 +19,7 @@ namespace GymRats.Data.Repositories
         }
 
         public async Task<User> AddNewUser(string email, string password, string name, string surname,
-            DateOnly birthday, string phoneNumber, string gender, string address, string flatNumber, string zipCode,
+            string birthday, string phoneNumber, string gender, string address, string flatNumber, string zipCode,
             string place,
             CancellationToken cancellationToken = default)
         {
@@ -31,7 +31,7 @@ namespace GymRats.Data.Repositories
                 {
                     Name = name,
                     Surname = surname,
-                    Birthday = birthday,
+                    Birthday = DateOnly.Parse(birthday),
                     PhoneNumber = phoneNumber,
                     Gender = gender.Equals("M", StringComparison.OrdinalIgnoreCase) ? "Mezczyzna" : "Kobieta",
                     Weight = 0,

@@ -8,7 +8,7 @@ public interface IUserRepository
     Task<bool> EmailExists(string email, CancellationToken cancellationToken = default);
 
     Task<User> AddNewUser(string email, string password, string name, string surname,
-        DateOnly birthday, string phoneNumber, string gender, string address, string flatNumber, string zipCode,
+        string birthday, string phoneNumber, string gender, string address, string flatNumber, string zipCode,
         string place,
         CancellationToken cancellationToken = default);
 

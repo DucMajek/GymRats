@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../assets/styles/Login.css';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AuthForm from './AuthForm';
 import { useAuth } from './AuthContext';
 function Login() {
@@ -10,26 +10,34 @@ function Login() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
+    const [birthday, setBirthday] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [gender, setGender] = useState("");
+    const [address, setAddress] = useState("");
+    const [flatNumber, setFlatNumber] = useState("");
+    const [zipCode, setZipCode] = useState("");
+    const [place, setPlace] = useState("");
     const [action, setAction] = useState("Zaloguj");
     const { login: authLogin } = useAuth();
     const navigate = useNavigate();
     const handleSubmit = (e) => {
         e.preventDefault();
         if (action === "Zaloguj") {
-            axios.post(`https://localhost:44380/login`, { email, password })
+            axios.post('https://localhost:44380/login', { email, password })
                 .then(result => {
                     if (result.status === 200) {
-                        authLogin(email);
-                        navigate('/dashboard');
                         const token = result.data.token;
-                        localStorage.setItem('token', token);
+                        authLogin(email, token);
+                        navigate('/user-profile');
                     }
                 })
                 .catch(err => { console.log(err); });
         } else if (action === "Stwórz konto") {
-            axios.post(`https://localhost:44380/register?Email=${email}&Password=${password}&Imie=${name}&Nazwisko=${surname}`, { email, password, name, surname })
+            axios.post(`https://localhost:44380/register?Email=${email}&Password=${password}&Name=${name}&Surname=${surname}&Birthday=${birthday}&PhoneNumber=${phoneNumber}&Gender=${gender}&Address=${address}&FlatNumber=${flatNumber}&ZipCode=${zipCode}&Place=${place}
+                        `, { email, password, name, surname, birthday, phoneNumber, gender, address, flatNumber, zipCode, place })
                 .then(result => {
                     if (result.status === 200) {
+
                     }
                 })
                 .catch(err => { console.log(err); });
@@ -59,6 +67,20 @@ function Login() {
                     setPassword={setPassword}
                     confirmPassword={confirmPassword}
                     setConfirmPassword={setConfirmPassword}
+                    birthday={birthday}
+                    setBirthday={setBirthday}
+                    phoneNumber={phoneNumber}
+                    setPhoneNumber={setPhoneNumber}
+                    gender={gender}
+                    setGender={setGender}
+                    address={address}
+                    setAddress={setAddress}
+                    flatNumber={flatNumber}
+                    setFlatNumber={setFlatNumber}
+                    zipCode={zipCode}
+                    setZipCode={setZipCode}
+                    place={place}
+                    setPlace={setPlace}
                     onSubmit={handleSubmit}
                 />
             </div>

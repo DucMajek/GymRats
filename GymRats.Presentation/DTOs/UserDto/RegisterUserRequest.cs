@@ -17,7 +17,7 @@ namespace GymRats.Presentation.DTOs
         [Required(ErrorMessage = "Required.")] public string Name { get; set; } = null!;
 
         [Required(ErrorMessage = "Required.")] public string Surname { get; set; } = null!;
-        [Required(ErrorMessage = "Required.")] public DateOnly Birthday { get; set; }
+        [Required(ErrorMessage = "Required.")] public string Birthday { get; set; }
         [Required(ErrorMessage = "Required.")] public string PhoneNumber { get; set; } = null!;
         [Required(ErrorMessage = "Required.")] public string Gender { get; set; } = null!;
         [Required(ErrorMessage = "Required.")] public string Address { get; set; } = null!;
