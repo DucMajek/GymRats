@@ -42,4 +42,5 @@ public interface IUserServices
 
     Task<List<PersonalTraining>> GetPersonalTrainings(string email, CancellationToken cancellationToken = default);
     Task<List<Coach>> GetCoachesList();
+    Task<bool> DroppingClass(string email, int groupId, CancellationToken cancellationToken = default);
 }

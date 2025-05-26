@@ -333,5 +333,13 @@ namespace GymRats.Presentation.Controllers
                 return NotFound(ex.Message);
             }
         }
+
+        [HttpDelete("user/dropClass/{email}/{idGroup}")]
+        public async Task<ActionResult> DropClass(string email, int idGroup,
+            CancellationToken cancellationToken = default)
+        {
+            var resignation = await _userService.DroppingClass(email, idGroup, cancellationToken);
+            return Ok(resignation);
+        }
     }
 }

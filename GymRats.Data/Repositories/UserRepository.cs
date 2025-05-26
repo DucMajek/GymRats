@@ -397,12 +397,26 @@ namespace GymRats.Data.Repositories
 
         public async Task<List<Coach>> GetCoaches()
         {
-            
             return await _context
                 .Coaches
                 .AsNoTracking()
                 .Include(p => p.IdCoachNavigation)
                 .ToListAsync();
+        }
+
+        public async Task<bool> DeleteParticipationInClass(int groupId, int userId,
+            CancellationToken cancellationToken = default)
+        {
+            var userParticipationInClass = _context.ParticipationInClasses
+                .FirstOrDefault(e => e.IdUser == userId && e.IdGroup == groupId);
+            if (userParticipationInClass == null)
+            {
+                return false;
+            }
+
+            _context.Remove(userParticipationInClass);
+            await _context.SaveChangesAsync(cancellationToken);
+            return true;
         }
     }
 }

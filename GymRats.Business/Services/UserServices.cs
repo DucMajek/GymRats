@@ -264,4 +264,11 @@ public class UserServices : IUserServices
             throw new InvalidOperationException("No trainers available");
         return coaches;
     }
+
+    public async Task<bool> DroppingClass(string email,  int groupId, CancellationToken cancellationToken = default)
+    {
+        var user = await _userRepository.GetUser(email, cancellationToken);
+        
+        return await _userRepository.DeleteParticipationInClass(groupId, user.IdUser, cancellationToken);
+    }
 }
