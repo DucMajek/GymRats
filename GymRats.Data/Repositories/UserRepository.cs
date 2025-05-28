@@ -392,6 +392,7 @@ namespace GymRats.Data.Repositories
             return await _context.PersonalTrainings
                 .AsNoTracking()
                 .Where(e => e.IdUser == userId)
+                .Include(p => p.IdCoachNavigation)
                 .ToListAsync(cancellationToken);
         }
 
@@ -417,6 +418,22 @@ namespace GymRats.Data.Repositories
             _context.Remove(userParticipationInClass);
             await _context.SaveChangesAsync(cancellationToken);
             return true;
+        }
+
+        public async Task<PersonalTraining> AddNewPersonalTraining(int coachId, int userId, string date,
+            CancellationToken cancellationToken = default)
+        {
+            await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+            var newPersonalTraining = new PersonalTraining()
+            {
+                ReservationDateTime = DateTime.Parse(date),
+                IdCoach = coachId,
+                IdUser = userId
+            };
+            await _context.PersonalTrainings.AddAsync(newPersonalTraining, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
+            await transaction.CommitAsync(cancellationToken);
+            return newPersonalTraining;
         }
     }
 }

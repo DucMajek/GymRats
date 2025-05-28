@@ -341,5 +341,14 @@ namespace GymRats.Presentation.Controllers
             var resignation = await _userService.DroppingClass(email, idGroup, cancellationToken);
             return Ok(resignation);
         }
+
+        [HttpPost("user/personalTraning/{coachId}/{email}/{date}")]
+        public async Task<ActionResult> RegisterForPersonalTraining(int coachId, string email, string date,
+            CancellationToken cancellationToken = default)
+        {
+            var registrationForTraining =
+                await _userService.NewPersonalTraining(coachId, email, date, cancellationToken);
+            return Ok(registrationForTraining);
+        }
     }
 }

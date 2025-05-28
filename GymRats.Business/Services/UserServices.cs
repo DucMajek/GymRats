@@ -271,4 +271,11 @@ public class UserServices : IUserServices
         
         return await _userRepository.DeleteParticipationInClass(groupId, user.IdUser, cancellationToken);
     }
+
+    public async Task<PersonalTraining> NewPersonalTraining(int coachId, string email, string date,
+        CancellationToken cancellationToken = default)
+    {
+        var user = await _userRepository.GetUser(email, cancellationToken);
+        return await _userRepository.AddNewPersonalTraining(coachId, user.IdUser, date, cancellationToken);
+    }
 }

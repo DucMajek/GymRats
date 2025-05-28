@@ -45,4 +45,7 @@ public interface IUserRepository
     Task<List<PersonalTraining>> GetPersonalTraining(int userId, CancellationToken cancellationToken = default);
     Task<List<Coach>> GetCoaches();
     Task<bool> DeleteParticipationInClass(int groupId, int userId, CancellationToken cancellationToken = default);
+
+    Task<PersonalTraining> AddNewPersonalTraining(int coachId, int userId, string date,
+        CancellationToken cancellationToken = default);
 }
