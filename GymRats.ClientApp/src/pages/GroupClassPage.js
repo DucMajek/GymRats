@@ -5,21 +5,19 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import GroupClassCard from '../components/GroupClassCard';
 
-import '../assets/styles/Dashboard.css';
 import '../assets/styles/Groupclass.css';
 
 export default function GroupClassPage() {
-  const { classes, loading, error, signedIn, signIn } = useGroupClasses();
+  const { classes, loading, error, signedIn, signIn , drop} = useGroupClasses();
 
-  // 1) Filter state
+ 
   const [coachFilter, setCoachFilter] = useState('');
 
-  // 2) Build unique list of coaches
   const coachNames = Array.from(
     new Set(classes.map(c => c.coachName).filter(n => n))
   );
 
-  // 3) Decide which to display
+ 
   const displayed = coachFilter
     ? classes.filter(c => c.coachName === coachFilter)
     : classes;
@@ -66,6 +64,7 @@ export default function GroupClassPage() {
                 coachName={cls.coachName}
                 signedIn={signedIn.has(cls.idGroup)}
                 onSignIn={() => signIn(cls.idGroup)}
+                onDrop={() => drop(cls.idGroup)}
               />
             ))}
           </div>

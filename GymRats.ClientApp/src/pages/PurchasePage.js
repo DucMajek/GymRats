@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../components/AuthContext';
-import {  Button, Alert } from 'react-bootstrap';
+import { Button, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import '../assets/styles/PurchasePage.css';
 import Header from '../components/Header';
@@ -43,17 +43,22 @@ export default function PurchasePage() {
   const { isLoggedIn, email, token } = useAuth();
   const navigate = useNavigate();
 
-  const [buyingId, setBuyingId] = useState(null);
-  const [error, setError]     = useState('');
-  const [success, setSuccess] = useState(false);
+  const [buyingId, setBuyingId]   = useState(null);
+  const [error, setError]         = useState('');
+  const [success, setSuccess]     = useState(false);
 
   if (!isLoggedIn) {
-    return <Alert variant="warning" className="m-4">Musisz być zalogowany, aby kupić karnet.</Alert>;
+    return (
+      <Alert variant="warning" className="m-4">
+        Musisz być zalogowany, aby kupić karnet.
+      </Alert>
+    );
   }
 
   const handleBuy = async (passId) => {
     setError('');
     setBuyingId(passId);
+
     try {
       await axios.post(
         `${API_URL}/buyGymPass/${passId}/${encodeURIComponent(email)}`,
@@ -61,6 +66,7 @@ export default function PurchasePage() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setSuccess(true);
+      // Po 1.5s przekieruj do podglądu
       setTimeout(() => navigate('/gym-pass'), 1500);
     } catch (err) {
       setError(err.response?.data || err.message || 'Coś poszło nie tak przy zakupie.');
@@ -70,50 +76,54 @@ export default function PurchasePage() {
   };
 
   return (
-    
-      <div className="main">
-        <Header />
-            <div className="d-flex" >
-                <Sidebar />
+    <div className="main">
+      <Header />
+      <div className="d-flex">
+        <Sidebar />
+        <div className="dashboard-main">
+          <h2 className="group-classes-title">Zakup karnetu</h2>
 
-      <div className="dashboard-main">
-        <h2 className="group-classes-title">Zakup karnetu</h2>
-        {error   && <Alert variant="danger">{error}</Alert>}
-        {success && <Alert variant="success">Karnet zakupiony! Zaraz przekieruję Cię do podglądu.</Alert>}
+          {error && <Alert variant="danger">{error}</Alert>}
+          {success && (
+            <Alert variant="success">
+              Karnet zakupiony! Zaraz przekieruję Cię do podglądu.
+            </Alert>
+          )}
 
-        <div className="group-classes-container">
-          {AVAILABLE_PASSES.map(p => (
-            <div className="group-card" key={p.idTypePass}>
-              <div className="group-card-type">{p.gymPassName}</div>
-              <h3 className="group-card-title">{p.price} PLN</h3>
+          {/* Ukryj opcje zakupowe po sukcesie */}
+          {!success && (
+            <div className="group-classes-container">
+              {AVAILABLE_PASSES.map(p => (
+                <div className="group-card" key={p.idTypePass}>
+                  <div className="group-card-type">{p.gymPassName}</div>
+                  <h3 className="group-card-title">{p.price} PLN</h3>
 
-              {/* tu pokazujemy całe description */}
-              <div className="group-card-description">
-                {p.description.split('\n').map((line, i) => (
-                  <p key={i}>{line}</p>
-                ))}
-              </div>
+                  <div className="group-card-description">
+                    {p.description.split('\n').map((line, i) => (
+                      <p key={i}>{line}</p>
+                    ))}
+                  </div>
 
-              <div className="group-card-middle">
-                <Button
-                  className="sign-in-button"
-                  disabled={buyingId === p.idTypePass}
-                  onClick={() => handleBuy(p.idTypePass)}
-                >
-                  {buyingId === p.idTypePass ? 'Kupowanie…' : 'Kup karnet'}
-                </Button>
-              </div>
+                  <div className="group-card-middle">
+                    <Button
+                      className="sign-in-button"
+                      disabled={buyingId === p.idTypePass}
+                      onClick={() => handleBuy(p.idTypePass)}
+                    >
+                      {buyingId === p.idTypePass ? 'Kupowanie…' : 'Kup karnet'}
+                    </Button>
+                  </div>
 
-              <div className="group-card-stats">
-                <span>Czas trwania:</span>
-                <span>{p.durationPass} dni</span>
-              </div>
+                  <div className="group-card-stats">
+                    <span>Czas trwania:</span>
+                    <span>{p.durationPass} dni</span>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>
-    </div>
-    
   );
 }
