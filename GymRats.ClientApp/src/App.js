@@ -18,7 +18,8 @@ import GroupClassPage from './pages/GroupClassPage';
 import PurchasePage from './pages/PurchasePage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CoursesTypePage from "./pages/CoursesTypePage";
-
+import PersonalTrainingPage from "./pages/PersonalTrainingPage";
+import MyPersonalTrainingsPage from "./pages/MyPersonalTrainingsPage";
 
 function App() {
   return (
@@ -38,6 +39,8 @@ function App() {
             <Route path="/diets" element={<DietsPage />} />
             <Route path="/training-plans" element={<TrainingPlansPage />} />
             <Route path="/courses" element={<CoursesPage />} />
+            <Route path="/personal-training/signup" element={<PersonalTrainingPage />} />
+            <Route path="/personal-training/my-training" element={<MyPersonalTrainingsPage />} />
           </Routes>
         </div>
       </Router>

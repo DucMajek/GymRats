@@ -21,7 +21,7 @@ export default function Sidebar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { email, token, logout } = useAuth();
-
+  const [personalOpen, setPersonalOpen] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       if (!email || !token) return;
@@ -44,7 +44,7 @@ export default function Sidebar() {
 
   const handleLogout = () => {
     logout();
-    navigate('/');  // Tutaj dodajemy przekierowanie
+    navigate('/', { replace: true }); 
   };
 
   return (
@@ -65,24 +65,76 @@ export default function Sidebar() {
 
           <CDBSidebarContent>
             <CDBSidebarMenu>
-              <NavLink exact to="/user-profile">
-                <CDBSidebarMenuItem icon="user">Moje konto</CDBSidebarMenuItem>
+              <NavLink to="/user-profile">
+                {({ isActive }) => (
+                  <CDBSidebarMenuItem icon="user" className={isActive ? "active" : ""}>
+                    Moje konto
+                  </CDBSidebarMenuItem>
+                )}
               </NavLink>
-              <NavLink exact to="/gym-pass">
-                <CDBSidebarMenuItem icon="ticket-alt">Karnety</CDBSidebarMenuItem>
+              <NavLink to="/gym-pass">
+                {({ isActive }) => (
+                  <CDBSidebarMenuItem icon="ticket-alt" className={isActive ? "active" : ""}>
+                    Karnety
+                  </CDBSidebarMenuItem>
+                )}
               </NavLink>
-              <NavLink exact to="/diets">
-                <CDBSidebarMenuItem icon="carrot">Diety</CDBSidebarMenuItem>
+              <NavLink to="/diets">
+                {({ isActive }) => (
+                  <CDBSidebarMenuItem icon="carrot" className={isActive ? "active" : ""}>
+                    Diety
+                  </CDBSidebarMenuItem>
+                )}
               </NavLink>
-              <NavLink exact to="/training-plans">
-                <CDBSidebarMenuItem icon="clipboard-list">Plany treningowe</CDBSidebarMenuItem>
+              <NavLink to="/training-plans">
+                {({ isActive }) => (
+                  <CDBSidebarMenuItem icon="clipboard-list" className={isActive ? "active" : ""}>
+                    Plany treningowe
+                  </CDBSidebarMenuItem>
+                )}
               </NavLink>
-              <NavLink exact to="/courses">
-                <CDBSidebarMenuItem icon="graduation-cap">Kursy</CDBSidebarMenuItem>
+              <NavLink to="/courses">
+                {({ isActive }) => (
+                  <CDBSidebarMenuItem icon="graduation-cap" className={isActive ? "active" : ""}>
+                    Kursy
+                  </CDBSidebarMenuItem>
+                )}
               </NavLink>
-              <NavLink exact to="/Groupclass">
-                <CDBSidebarMenuItem icon="calendar-alt">Zajęcia grupowe</CDBSidebarMenuItem>
+              <NavLink to="/Groupclass">
+                {({ isActive }) => (
+                  <CDBSidebarMenuItem icon="calendar-alt" className={isActive ? "active" : ""}>
+                    Zajęcia grupowe
+                  </CDBSidebarMenuItem>
+                )}
               </NavLink>
+              <div>
+                <div
+                  className="sidebar-submenu-toggle"
+                  onClick={() => setPersonalOpen(o => !o)}
+                >
+                  <CDBSidebarMenuItem icon="dumbbell">
+                    Treningi
+                  </CDBSidebarMenuItem>
+                </div>
+                {personalOpen && (
+                  <div className="sidebar-submenu">
+                    <NavLink to="/personal-training/signup">
+                      {({ isActive }) => (
+                        <CDBSidebarMenuItem icon="calendar-plus" className={`submenu-item${isActive ? " active" : ""}`}>
+                          Umów się
+                        </CDBSidebarMenuItem>
+                      )}
+                    </NavLink>
+                    <NavLink to="/personal-training/my-training">
+                      {({ isActive }) => (
+                        <CDBSidebarMenuItem icon="running" className={`submenu-item${isActive ? " active" : ""}`}>
+                          Moje treningi
+                        </CDBSidebarMenuItem>
+                      )}
+                    </NavLink>
+                  </div>
+                )}
+              </div>
             </CDBSidebarMenu>
           </CDBSidebarContent>
 

@@ -1,0 +1,106 @@
+.trainer-block {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 18px 24px;
+    transition: box-shadow 0.2s, background 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+    min-height: 64px;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-left: 10px;
+    width: 99%;
+}
+
+.trainer-block:hover {
+    box-shadow: 0 0 20px rgb(238, 108, 48);
+    transform: translateY(-4px);
+}
+
+.trainer-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 200px;
+    justify-content: center;
+    min-width: 0;
+}
+
+.trainer-signup-btn {
+    background: orange;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+    align-self: center;
+    min-width: 120px;
+    margin-left: 24px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+    .trainer-block {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 14px 10px;
+        min-height: unset;
+    }
+
+    .trainer-signup-btn {
+        margin-left: 0;
+        margin-top: 12px;
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+.personal-training-title {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin: 60px 0 20px 40px;
+    color: white;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center !important; 
+    justify-content: center !important;
+    z-index: 2000;
+    overflow: hidden;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 32px 24px;
+    border-radius: 10px;
+    min-width: 280px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 30%;
+    height: 40%;
+}
+.modal-content label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+.modal-content input[type="date"],
+.modal-content input[type="time"] {
+    margin-top: 4px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
