@@ -20,6 +20,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CoursesTypePage from "./pages/CoursesTypePage";
 import PersonalTrainingPage from "./pages/PersonalTrainingPage";
 import MyPersonalTrainingsPage from "./pages/MyPersonalTrainingsPage";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -32,7 +33,11 @@ function App() {
             <Route path="/Groupclass" element={<GroupClassPage />} />
             <Route exact="true" path="/login" element={<LoginPage />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<UserDashboard />} />
+            <Route path="/dashboard" element={
+              <PrivateRoute>
+                <UserDashboard />
+              </PrivateRoute>
+            } />
             <Route path="/user-profile" element={<UserProfile />} />
             <Route path="/gym-pass" element={<GymPassPage />} />
             <Route path="/purchase" element={<PurchasePage />} />

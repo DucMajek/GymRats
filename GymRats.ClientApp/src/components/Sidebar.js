@@ -74,14 +74,14 @@ export default function Sidebar() {
               </NavLink>
               <NavLink to="/gym-pass">
                 {({ isActive }) => (
-                  <CDBSidebarMenuItem icon="ticket-alt" className={isActive ? "active" : ""}>
-                    Karnety
+                  <CDBSidebarMenuItem icon="id-card" className={isActive ? "active" : ""} iconClassName="sidebar-icon-small">
+                    &nbsp;Karnety
                   </CDBSidebarMenuItem>
                 )}
               </NavLink>
               <NavLink to="/diets">
                 {({ isActive }) => (
-                  <CDBSidebarMenuItem icon="carrot" className={isActive ? "active" : ""}>
+                  <CDBSidebarMenuItem icon="utensils" className={isActive ? "active" : ""}>
                     Diety
                   </CDBSidebarMenuItem>
                 )}
@@ -95,7 +95,7 @@ export default function Sidebar() {
               </NavLink>
               <NavLink to="/courses">
                 {({ isActive }) => (
-                  <CDBSidebarMenuItem icon="graduation-cap" className={isActive ? "active" : ""}>
+                  <CDBSidebarMenuItem icon="book" className={isActive ? "active" : ""}>
                     Kursy
                   </CDBSidebarMenuItem>
                 )}
@@ -112,7 +112,7 @@ export default function Sidebar() {
                   className="sidebar-submenu-toggle"
                   onClick={() => setPersonalOpen(o => !o)}
                 >
-                  <CDBSidebarMenuItem icon="dumbbell">
+                  <CDBSidebarMenuItem icon="chart-line">
                     Treningi
                   </CDBSidebarMenuItem>
                 </div>

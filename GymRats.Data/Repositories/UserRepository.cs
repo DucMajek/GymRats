@@ -391,8 +391,11 @@ namespace GymRats.Data.Repositories
         {
             return await _context.PersonalTrainings
                 .AsNoTracking()
-                .Where(e => e.IdUser == userId)
+                .Where(e => e.IdUser == userId || e.IdCoach == userId)
                 .Include(p => p.IdCoachNavigation)
+                .ThenInclude(c => c.IdCoachNavigation)
+                .Include(p => p.IdUserNavigation)
+                .ThenInclude(u => u.IdUserNavigation)
                 .ToListAsync(cancellationToken);
         }
 
