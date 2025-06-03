@@ -17,10 +17,6 @@ public partial class Person
 
     public string Gender { get; set; } = null!;
 
-    public decimal Weight { get; set; }
-
-    public int Height { get; set; }
-
     public string? Address { get; set; }
 
     public string? FlatNumber { get; set; }

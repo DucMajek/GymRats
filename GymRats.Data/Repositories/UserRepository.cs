@@ -34,8 +34,6 @@ namespace GymRats.Data.Repositories
                     Birthday = DateOnly.Parse(birthday),
                     PhoneNumber = phoneNumber,
                     Gender = gender.Equals("M", StringComparison.OrdinalIgnoreCase) ? "Mezczyzna" : "Kobieta",
-                    Weight = 0,
-                    Height = 0,
                     Address = address,
                     FlatNumber = flatNumber,
                     ZipCode = zipCode,

@@ -157,7 +157,6 @@ public partial class GymRatsContext : DbContext
             entity.Property(e => e.Gender)
                 .IsUnicode(false)
                 .HasColumnName("gender");
-            entity.Property(e => e.Height).HasColumnName("height");
             entity.Property(e => e.Name)
                 .IsUnicode(false)
                 .HasColumnName("name");
@@ -170,9 +169,6 @@ public partial class GymRatsContext : DbContext
             entity.Property(e => e.Surname)
                 .IsUnicode(false)
                 .HasColumnName("surname");
-            entity.Property(e => e.Weight)
-                .HasColumnType("decimal(4, 2)")
-                .HasColumnName("weight");
             entity.Property(e => e.ZipCode)
                 .IsUnicode(false)
                 .HasColumnName("zip_code");
