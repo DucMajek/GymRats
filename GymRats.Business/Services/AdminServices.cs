@@ -27,6 +27,7 @@ public class AdminServices : IAdminServices
         {
             throw new InvalidFileFormatException("Invalid PDF file.");
         }
+
         byte[] fileBytes;
         using (var memoryStream = new MemoryStream())
         {
@@ -42,10 +43,12 @@ public class AdminServices : IAdminServices
     {
         if (string.IsNullOrWhiteSpace(trainingPlanName))
             throw new ArgumentNullException("Training plan name cannot be null or empty.");
-        if (TrainingPlanFile == null || TrainingPlanFile.Length == 0 || !TrainingPlanFile.ContentType.Equals("application/pdf"))
+        if (TrainingPlanFile == null || TrainingPlanFile.Length == 0 ||
+            !TrainingPlanFile.ContentType.Equals("application/pdf"))
         {
             throw new InvalidFileFormatException("Invalid PDF file.");
         }
+
         byte[] fileBytes;
         using (var memoryStream = new MemoryStream())
         {
@@ -81,6 +84,8 @@ public class AdminServices : IAdminServices
 
         if (string.IsNullOrWhiteSpace(description))
             throw new ArgumentNullException("Description cannot be null or empty.");
+
+        description = description.Replace(" ", "\n");
 
         return await _adminRepository.AddTypePass(gymPassName, price, durationPass, description, cancellationToken);
     }
