@@ -19,4 +19,6 @@ public interface IAdminRepository
 
     Task<TrainerCourse> AddTrainerCourse(string courseName, string duration, string description, int coachId,
         CancellationToken cancellationToken = default);
+    Task<bool> RemoveTrainingPlan(int trainingPlanId, CancellationToken cancellationToken = default);
+    Task<bool> RemoveFoodEbook(int foodEbookId, CancellationToken cancellationToken = default);
 }

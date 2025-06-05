@@ -100,4 +100,34 @@ public class AdminRepository : IAdminRepository
         await transaction.CommitAsync(cancellationToken);
         return newTrainerCourse;
     }
+
+    public async Task<bool> RemoveTrainingPlan(int trainingPlanId, CancellationToken cancellationToken = default)
+    {
+        var trainingPlan = _context.TrainingPlans
+            .AsNoTracking()
+            .FirstOrDefault(e => e.IdTrainingPlan == trainingPlanId);
+        if (trainingPlan == null)
+        {
+            return false;
+        }
+
+        _context.Remove(trainingPlan);
+        await _context.SaveChangesAsync(cancellationToken);
+        return true;
+    }
+
+    public async Task<bool> RemoveFoodEbook(int foodEbookId, CancellationToken cancellationToken = default)
+    {
+        var foodEbook = _context.FoodEbooks
+            .AsNoTracking()
+            .FirstOrDefault(e => e.IdEbook == foodEbookId);
+        if (foodEbook == null)
+        {
+            return false;
+        }
+
+        _context.Remove(foodEbook);
+        await _context.SaveChangesAsync(cancellationToken);
+        return true;
+    }
 }

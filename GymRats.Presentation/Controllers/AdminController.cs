@@ -40,7 +40,7 @@ public class AdminController : ControllerBase
 
     [HttpPost("admin/newTrainigPlan/{trainingPlanName}")]
     [Consumes("multipart/form-data")]
-    public async Task<ActionResult> NewFoodBook(string trainingPlanName, IFormFile trainingPlanFile,
+    public async Task<ActionResult> NewTrainingPlan(string trainingPlanName, IFormFile trainingPlanFile,
         CancellationToken cancellationToken = default)
     {
         try
@@ -56,7 +56,7 @@ public class AdminController : ControllerBase
     }
 
     [HttpPut("admin/updateGymPassPrice/{gymPassId}/{newPassPrice}")]
-    public async Task<ActionResult> NewFoodBook(int gymPassId, int newPassPrice,
+    public async Task<ActionResult> NewGymPassPrice(int gymPassId, int newPassPrice,
         CancellationToken cancellationToken = default)
     {
         try
@@ -87,7 +87,7 @@ public class AdminController : ControllerBase
     }
 
     [HttpPost("admin/newTrainerCourse/{courseName}/{duration}/{description}/{coachId}")]
-    public async Task<ActionResult> NewGymPass(string courseName, string duration, string description,
+    public async Task<ActionResult> NewTrainerCourse(string courseName, string duration, string description,
         int coachId,
         CancellationToken cancellationToken = default)
     {
@@ -101,5 +101,21 @@ public class AdminController : ControllerBase
         {
             return BadRequest(ex.Message);
         }
+    }
+
+    [HttpDelete("admin/deleteTrainingPlan/{trainingPlanId}/")]
+    public async Task<ActionResult> DeleteTrainingPlan(int trainingPlanId,
+        CancellationToken cancellationToken = default)
+    {
+        var trainingPlan = await _adminService.DeleteTrainingPlan(trainingPlanId, cancellationToken);
+        return Ok(trainingPlan);
+    }
+    
+    [HttpDelete("admin/deleteFoodEbook/{foodEbookId}/")]
+    public async Task<ActionResult> DeleteFoodEbook(int foodEbookId,
+        CancellationToken cancellationToken = default)
+    {
+        var foodEbook = await _adminService.DeleteFoodEbook(foodEbookId, cancellationToken);
+        return Ok(foodEbook);
     }
 }

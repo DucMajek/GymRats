@@ -104,4 +104,14 @@ public class AdminServices : IAdminServices
             throw new ArgumentNullException("Description cannot be null or empty.");
         return await _adminRepository.AddTrainerCourse(courseName, duration, description, coachId, cancellationToken);
     }
+
+    public async Task<bool> DeleteTrainingPlan(int trainingPlanId, CancellationToken cancellationToken = default)
+    {
+        return await _adminRepository.RemoveTrainingPlan(trainingPlanId, cancellationToken);
+    }
+
+    public async Task<bool> DeleteFoodEbook(int foodEbookId, CancellationToken cancellationToken = default)
+    {
+        return await _adminRepository.RemoveFoodEbook(foodEbookId, cancellationToken);
+    }
 }
