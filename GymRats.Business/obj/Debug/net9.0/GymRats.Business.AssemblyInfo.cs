@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GymRats.Business")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+82117d03ff63daeddbaaed87a1491f7c1a60c334")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5f735884f51f961157eb2212e958087ca15b131b")]
 [assembly: System.Reflection.AssemblyProductAttribute("GymRats.Business")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GymRats.Business")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
