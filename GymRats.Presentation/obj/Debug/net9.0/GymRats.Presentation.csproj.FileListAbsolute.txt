@@ -278,3 +278,8 @@ D:\Praca dyplomowa\GymRats\GymRats.Presentation\bin\Debug\net9.0\Microsoft.Exten
 D:\Praca dyplomowa\GymRats\GymRats.Presentation\bin\Debug\net9.0\Microsoft.Extensions.FileProviders.Physical.dll
 D:\Praca dyplomowa\GymRats\GymRats.Presentation\bin\Debug\net9.0\Microsoft.Extensions.FileSystemGlobbing.dll
 D:\Praca dyplomowa\GymRats\GymRats.Presentation\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+D:\Praca dyplomowa\GymRats\GymRats.Presentation\bin\Debug\net9.0\GymRats.ClientApp\build\asset-manifest.json
+D:\Praca dyplomowa\GymRats\GymRats.Presentation\bin\Debug\net9.0\GymRats.ClientApp\build\manifest.json
+D:\Praca dyplomowa\GymRats\GymRats.Presentation\bin\Debug\net9.0\GymRats.ClientApp\package-lock.json
+D:\Praca dyplomowa\GymRats\GymRats.Presentation\bin\Debug\net9.0\GymRats.ClientApp\package.json
+D:\Praca dyplomowa\GymRats\GymRats.Presentation\bin\Debug\net9.0\GymRats.ClientApp\public\manifest.json

@@ -19,21 +19,6 @@ function Footer() {
       <footer className="section__container footer__container">
         <span className="bg__blur"></span>
         <span className="bg__blur footer__blur"></span>
-        <div className="footer__col">
-          <div className="footer__logo"><img src={GymRats_logo} alt="logo" /></div>
-          <p>
-            Zrób pierwszy krok w stronę zdrowszej i silniejszej wersji siebie dzięki naszym atrakcyjnym planom cenowym.
-            Ćwicz, osiągaj cele i pokonuj wyzwania razem z nami!
-          </p>
-        </div>
-
-        <div className="footer__col">
-          <h4>Contact</h4>
-          <a href="#">Contact Us</a>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms & Conditions</a>
-          <a href="/BmiCalculator">BMI Calculator</a>
-        </div>
       </footer>
       <div className="footer__bar">
         Copyright © 2025. All rights reserved.
