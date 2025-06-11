@@ -4,7 +4,7 @@ import Sidebar from '../components/Sidebar';
 import GymPassCard from '../components/GymPassCard';
 import '../assets/styles/GymPass.css';
 
-export default function GymPassPage() {
+function GymPassPage() {
   return (
     <div className="main">
       <Header />
@@ -18,3 +18,4 @@ export default function GymPassPage() {
     </div>
   );
 }
+export default GymPassPage;

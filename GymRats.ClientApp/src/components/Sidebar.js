@@ -14,7 +14,7 @@ import axios from 'axios';
 import '../assets/styles/Sidebar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function Sidebar() {
+function Sidebar() {
   const [personalData, setPersonalData] = useState(null);
   const [error, setError] = useState(null);
   const [open, setOpen] = useState(false);
@@ -107,6 +107,13 @@ export default function Sidebar() {
                   </CDBSidebarMenuItem>
                 )}
               </NavLink>
+              <NavLink to="/BmiCalculator">
+                {({ isActive }) => (
+                  <CDBSidebarMenuItem icon="calculator" className={isActive ? "active" : ""}>
+                    Kalkulator BMI
+                  </CDBSidebarMenuItem>
+                )}
+              </NavLink>
               <div>
                 <div
                   className="sidebar-submenu-toggle"
@@ -148,3 +155,4 @@ export default function Sidebar() {
     </>
   );
 }
+export default Sidebar;

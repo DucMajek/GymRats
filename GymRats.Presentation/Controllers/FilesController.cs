@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GymRats.Presentation.DTOs.FileDto;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 
 namespace GymRats.Presentation.Controllers
@@ -104,6 +105,62 @@ namespace GymRats.Presentation.Controllers
             var fileName = reader["training_plan_name"].ToString();
 
             return File(fileData, PdfMimeType, fileName);
+        }
+        [HttpGet("getAllDiet/")]
+        public async Task<IActionResult> GetAllDiet(CancellationToken cancellationToken)
+        {
+            var connectionString = _configuration.GetConnectionString("MyDBConnection");
+
+            const string query = @"SELECT * FROM Food_ebook";
+
+            var diets = new List<DietDto>();
+
+            await using var connection = new SqlConnection(connectionString);
+            await connection.OpenAsync(cancellationToken);
+
+            await using var command = new SqlCommand(query, connection);
+            await using var reader = await command.ExecuteReaderAsync(cancellationToken);
+
+            while (await reader.ReadAsync(cancellationToken))
+            {
+                diets.Add(new DietDto
+                {
+                    IdEbook = reader.GetInt32(reader.GetOrdinal("Id_Ebook")),
+                    Calories = reader.GetString(reader.GetOrdinal("Calories")),
+                    DietType = reader.GetString(reader.GetOrdinal("Diet_Type"))
+                });
+            }
+
+            return Ok(diets);
+        }
+        
+        [HttpGet("getAlltrainingPlan/")]
+        public async Task<IActionResult> GetAllTrainingPlans(CancellationToken cancellationToken)
+        {
+            var connectionString = _configuration.GetConnectionString("MyDBConnection");
+
+            const string query = @"
+        SELECT *
+        FROM Training_Plan";
+
+            var trainingPlans = new List<TrainingPlanDto>();
+
+            await using var connection = new SqlConnection(connectionString);
+            await connection.OpenAsync(cancellationToken);
+
+            await using var command = new SqlCommand(query, connection);
+            await using var reader = await command.ExecuteReaderAsync(cancellationToken);
+
+            while (await reader.ReadAsync(cancellationToken))
+            {
+                trainingPlans.Add(new TrainingPlanDto
+                {
+                    IdTrainingPlan = reader.GetInt32(reader.GetOrdinal("Id_Training_Plan")),
+                    TrainingPlanName = reader.GetString(reader.GetOrdinal("Training_Plan_Name"))
+                });
+            }
+
+            return Ok(trainingPlans);
         }
     }
 }

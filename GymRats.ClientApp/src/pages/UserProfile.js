@@ -10,7 +10,7 @@ import Sidebar from '../components/Sidebar';
 import ChangePasswordModal from '../components/ChangePasswordModal';
 import { useAuth } from '../components/AuthContext';
 
-export default function UserProfile() {
+function UserProfile() {
   const { email, token } = useAuth();
   const [personalData, setPersonalData] = useState(null);
   const [isLoading, setIsLoading]       = useState(true);
@@ -115,3 +115,4 @@ export default function UserProfile() {
     </div>
   );
 }
+export default UserProfile;

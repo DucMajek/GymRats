@@ -31,7 +31,7 @@ function getEmailFromToken() {
   }
 }
 
-export default function GroupClassPage() {
+function GroupClassPage() {
   const { classes, loading, error, signedIn, signIn, drop } = useGroupClasses();
 
   const [coachFilter, setCoachFilter] = useState('');
@@ -263,3 +263,4 @@ export default function GroupClassPage() {
     </div>
   );
 }
+export default GroupClassPage;

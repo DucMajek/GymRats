@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [email, setEmail]         = useState(emailFromStorage || '');
   const [isLoggedIn, setLoggedIn] = useState(!!tokenFromStorage);
 
-
+ 
   useEffect(() => {
     if (token) {
       localStorage.setItem('token', token);
