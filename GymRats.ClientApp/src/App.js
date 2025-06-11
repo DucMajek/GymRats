@@ -22,6 +22,8 @@ import PersonalTrainingPage from "./pages/PersonalTrainingPage";
 import MyPersonalTrainingsPage from "./pages/MyPersonalTrainingsPage";
 import PrivateRoute from "./components/PrivateRoute";
 
+import BmiCalculatorPage from './pages/BmiCalculatorPage';
+
 function App() {
   return (
     <AuthProvider>
@@ -46,6 +48,7 @@ function App() {
             <Route path="/courses" element={<CoursesPage />} />
             <Route path="/personal-training/signup" element={<PersonalTrainingPage />} />
             <Route path="/personal-training/my-training" element={<MyPersonalTrainingsPage />} />
+            <Route path="/BmiCalculator" element={<BmiCalculatorPage />} />
           </Routes>
         </div>
       </Router>

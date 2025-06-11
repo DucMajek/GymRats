@@ -1,17 +1,21 @@
 import React from 'react';
 import DownloadButton from './DownloadButton';
 import '../assets/styles/DietPlan.css';
-function DietPlan({ title, type }) {
+
+function DietPlan({ title, type, diets = [], onDelete, isAdmin }) {
   return (
     <div className="diet-plan">
       <h3>{title}</h3>
-      <div className="calories" >
-        <p>1500 kcal&nbsp; <DownloadButton  useAlternativeApi={false} type={type} calories={'1500'} /></p>
-        <p>1800 kcal&nbsp; <DownloadButton useAlternativeApi={false} type={type} calories={'1800'} /></p>
-        <p>2000 kcal <DownloadButton useAlternativeApi={false} type={type} calories={'2000'} /></p>
-        <p>2500 kcal <DownloadButton useAlternativeApi={false} type={type} calories={'2500'} /></p>
-        <p>3000 kcal <DownloadButton useAlternativeApi={false} type={type} calories={'3000'} /></p>
-        <p>3500 kcal <DownloadButton useAlternativeApi={false} type={type} calories={'3500'} /></p>
+      <div className="calories">
+        {diets.map(diet => (
+          <p key={diet.idEbook}>
+            {diet.calories} kcal&nbsp;&nbsp;
+            <DownloadButton useAlternativeApi={false} type={type} calories={diet.calories.toString()} />
+            {isAdmin && (
+              <button style={{marginLeft: 8, background: 'red'}} onClick={() => onDelete(diet.idEbook)}>Usuń</button>
+            )}
+          </p>
+        ))}
       </div>
     </div>
   );

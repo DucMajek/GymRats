@@ -58,7 +58,7 @@ function TraningCourse() {
             <div id="coursesCarousel" className="carousel slide mx-auto" style={{ maxWidth: '600px' }}>
                 <div className="carousel-inner">
                     {courses.map((course, index) => (
-                        <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={course.idKursu}>
+                        <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={course.idCourse}>
                             <div className="course__card" style={{ width: 'auto', height: 'auto' }}>
                                 <center><h3>{course.courseName}</h3></center>
                                 <br />

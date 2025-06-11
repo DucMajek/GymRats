@@ -5,7 +5,7 @@ const api = axios.create({
   baseURL: 'https://localhost:44380',
 });
 
-export default function useGroupClasses() {
+function useGroupClasses() {
   const [classes, setClasses]   = useState([]);
   const [loading, setLoading]   = useState(true);
   const [error, setError]       = useState(null);
@@ -105,3 +105,4 @@ export default function useGroupClasses() {
 
   return { classes, loading, error, signedIn, signIn, drop };
 }
+export default useGroupClasses;

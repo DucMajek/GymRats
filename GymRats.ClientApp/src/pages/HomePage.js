@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import '../assets/styles/HomePage.css';
 import headerLogo from '../assets/img/header.png';
 import join from '../assets/img/join.png';

@@ -1,5 +1,6 @@
 using GymRats.Business.Exceptions;
 using GymRats.Business.Interfaces;
+using GymRats.Presentation.DTOs.AdminDto;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -86,19 +87,28 @@ public class AdminController : ControllerBase
         }
     }
 
-    [HttpPost("admin/newTrainerCourse/{courseName}/{duration}/{description}/{coachId}")]
-    public async Task<ActionResult> NewTrainerCourse(string courseName, string duration, string description,
-        int coachId,
+    [HttpPost("admin/newTrainerCourse")]
+    
+    public async Task<ActionResult> NewTrainerCourse([FromBody] NewTrainerCourseDto dto,
         CancellationToken cancellationToken = default)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
         try
         {
-            var newTrainerCourse =
-                await _adminService.AddNewTrainerCourse(courseName, duration, description, coachId, cancellationToken);
+            var newTrainerCourse = await _adminService.AddNewTrainerCourse(
+                dto.CourseName,
+                dto.Duration,
+                dto.Description,
+                dto.CoachId,
+                cancellationToken);
+
             return Ok(newTrainerCourse);
         }
         catch (InvalidOperationException ex)
         {
+            _logger.LogError(ex, "Error adding trainer course");
             return BadRequest(ex.Message);
         }
     }

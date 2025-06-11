@@ -7,6 +7,48 @@
   max-width: fit-content;
 }
 
+.courses-page {
+  padding: 20px;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-inline: 20px;
+  padding: 1rem;
+  max-width: fit-content;
+}
+
+.courses-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.courses-header h2 {
+  margin: 0;
+  margin-top: 60px;
+}
+
+.courses-header .add-course-btn {
+  margin-top: 60px;
+  margin-left: 0px;
+  background-color: orange !important;
+  color: #fff !important;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgb(238, 108, 48);
+  font-weight: bold;
+  width: 150px;
+  text-align: left;
+}
+
+.courses-header .add-course-btn:hover {
+  background-color: rgba(238, 108, 48, 0.8) !important;
+  color: white !important;
+}
+
 .courses-page h2 {
   font-size: 2.5em;
   color: white;
@@ -19,16 +61,33 @@
 /* Kontener */
 .courses-container {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   align-items: flex-start;
-  gap: 20px;
+  gap: 2rem;
   
 }
 
+.typepage-courses .course-card {
+  width: 380px;
+  height: auto;
+  padding: 12px;
+}
+.typepage-courses .course-card h3 {
+  font-size: 0.9rem;
+}
+.typepage-courses .course-label {
+  font-size: 0.7rem;
+}
+.typepage-courses .course-card p {
+  font-size: 0.85rem;
+  white-space: normal;
+}
+
 .course-card {
+  width: 400px;
+  max-width: 100%;
   margin-left: 40px;
-  width: 100%; 
-  max-width: 400px; 
   height: auto; 
   background-color: rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 10px rgb(238, 108, 48);
@@ -100,52 +159,68 @@
   margin: 5px 0;
 }
 
-/* Link dowiedz się więcej */
-.learn-more {
-  display: inline-block;
-  margin-top: 15px;
-  color: orange;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
 
-.learn-more:hover {
-  color: rgba(238, 108, 48, 0.8);
-}
 
-/* Media Queries dla responsywności */
 @media (max-width: 768px) {
+  .courses-page {
+    padding: 0;
+    margin-inline: 0;
+    max-width: 100vw;
+    padding-top: 80px;
+  }
+  .courses-page h2 {
+    margin-left: 0;
+    margin-top: 32px;
+    text-align: center;
+    font-size: 2.2em;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 8px #000;
+    z-index: 2;
+    position: relative;
+  }
   .courses-container {
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 0 0;
+    width: 100vw;
+    padding: 0;
   }
-
   .course-card {
-      width: 90%; /* Karty zajmują 90% szerokości na mniejszych ekranach */
-      max-width: 100%; /* Usuwa maksymalną szerokość */
+    width: 300vw;
+    max-width: 340px;
+    margin: 0 auto 10px auto;
+    padding: 8px;
+    box-sizing: border-box;
   }
-
   .course-button {
-      width: 100%; /* Przycisk na pełną szerokość */
-      max-width: none; /* Usuwa ograniczenie szerokości */
+    width: 100%;
+    max-width: none;
   }
 }
 
 @media (max-width: 480px) {
+  .courses-page h2 {
+    font-size: 1.5em;
+    margin-top: 24px;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 8px #000;
+    z-index: 2;
+    position: relative;
+  }
   .course-card {
-      width: 100%; /* Karty zajmują 100% szerokości na bardzo małych ekranach */
-      padding: 15px; /* Mniejszy padding */
+    padding: 6px;
   }
-
   .course-card h3 {
-      font-size: 1.1rem; /* Mniejszy rozmiar czcionki */
+    font-size: 1.1rem;
   }
-
   .course-button {
-      padding: 10px 15px; /* Mniejszy padding przycisku */
-      font-size: 0.9rem; /* Mniejszy rozmiar czcionki */
+    padding: 10px 15px;
+    font-size: 0.9rem;
   }
   .content-wrapper {
     display: flex;
@@ -162,16 +237,78 @@
 
 .header-actions .action-button {
   margin-left: 1rem;
-  margin-top: 0.5rem; /* obniża przycisk względem tytułu */
+  margin-top: 0.5rem;
 }
-
 
 .header-actions {
   display: flex;
-  align-items: flex-start; /* wyrównuje elementy do góry kontenera */
+  align-items: flex-start;
 }
 
 .header-actions .action-button {
-  margin-left: 1rem;   /* odstęp od tytułu */
-  margin-top: 3rem;    /* obniża przycisk względem tytułu */
+  margin-left: 1rem;
+  margin-top: 3rem;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  z-index: 100;
+  text-align: center;
+}
+
+.pagination button {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination button:hover {
+  background-color: rgba(238, 108, 48, 0.8);
+}
+
+.pagination button:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  color: #fff;
+  font-size: 1.1em;
+  margin: 0 10px;
+}
+
+.pagination-mobile {
+  position: static !important;
+  margin: 32px auto 0 auto !important;
+  width: 100% !important;
+  max-width: 320px !important;
+  justify-content: center !important;
+  display: flex !important;
+  color: #fff;
+}
+
+@media (min-width: 769px) {
+  .pagination {
+    position: fixed !important;
+    left: 50% !important;
+    bottom: 40px !important;
+    transform: translateX(-50%) !important;
+    width: auto !important;
+    z-index: 100 !important;
+  }
+  .typepage-courses, .courses-container {
+    margin-bottom: 80px; 
+  }
+}
+

@@ -32,7 +32,7 @@ function Footer() {
           <a href="#">Contact Us</a>
           <a href="#">Privacy Policy</a>
           <a href="#">Terms & Conditions</a>
-          <a href="#">BMI Calculator</a>
+          <a href="/BmiCalculator">BMI Calculator</a>
         </div>
       </footer>
       <div className="footer__bar">
