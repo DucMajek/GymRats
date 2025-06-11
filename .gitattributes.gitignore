@@ -1,2 +1,0 @@
-src/**/*.cs linguist-language=C#
-docs/**/*.md linguist-detectable=false
