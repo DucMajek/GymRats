@@ -34,39 +34,48 @@ function AuthForm({
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    setError('');
-    setSuccess('');
+  setError('');
+  setSuccess('');
 
-    if (action === "Stwórz konto" && password !== confirmPassword) {
-      setError("Hasła się nie zgadzają.");
-      return;
+  if (action === "Stwórz konto" && password !== confirmPassword) {
+    setError("Hasła się nie zgadzają.");
+    setTimeout(() => setError(''), 1500);
+    return;
+  }
+
+  const result = await onSubmit(e);
+
+  if (result === false) {
+    if (action === "Zaloguj") {
+      setError("Nieprawidłowy email lub hasło.");
+    } else {
+      setError("Rejestracja nie powiodła się.");
     }
+    setTimeout(() => setError(''), 1000);
+    return;
+  }
 
-    // Wywołaj funkcję z rodzica
-    const result = onSubmit(e);
-
-    if (result !== false) {
-      setSuccess("Konto zostało pomyślnie utworzone!");
-
-      // Wyczyść wszystkie pola
-      setName('');
-      setSurname('');
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
-      setBirthday('');
-      setPhoneNumber('');
-      setGender('');
-      setAddress('');
-      setFlatNumber('');
-      setZipCode('');
-      setPlace('');
-    }
-  };
-
+  if (action === "Stwórz konto") {
+    setSuccess("Konto zostało pomyślnie utworzone!");
+    setTimeout(() => setError(''), 1500);
+    
+    setName('');
+    setSurname('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setBirthday('');
+    setPhoneNumber('');
+    setGender('');
+    setAddress('');
+    setFlatNumber('');
+    setZipCode('');
+    setPlace('');
+  }
+};
   return (
     <form onSubmit={handleSubmit}>
       {error && <div className="alert alert-danger">{error}</div>}

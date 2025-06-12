@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "vp1bMMHUYtI7B8e9nGrqxCNnaJDB0geKr/BShcoLD58=",
+  "Hash": "LbMwWH75MY1k+hMmS62Th49fhO3UAENTIJZM0m5OHG0=",
   "Source": "GymRats.Presentation",
   "BasePath": "_content/GymRats.Presentation",
   "Mode": "Default",
@@ -9,10 +9,10 @@
   "DiscoveryPatterns": [],
   "Assets": [
     {
-      "Identity": "C:\\Users\\micha\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
+      "Identity": "C:\\Users\\Duc\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
       "SourceId": "Microsoft.AspNetCore.Components.QuickGrid",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\micha\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Duc\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\",
       "BasePath": "_content/Microsoft.AspNetCore.Components.QuickGrid",
       "RelativePath": "Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
       "AssetKind": "All",
@@ -27,13 +27,13 @@
       "Integrity": "Nuu0BHvGBlwN6c5FSVjV9yxX0YPfwg3ufdOucRJCOz0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\micha\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\Duc\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\micha\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\QuickGrid.razor.js",
+      "Identity": "C:\\Users\\Duc\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\QuickGrid.razor.js",
       "SourceId": "Microsoft.AspNetCore.Components.QuickGrid",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\micha\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Duc\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\",
       "BasePath": "_content/Microsoft.AspNetCore.Components.QuickGrid",
       "RelativePath": "QuickGrid.razor.js",
       "AssetKind": "All",
@@ -48,13 +48,13 @@
       "Integrity": "tnamWuQ2F5I2J8hbtBt4/9i8Mb2y2o+9Tepj5tUrSdU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\micha\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\QuickGrid.razor.js"
+      "OriginalItemSpec": "C:\\Users\\Duc\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\QuickGrid.razor.js"
     },
     {
-      "Identity": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\fhah6atl6u-25o87uqmvr.gz",
+      "Identity": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\fhah6atl6u-25o87uqmvr.gz",
       "SourceId": "Microsoft.AspNetCore.Components.QuickGrid",
       "SourceType": "Package",
-      "ContentRoot": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\",
+      "ContentRoot": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Microsoft.AspNetCore.Components.QuickGrid",
       "RelativePath": "Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css.gz",
       "AssetKind": "All",
@@ -62,20 +62,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\micha\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
+      "RelatedAsset": "C:\\Users\\Duc\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "izrngo8qdo",
       "Integrity": "bl1Sll6BsS4llCzjKcNcHMwzxdPETwjAAvYwJAQ73Vc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\micha\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\Duc\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css"
     },
     {
-      "Identity": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\unlu0xluo6-eu7w3d5g1a.gz",
+      "Identity": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\unlu0xluo6-eu7w3d5g1a.gz",
       "SourceId": "Microsoft.AspNetCore.Components.QuickGrid",
       "SourceType": "Package",
-      "ContentRoot": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\",
+      "ContentRoot": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Microsoft.AspNetCore.Components.QuickGrid",
       "RelativePath": "QuickGrid.razor.js.gz",
       "AssetKind": "All",
@@ -83,20 +83,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\micha\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\QuickGrid.razor.js",
+      "RelatedAsset": "C:\\Users\\Duc\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\QuickGrid.razor.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "p4818tnj3t",
       "Integrity": "l1TN0xlzfmCvoE1j6NfscfK49JNKk0yWC8evKQzqR0w=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\micha\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\QuickGrid.razor.js"
+      "OriginalItemSpec": "C:\\Users\\Duc\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\QuickGrid.razor.js"
     },
     {
-      "Identity": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\vkhz6p3kdu-02jfxhbwsz.gz",
+      "Identity": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\vkhz6p3kdu-02jfxhbwsz.gz",
       "SourceId": "GymRats.Presentation",
       "SourceType": "Computed",
-      "ContentRoot": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\",
+      "ContentRoot": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/GymRats.Presentation",
       "RelativePath": "GymRats.Presentation#[.{fingerprint=02jfxhbwsz}]?.styles.css.gz",
       "AssetKind": "All",
@@ -104,20 +104,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\scopedcss\\bundle\\GymRats.Presentation.styles.css",
+      "RelatedAsset": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\scopedcss\\bundle\\GymRats.Presentation.styles.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "l1tlhdabtq",
       "Integrity": "Sevl3eIEh0c2HsgOl5gu4XsP1zcS+J6fzjWaCcQyrTE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\scopedcss\\bundle\\GymRats.Presentation.styles.css"
+      "OriginalItemSpec": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\scopedcss\\bundle\\GymRats.Presentation.styles.css"
     },
     {
-      "Identity": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\scopedcss\\bundle\\GymRats.Presentation.styles.css",
+      "Identity": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\scopedcss\\bundle\\GymRats.Presentation.styles.css",
       "SourceId": "GymRats.Presentation",
       "SourceType": "Computed",
-      "ContentRoot": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\scopedcss\\bundle\\",
       "BasePath": "_content/GymRats.Presentation",
       "RelativePath": "GymRats.Presentation#[.{fingerprint}]?.styles.css",
       "AssetKind": "All",
@@ -132,13 +132,13 @@
       "Integrity": "yJzMRujk3CbSbBe5hogvoEpcGbz0ThnTl058XcI1svI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\scopedcss\\bundle\\GymRats.Presentation.styles.css"
+      "OriginalItemSpec": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\scopedcss\\bundle\\GymRats.Presentation.styles.css"
     }
   ],
   "Endpoints": [
     {
       "Route": "_content/Microsoft.AspNetCore.Components.QuickGrid/Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
-      "AssetFile": "C:\\Users\\micha\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
+      "AssetFile": "C:\\Users\\Duc\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -175,7 +175,7 @@
     },
     {
       "Route": "_content/Microsoft.AspNetCore.Components.QuickGrid/Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
-      "AssetFile": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\fhah6atl6u-25o87uqmvr.gz",
+      "AssetFile": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\fhah6atl6u-25o87uqmvr.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -230,7 +230,7 @@
     },
     {
       "Route": "_content/Microsoft.AspNetCore.Components.QuickGrid/Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css.gz",
-      "AssetFile": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\fhah6atl6u-25o87uqmvr.gz",
+      "AssetFile": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\fhah6atl6u-25o87uqmvr.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -275,7 +275,7 @@
     },
     {
       "Route": "_content/Microsoft.AspNetCore.Components.QuickGrid/QuickGrid.razor.js",
-      "AssetFile": "C:\\Users\\micha\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\QuickGrid.razor.js",
+      "AssetFile": "C:\\Users\\Duc\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.10\\staticwebassets\\QuickGrid.razor.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -312,7 +312,7 @@
     },
     {
       "Route": "_content/Microsoft.AspNetCore.Components.QuickGrid/QuickGrid.razor.js",
-      "AssetFile": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\unlu0xluo6-eu7w3d5g1a.gz",
+      "AssetFile": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\unlu0xluo6-eu7w3d5g1a.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -367,7 +367,7 @@
     },
     {
       "Route": "_content/Microsoft.AspNetCore.Components.QuickGrid/QuickGrid.razor.js.gz",
-      "AssetFile": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\unlu0xluo6-eu7w3d5g1a.gz",
+      "AssetFile": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\unlu0xluo6-eu7w3d5g1a.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -412,7 +412,7 @@
     },
     {
       "Route": "GymRats.Presentation.02jfxhbwsz.styles.css",
-      "AssetFile": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\vkhz6p3kdu-02jfxhbwsz.gz",
+      "AssetFile": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\vkhz6p3kdu-02jfxhbwsz.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -435,7 +435,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 26 Mar 2025 22:57:32 GMT"
+          "Value": "Thu, 12 Jun 2025 18:02:29 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -479,7 +479,7 @@
     },
     {
       "Route": "GymRats.Presentation.02jfxhbwsz.styles.css",
-      "AssetFile": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\scopedcss\\bundle\\GymRats.Presentation.styles.css",
+      "AssetFile": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\scopedcss\\bundle\\GymRats.Presentation.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -504,7 +504,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 26 Mar 2025 22:57:32 GMT"
+          "Value": "Thu, 12 Jun 2025 18:02:29 GMT"
         },
         {
           "Name": "Link",
@@ -528,7 +528,7 @@
     },
     {
       "Route": "GymRats.Presentation.02jfxhbwsz.styles.css.gz",
-      "AssetFile": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\vkhz6p3kdu-02jfxhbwsz.gz",
+      "AssetFile": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\vkhz6p3kdu-02jfxhbwsz.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -549,7 +549,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 26 Mar 2025 22:57:32 GMT"
+          "Value": "Thu, 12 Jun 2025 18:02:29 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -581,7 +581,7 @@
     },
     {
       "Route": "GymRats.Presentation.styles.css",
-      "AssetFile": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\vkhz6p3kdu-02jfxhbwsz.gz",
+      "AssetFile": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\vkhz6p3kdu-02jfxhbwsz.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -604,7 +604,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 26 Mar 2025 22:57:32 GMT"
+          "Value": "Thu, 12 Jun 2025 18:02:29 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -640,7 +640,7 @@
     },
     {
       "Route": "GymRats.Presentation.styles.css",
-      "AssetFile": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\scopedcss\\bundle\\GymRats.Presentation.styles.css",
+      "AssetFile": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\scopedcss\\bundle\\GymRats.Presentation.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -665,7 +665,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 26 Mar 2025 22:57:32 GMT"
+          "Value": "Thu, 12 Jun 2025 18:02:29 GMT"
         },
         {
           "Name": "Link",
@@ -681,7 +681,7 @@
     },
     {
       "Route": "GymRats.Presentation.styles.css.gz",
-      "AssetFile": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\vkhz6p3kdu-02jfxhbwsz.gz",
+      "AssetFile": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation\\obj\\Debug\\net9.0\\compressed\\vkhz6p3kdu-02jfxhbwsz.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -702,7 +702,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 26 Mar 2025 22:57:32 GMT"
+          "Value": "Thu, 12 Jun 2025 18:02:29 GMT"
         },
         {
           "Name": "Cache-Control",

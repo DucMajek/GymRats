@@ -20,33 +20,36 @@ function Login() {
     const [action, setAction] = useState("Zaloguj");
     const { login: authLogin } = useAuth();
     const navigate = useNavigate();
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (action === "Zaloguj") {
-            axios.post('https://localhost:44380/login', { email, password })
-                .then(result => {
-                    if (result.status === 200) {
-                        const token = result.data.token;
-                        authLogin(email, token);
-                        navigate('/user-profile');
-                    }
-                })
-                .catch(err => { console.log(err); });
-        } else if (action === "Stwórz konto") {
-            axios.post(`https://localhost:44380/register?Email=${email}&Password=${password}&Name=${name}&Surname=${surname}&Birthday=${birthday}&PhoneNumber=${phoneNumber}&Gender=${gender}&Address=${address}&FlatNumber=${flatNumber}&ZipCode=${zipCode}&Place=${place}
-                        `, { email, password, name, surname, birthday, phoneNumber, gender, address, flatNumber, zipCode, place })
-                .then(result => {
-                    if (result.status === 200) {
-
-                    }
-                })
-                .catch(err => { console.log(err); });
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (action === "Zaloguj") {
+        try {
+        const result = await axios.post('https://localhost:44380/login', { email, password });
+        if (result.status === 200) {
+            const token = result.data.token;
+            authLogin(email, token);
+            navigate('/user-profile');
+            return true; // Sukces logowania
         }
-
-        else {
-            console.log("Signing up with:", email, password, confirmPassword);
+        } catch (err) {
+        return false; // Błąd logowania
         }
+    } else if (action === "Stwórz konto") {
+        try {
+        const result = await axios.post(`https://localhost:44380/register?Email=${email}&Password=${password}&Name=${name}&Surname=${surname}&Birthday=${birthday}&PhoneNumber=${phoneNumber}&Gender=${gender}&Address=${address}&FlatNumber=${flatNumber}&ZipCode=${zipCode}&Place=${place}`,
+            { email, password, name, surname, birthday, phoneNumber, gender, address, flatNumber, zipCode, place });
+
+        if (result.status === 200) {
+            return true; // Sukces rejestracji
+        }
+        } catch (err) {
+        return false; // Błąd rejestracji
+        }
+    }
+
+    return false;
     };
+
 
     return (
         <div className='container'>

@@ -312,3 +312,12 @@
   }
 }
 
+
+.centered-benefits {
+  display: flex;
+  flex-direction: column;
+
+  margin-left: 105px;
+  margin-top: 10px;
+  
+}
