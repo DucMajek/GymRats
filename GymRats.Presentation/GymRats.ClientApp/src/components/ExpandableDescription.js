@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-export default function ExpandableDescription({ description, wordLimit = 80 }) {
+export default function ExpandableDescription({ description, wordLimit = 60 }) {
   const words = description ? description.split(/\s+/) : [];
   const shouldTruncate = words.length > wordLimit;
   const [showModal, setShowModal] = useState(false);

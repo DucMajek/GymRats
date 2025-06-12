@@ -3,7 +3,7 @@
 "ServerUrl": "",
 "RedirectUrl": "",
 "LaunchCommand": "",
-"WorkingDirectory": "D:\\Praca dyplomowa\\GymRats\\GymRats.Presentation",
+"WorkingDirectory": "C:\\Users\\Duc\\Desktop\\GymRats\\GymRats.Presentation",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }
