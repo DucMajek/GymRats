@@ -23,6 +23,22 @@ function CoursesPage() {
   const [error, setError] = useState('');
   const [courses, setCourses] = useState([]);
 
+  const [showYoutubeModal, setShowYoutubeModal] = useState(false);
+
+const handleShowYoutubeModal = () => {
+  setShowYoutubeModal(true);
+};
+
+const handleCloseYoutubeModal = () => {
+  setShowYoutubeModal(false);
+};
+
+const handleGoToYoutubeLinks = () => {
+  setShowYoutubeModal(false);
+  navigate('/linksYoutube');
+};
+
+
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
@@ -137,10 +153,12 @@ function CoursesPage() {
                       <p><ExpandableDescription description={course.description} /></p>
                       <p className="course-duration"><strong>Czas trwania:</strong> {course.duration} godz.</p>
                       {course.price && <p className="course-price">Cena: {course.price} zł</p>}
-                      <div className="course-benefits">
+                      <div className="course-benefits centered-benefits">
                         <p><strong>Link do YouTube:</strong></p>
                         <ul>
-                          {/* YouTube links can be listed here */}
+                          <Button variant="outline-primary" onClick={() => handleShowYoutubeModal()}>
+                            Zobacz linki do YouTube
+                          </Button>
                         </ul>
                       </div>
                     </div>
@@ -149,7 +167,6 @@ function CoursesPage() {
                   <p className="mt-3">Nie masz aktywnych kursów. Kup teraz!</p>
                 )}
               </div>
-
               {/* MOBILE: paginacja pod kartami */}
               {window.innerWidth <= 768 && totalPages > 1 && showPaginationMobile && (
                 <div className="pagination-mobile">
@@ -170,7 +187,8 @@ function CoursesPage() {
                   </button>
                 </div>
               )}
-              {/* DESKTOP: paginacja fixed na dole */}
+              
+              
               {window.innerWidth > 768 && totalPages > 1 && (
                 <div className="pagination">
                   <button
@@ -205,6 +223,23 @@ function CoursesPage() {
               <Button variant="primary" onClick={handleNavigate}>Przejdź do kursów</Button>
             </Modal.Footer>
           </Modal>
+          <Modal show={showYoutubeModal} onHide={handleCloseYoutubeModal} centered>
+            <Modal.Header closeButton>
+              <Modal.Title>Linki do YouTube</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Kliknij przycisk poniżej, aby przejść do listy linków związanych z kursem na YouTube.
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleCloseYoutubeModal}>
+                Zamknij
+              </Button>
+              <Button variant="primary" onClick={handleGoToYoutubeLinks}>
+                Przejdź do linków
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
         </div>
       </div>
 

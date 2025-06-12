@@ -1,0 +1,13 @@
+D:\Praca dyplomowa\GymRats\GymRats.Data\bin\Release\net9.0\win-x64\GymRats.Data.deps.json
+D:\Praca dyplomowa\GymRats\GymRats.Data\bin\Release\net9.0\win-x64\GymRats.Data.dll
+D:\Praca dyplomowa\GymRats\GymRats.Data\bin\Release\net9.0\win-x64\GymRats.Data.pdb
+D:\Praca dyplomowa\GymRats\GymRats.Data\obj\Release\net9.0\win-x64\GymRats.Data.csproj.AssemblyReference.cache
+D:\Praca dyplomowa\GymRats\GymRats.Data\obj\Release\net9.0\win-x64\GymRats.Data.GeneratedMSBuildEditorConfig.editorconfig
+D:\Praca dyplomowa\GymRats\GymRats.Data\obj\Release\net9.0\win-x64\GymRats.Data.AssemblyInfoInputs.cache
+D:\Praca dyplomowa\GymRats\GymRats.Data\obj\Release\net9.0\win-x64\GymRats.Data.AssemblyInfo.cs
+D:\Praca dyplomowa\GymRats\GymRats.Data\obj\Release\net9.0\win-x64\GymRats.Data.csproj.CoreCompileInputs.cache
+D:\Praca dyplomowa\GymRats\GymRats.Data\obj\Release\net9.0\win-x64\GymRats.Data.sourcelink.json
+D:\Praca dyplomowa\GymRats\GymRats.Data\obj\Release\net9.0\win-x64\GymRats.Data.dll
+D:\Praca dyplomowa\GymRats\GymRats.Data\obj\Release\net9.0\win-x64\refint\GymRats.Data.dll
+D:\Praca dyplomowa\GymRats\GymRats.Data\obj\Release\net9.0\win-x64\GymRats.Data.pdb
+D:\Praca dyplomowa\GymRats\GymRats.Data\obj\Release\net9.0\win-x64\ref\GymRats.Data.dll

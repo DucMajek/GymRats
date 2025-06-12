@@ -29,10 +29,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 // Add services to the container.
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost3000",
+    options.AddPolicy("AllowFrontend",
         builders =>
         {
-            builders.WithOrigins("http://localhost:3000")
+            builders.WithOrigins(
+                    "http://localhost",
+                    "http://localhost:80",
+                    "https://localhost", 
+                    "https://localhost:44380",
+                    "https://localhost:443"
+                )
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials()
@@ -70,14 +76,23 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(options =>
+    options.WithOrigins("http://localhost:443")
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials()
+        .SetIsOriginAllowed(origin => true)
+        .WithExposedHeaders(HeaderNames.ContentDisposition));
 
+app.UseSwagger();
+app.UseSwaggerUI();
+app.UseCors("AllowFrontend");
+app.UseRouting();
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseHttpsRedirection();
-
-app.UseCors("AllowLocalhost3000");
-
 
 app.MapControllers();
 

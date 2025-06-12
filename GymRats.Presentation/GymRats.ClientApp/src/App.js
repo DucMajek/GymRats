@@ -23,6 +23,7 @@ import MyPersonalTrainingsPage from "./pages/MyPersonalTrainingsPage";
 import PrivateRoute from "./components/PrivateRoute";
 
 import BmiCalculatorPage from './pages/BmiCalculatorPage';
+import LinksYoutubePage from "./pages/LinksYoutubePage";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
             <Route path="/diets" element={<DietsPage />} />
             <Route path="/training-plans" element={<TrainingPlansPage />} />
             <Route path="/courses" element={<CoursesPage />} />
+            <Route path="/linksYoutube" element={<LinksYoutubePage />} />
             <Route path="/personal-training/signup" element={<PersonalTrainingPage />} />
             <Route path="/personal-training/my-training" element={<MyPersonalTrainingsPage />} />
             <Route path="/BmiCalculator" element={<BmiCalculatorPage />} />
