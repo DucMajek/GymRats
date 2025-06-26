@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using GymRats.Data.Entities;
 
 namespace GymRats.Data.Interfaces;
@@ -48,4 +49,6 @@ public interface IUserRepository
 
     Task<PersonalTraining> AddNewPersonalTraining(int coachId, int userId, string date,
         CancellationToken cancellationToken = default);
+    Task<List<ParticipationInClass>> GetUsersParticipationInClass(int groupId, CancellationToken cancellationToken = default);
+    Task<GroupClass> GetGroup(int groupId, CancellationToken cancellationToken = default);
 }

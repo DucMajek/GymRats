@@ -436,5 +436,26 @@ namespace GymRats.Data.Repositories
             await transaction.CommitAsync(cancellationToken);
             return newPersonalTraining;
         }
+
+        public async Task<List<ParticipationInClass>> GetUsersParticipationInClass(int groupId,
+            CancellationToken cancellationToken = default)
+        {
+            return await _context
+                .ParticipationInClasses
+                .AsNoTracking()
+                .Where(e => e.IdGroup == groupId)
+                .Include(p => p.IdUserNavigation)
+                .ThenInclude(c => c.IdUserNavigation)
+                .ToListAsync();
+        }
+
+        public async Task<GroupClass> GetGroup(int groupId, CancellationToken cancellationToken = default)
+        {
+            return await _context
+                .GroupClasses
+                .AsNoTracking()
+                .Where(e => e.IdGroup == groupId)
+                .FirstOrDefaultAsync(cancellationToken);
+        }
     }
 }

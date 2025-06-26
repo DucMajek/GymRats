@@ -46,4 +46,6 @@ public interface IUserServices
 
     Task<PersonalTraining> NewPersonalTraining(int coachId, string email, string date,
         CancellationToken cancellationToken = default);
+
+    Task<List<ParticipationInClass>> GetUsersGroupClasses(int groupId, CancellationToken cancellationToken = default);
 }

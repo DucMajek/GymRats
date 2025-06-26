@@ -217,9 +217,7 @@ namespace GymRats.Presentation.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error user is already sign up to the group {Group}", groupId);
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    "An error occurred while processing your request");
+                return Conflict(ex.Message);
             }
         }
 
@@ -349,6 +347,22 @@ namespace GymRats.Presentation.Controllers
             var registrationForTraining =
                 await _userService.NewPersonalTraining(coachId, email, date, cancellationToken);
             return Ok(registrationForTraining);
+        }
+
+
+        [HttpGet("user/usersParticipationInClass/{idGroup}")]
+        public async Task<ActionResult<List<ParticipationInClass>>> GetUserListParticipationInClass(int idGroup,
+            CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var usersList = await _userService.GetUsersGroupClasses(idGroup);
+                return Ok(usersList);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

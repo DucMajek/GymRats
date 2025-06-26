@@ -146,6 +146,12 @@ public class UserServices : IUserServices
         var userIsInGroupList = await _userRepository.UserIsAlreadyInGroup(groupId, email, cancellationToken);
         if (!userIsInGroupList)
         {
+            var groupClassSize = await _userRepository.GetGroup(groupId, cancellationToken);
+            var groupSize = await _userRepository.GetUsersParticipationInClass(groupId, cancellationToken);
+            if (groupSize.Count == groupClassSize.GroupSize)
+            {
+                throw new ArgumentException("Group size is already full");
+            }
             var signUp = await _userRepository.SignUpForGroup(groupId, email, cancellationToken);
             var user = await _userRepository.GetUser(email, cancellationToken);
             if (user == null)
@@ -277,5 +283,10 @@ public class UserServices : IUserServices
     {
         var user = await _userRepository.GetUser(email, cancellationToken);
         return await _userRepository.AddNewPersonalTraining(coachId, user.IdUser, date, cancellationToken);
+    }
+
+    public async Task<List<ParticipationInClass>> GetUsersGroupClasses(int groupId, CancellationToken cancellationToken = default)
+    {
+        return await _userRepository.GetUsersParticipationInClass(groupId, cancellationToken);
     }
 }
